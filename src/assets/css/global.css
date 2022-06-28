@@ -1,0 +1,11 @@
+@import url("https://fonts.googleapis.com/css2?family=Play:wght@400;700&display=swap");
+:root {
+  --black: #0f0f0f;
+  font-family: "Unica One";
+}
+
+.aic {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

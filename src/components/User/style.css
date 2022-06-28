@@ -1,0 +1,11 @@
+.user-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: linear-gradient(90deg, #00f38d 0%, #009eff 100%);
+  width: 52px;
+  height: 52px;
+  box-sizing: border-box;
+  border-radius: 50%;
+  border: 2px solid #da4a52;
+}
