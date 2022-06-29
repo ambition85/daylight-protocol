@@ -1,5 +1,44 @@
 .hero-info-container {
   display: flex;
+  justify-content: flex-start;
+  align-items: flex-start;
+  flex-direction: column;
+  color: #ffffff;
+}
+.hero-info--title {
+  width: 533.14px;
+  height: 198px;
+  font-family: "Unica One";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 56px;
+  line-height: 66px;
+}
+.hero-info--subtitle {
+  font-family: "Play";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 17px;
+  line-height: 20px;
+  margin-top: 12.35px;
+  margin-bottom: 33.75px;
+  width: 399.8px;
+  height: 80px;
+}
+
+.hero-info--socials {
+  margin-top: 16px;
+  display: flex;
   justify-content: center;
   align-items: center;
+  gap: 8px;
+}
+.hero-info--socials-icon {
+  width: 42px;
+  height: 42px;
+}
+.hero-info--socials-icon > img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
 }

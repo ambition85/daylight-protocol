@@ -1,0 +1,8 @@
+.progress-container {
+  padding: 55px 0px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 64px;
+  flex-wrap: wrap;
+}
