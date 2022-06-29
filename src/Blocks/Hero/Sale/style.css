@@ -1,0 +1,159 @@
+.hero-sale-container-outer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  gap: 26.13px;
+}
+.hero-sale-container {
+  width: 604.24px;
+  height: 439.9px;
+  background: rgba(255, 255, 255, 0.9);
+  border: 2px solid #000000;
+  box-shadow: 0px 4px 24px rgba(0, 0, 0, 0.25);
+  border-radius: 29px;
+  padding: 30px;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  flex-direction: column;
+  font-family: "Play";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 21px;
+  color: #000000;
+}
+.hero-sale-section {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}
+.hero-sale-section-brand {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 12px;
+}
+.hero-sale-section-brand-logo {
+  width: 48px;
+  height: 48px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.hero-sale-section-brand-img {
+  height: 100%;
+  width: 100%;
+  object-fit: contain;
+}
+.hero-sale-section-brand-title-name-small {
+  font-style: normal;
+  font-weight: 700;
+  font-size: 38px;
+  line-height: 44px;
+}
+.hero-sale-section-price {
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  flex-direction: column;
+}
+/* .hero-sale-section-price-title {
+} */
+.hero-sale-section-price-amount {
+  font-weight: 700;
+  font-size: 24px;
+  line-height: 28px;
+}
+/* .hero-sale-section-price-estimated {
+} */
+.hero-sale-section-nametags {
+  font-size: 12px;
+  line-height: 14px;
+}
+.hero-sale-bar {
+  background: linear-gradient(90deg, #da4a52 0%, #df775a 100%);
+  border-radius: 20px;
+  height: 30px;
+  width: 100%;
+  margin-top: 11px;
+  position: relative;
+}
+.hero-sale-bar-circle {
+  /* position: absolute; */
+  width: 28px;
+  height: 28px;
+
+  background: #fbc33c;
+  border-radius: 50%;
+}
+.hero-sale-bar-value {
+  margin-top: 8.37px;
+  align-self: flex-end;
+}
+.hero-sale-section-button {
+  background: linear-gradient(90deg, #da4a52 0%, #df775a 100%);
+  border-radius: 10px;
+  /* //// */
+  padding: 16px 32px;
+  font-family: "Urbanist";
+  font-style: normal;
+  font-weight: 700;
+  font-size: 18px;
+  line-height: 22px;
+  color: #ffffff;
+}
+
+/* ////////////////// */
+.hero-sale-process-container {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 66px;
+}
+.hero-sale-process {
+  display: flex;
+  gap: 55.74px;
+  position: relative;
+}
+.hero-sale-process-divider {
+  width: 130px;
+  height: 6.71px;
+  background: #de6d59;
+  position: absolute;
+  z-index: 0;
+  left: 50px;
+  top: 12px;
+}
+.hero-sale-process-option {
+  position: relative;
+
+  z-index: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  gap: 8.6px;
+  font-family: "Play";
+  font-style: normal;
+  font-weight: 700;
+  font-size: 18px;
+  line-height: 21px;
+  color: #ffffff;
+}
+.hero-sale-process-option-icon {
+  width: 33.16px;
+  height: 33.16px;
+  background: #ebe8e7;
+  border-radius: 50%;
+  border: 2px solid #da4a52;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.hero-sale-process-option-text {
+  width: 80px;
+  text-align: center;
+}
