@@ -4,6 +4,7 @@
   align-items: center;
   gap: 35px;
   flex-wrap: wrap-reverse;
+  height: 500px;
 }
 .defiaccess--info {
   display: flex;

@@ -1,0 +1,66 @@
+.footer-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  margin: 100px 0px 70px 0px;
+  gap: 35px;
+}
+.footer--top {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 54px;
+  flex-wrap: wrap;
+}
+.footer--bottom {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  gap: 20px;
+}
+.sectionlist-container {
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-start;
+  flex-direction: column;
+  gap: 8px;
+}
+.sectionlist--title {
+  font-family: "Play";
+  font-style: normal;
+  font-weight: 700;
+  font-size: 18px;
+  line-height: 21px;
+  background: linear-gradient(90deg, #da4a52 0%, #df775a 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  text-fill-color: transparent;
+}
+.sectionlist--option {
+  font-family: "Play";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 21px;
+  color: #ffffff;
+}
+.footer--bottom-brand {
+  width: 111.44px;
+  height: 63.56px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.footer--bottom-text {
+  font-family: "Play";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 14px;
+  /* identical to box height */
+
+  color: #ffffff;
+}

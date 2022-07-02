@@ -1,0 +1,80 @@
+.chains-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 0px;
+  gap: 154px;
+
+  height: 522.85px;
+}
+.chains--title {
+  font-family: "Play";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 56px;
+  line-height: 65px;
+  display: flex;
+  align-items: center;
+  text-align: center;
+
+  color: #ffffff;
+}
+.chains--options {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 64px;
+  flex-wrap: wrap;
+}
+/* /////////////////////// */
+.chainoption-container {
+  width: 161.22px;
+  height: 238.85px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+.chainoption--img {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 16px 32px;
+
+  width: 160px;
+  height: 146px;
+  margin-bottom: 15px;
+}
+.chainoption--title {
+  margin-bottom: 19.68px;
+  font-family: "Play";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 27px;
+  line-height: 28px;
+  display: flex;
+  align-items: center;
+  text-align: center;
+  letter-spacing: 0.035em;
+
+  color: #ffffff;
+}
+.chainoption--button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 158.32px;
+  height: 28.66px;
+
+  font-family: "Play";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 28px;
+  letter-spacing: 0.035em;
+
+  color: #ffffff;
+
+  background: linear-gradient(90.02deg, #0900be -149.45%, #fe2aff 100.03%);
+}
