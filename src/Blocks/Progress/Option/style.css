@@ -4,6 +4,7 @@
   align-items: center;
   flex-direction: column;
   gap: 8px;
+  width: 180px;
 }
 .progress-option--title {
   margin-top: 7px;

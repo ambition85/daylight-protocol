@@ -4,10 +4,11 @@
   align-items: center;
   flex-direction: column;
   gap: 26.13px;
+  width: 100%;
 }
 .hero-sale-container {
   width: 604.24px;
-  height: 439.9px;
+  /* height: 439.9px; */
   background: rgba(255, 255, 255, 0.9);
   border: 2px solid #000000;
   box-shadow: 0px 4px 24px rgba(0, 0, 0, 0.25);
@@ -23,6 +24,18 @@
   font-size: 18px;
   line-height: 21px;
   color: #000000;
+}
+.hero-sale-section-a {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}
+.hero-sale-section-b {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
 }
 .hero-sale-section {
   display: flex;
@@ -54,6 +67,12 @@
   font-size: 38px;
   line-height: 44px;
 }
+.hero-sale-section-price-a {
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  flex-direction: column;
+}
 .hero-sale-section-price {
   display: flex;
   justify-content: center;
@@ -82,12 +101,11 @@
   position: relative;
 }
 .hero-sale-bar-circle {
-  /* position: absolute; */
-  width: 28px;
-  height: 28px;
-
+  position: absolute;
+  height: 30px;
+  transition: 700ms cubic-bezier(0.54, 0.21, 0.18, 1.35);
   background: #fbc33c;
-  border-radius: 50%;
+  border-radius: 20px;
 }
 .hero-sale-bar-value {
   margin-top: 8.37px;
@@ -104,6 +122,7 @@
   font-size: 18px;
   line-height: 22px;
   color: #ffffff;
+  text-align: center;
 }
 
 /* ////////////////// */
@@ -112,6 +131,7 @@
   justify-content: center;
   align-items: flex-start;
   gap: 66px;
+  flex-wrap: wrap;
 }
 .hero-sale-process {
   display: flex;
@@ -156,4 +176,44 @@
 .hero-sale-process-option-text {
   width: 80px;
   text-align: center;
+}
+@media screen and (max-width: 1280px) {
+  .hero-sale-container {
+    width: 100%;
+    border-radius: 29px;
+    padding: 30px;
+  }
+}
+@media screen and (max-width: 650px) {
+  .hero-sale-section-a {
+    justify-content: flex-start;
+    align-items: flex-start;
+    flex-direction: column;
+    width: 100%;
+  }
+  .hero-sale-section-price-a {
+    align-items: flex-start;
+  }
+}
+@media screen and (max-width: 550px) {
+  .hero-sale-section-brand {
+    flex-direction: column;
+    gap: 20px;
+    width: 100%;
+  }
+  .hero-sale-section-brand-title {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+  }
+  .hero-sale-section {
+    justify-content: flex-start;
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 16px;
+  }
+  .hero-sale-section-price {
+    align-items: flex-start;
+  }
 }

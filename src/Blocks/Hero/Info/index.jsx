@@ -17,28 +17,28 @@ const Info = () => {
       </div>
       <Button>Add DLP to Metamask</Button>
       <div className="hero-info--socials">
-        <div className="hero-info--socials-icon aic">
+        <div className="hero-info--socials-icon hover-effect aic">
           <img src={TelegramIcon} alt="social icon" />
         </div>
-        <div className="hero-info--socials-icon aic">
+        <div className="hero-info--socials-icon hover-effect aic">
           <img src={DiscordIcon} alt="social icon" />
         </div>
-        <div className="hero-info--socials-icon aic">
+        <div className="hero-info--socials-icon hover-effect aic">
           <img src={TelegramIcon} alt="social icon" />
         </div>
-        <div className="hero-info--socials-icon aic">
+        <div className="hero-info--socials-icon hover-effect aic">
           <img src={DiscordIcon} alt="social icon" />
         </div>
-        <div className="hero-info--socials-icon aic">
+        <div className="hero-info--socials-icon hover-effect aic">
           <img src={TelegramIcon} alt="social icon" />
         </div>
-        <div className="hero-info--socials-icon aic">
+        <div className="hero-info--socials-icon hover-effect aic">
           <img src={TelegramIcon} alt="social icon" />
         </div>
-        <div className="hero-info--socials-icon aic">
+        <div className="hero-info--socials-icon hover-effect aic">
           <img src={TelegramIcon} alt="social icon" />
         </div>
-        <div className="hero-info--socials-icon aic">
+        <div className="hero-info--socials-icon hover-effect  aic">
           <img src={TelegramIcon} alt="social icon" />
         </div>
       </div>

@@ -14,5 +14,11 @@
   align-items: flex-start;
   gap: 60px;
   margin-top: 185px;
-  flex-wrap: wrap;
+  padding: 0px 32px;
+}
+@media screen and (max-width: 1280px) {
+  .hero-container {
+    flex-wrap: wrap-reverse;
+    margin-top: 40px;
+  }
 }

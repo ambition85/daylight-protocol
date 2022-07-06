@@ -5,4 +5,8 @@
   align-items: center;
   gap: 64px;
   flex-wrap: wrap;
+  width: 100%;
+  height: 100%;
+  border-top: 2px solid #df775a;
+  border-bottom: 2px solid #df775a;
 }
