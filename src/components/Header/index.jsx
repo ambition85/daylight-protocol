@@ -25,7 +25,7 @@ const Header = () => {
       </div>
 
       <div className="header--interaction">
-        <Button onclick={() => connectWallet}>
+        <Button onclick={() => connectWallet()}>
           {!!wallet ? shortenAddress(wallet) : "Connect Wallet"}
         </Button>
         <User />
