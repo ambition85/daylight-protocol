@@ -1,0 +1,27 @@
+.hero2-container {
+  height: 100vh;
+  width: 100vw;
+  background: radial-gradient(
+      76.44% 76.44% at 50% 0%,
+      rgba(200, 193, 237, 0.2) 0%,
+      rgba(0, 0, 0, 0) 72.9%
+    ),
+    linear-gradient(
+      119.13deg,
+      #f2f3e9 -0.22%,
+      #dfefe4 16.87%,
+      #cbd1ef 36.48%,
+      rgba(203, 209, 239, 0) 66.93%
+    ),
+    radial-gradient(
+      46.84% 35.23% at 50% 93.38%,
+      rgba(209, 146, 216, 0.9) 0%,
+      rgba(209, 146, 216, 0) 100%
+    ),
+    radial-gradient(
+        32.04% 36.17% at 82.92% 27.36%,
+        rgba(254, 251, 186, 0.2) 0%,
+        rgba(231, 190, 208, 0.2) 100%
+      )
+      radial-gradient(50% 87.89% at 49.44% 50%, #f7e5c5 0%, #ebc4cd 100%);
+}

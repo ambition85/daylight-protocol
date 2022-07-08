@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useContext } from "react";
+import { WalletWeb3Context } from "../../context/WalletWeb3Context";
 //
 import "./style.css";
 //
@@ -6,8 +7,10 @@ import LogoBrand from "../../assets/img/brand/logo.svg";
 //
 import Button from "../Button";
 import User from "../User";
+import { shortenAddress } from "../../utils/utils";
 
 const Header = () => {
+  const { connectWallet, wallet } = useContext(WalletWeb3Context);
   return (
     <nav className="header-container">
       <div className="header--brand">
@@ -22,7 +25,9 @@ const Header = () => {
       </div>
 
       <div className="header--interaction">
-        <Button>Connect Wallet</Button>
+        <Button onclick={() => connectWallet}>
+          {!!wallet ? shortenAddress(wallet) : "Connect Wallet"}
+        </Button>
         <User />
       </div>
     </nav>
