@@ -14,7 +14,7 @@ const ChainOption = ({ img, title, button, onclick }) => {
         <img src={img} alt="chain" draggable="false" loading="lazy" />
       </div>
       <div className="chainoption--title">{title}</div>
-      <div className="chainoption--button" onclick={() => buttonClickHandler()}>
+      <div className="chainoption--button" onClick={() => buttonClickHandler()}>
         {button}
       </div>
     </div>

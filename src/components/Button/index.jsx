@@ -2,14 +2,9 @@ import React from "react";
 import "./style.css";
 
 const Button = (props) => {
-  const { children, onclick } = props;
-  const clickHandler = () => {
-    if (!!onclick) {
-      onclick();
-    }
-  };
+  const { children } = props;
   return (
-    <div {...props} className="button-container" onClick={() => clickHandler()}>
+    <div {...props} className="button-container">
       {children}
     </div>
   );

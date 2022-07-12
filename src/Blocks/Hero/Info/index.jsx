@@ -6,7 +6,7 @@ import DiscordIcon from "../../../assets/img/icons/discord.svg";
 import TwitterIcon from "../../../assets/img/icons/twitter.svg";
 import MediumIcon from "../../../assets/img/icons/medium.svg";
 
-const Info = () => {
+const Info = ({ addDaylToken }) => {
   return (
     <div className="hero-info-container">
       <div
@@ -37,6 +37,7 @@ const Info = () => {
         data-aos-delay="400"
         data-aos-offset="-100"
         data-aos-easing="ease-in"
+        onClick={() => addDaylToken()}
       >
         Add $DAYL to Metamask
       </Button>
