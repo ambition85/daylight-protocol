@@ -9,7 +9,7 @@ const HeroSection = () => {
     <div className="hero-container-header">
       <Header />
       <div className="hero-container">
-        <Sale progress={54} total={100} />
+        <Sale progress={54} total={6000000} />
         <Info />
       </div>
     </div>

@@ -8,12 +8,12 @@
 }
 .hero-info--title {
   width: 533.14px;
-  height: 198px;
+  height: 177px;
   font-family: "Unica One";
   font-style: normal;
   font-weight: 400;
-  font-size: 56px;
-  line-height: 66px;
+  font-size: 50px;
+  line-height: 59px;
 }
 .hero-info--subtitle {
   font-family: "Play";
@@ -21,10 +21,9 @@
   font-weight: 400;
   font-size: 17px;
   line-height: 20px;
-  margin-top: 12.35px;
-  margin-bottom: 33.75px;
+  margin-bottom: 12px;
   width: 399.8px;
-  height: 80px;
+  height: 138px;
 }
 .hero-info--socials {
   margin-top: 16px;

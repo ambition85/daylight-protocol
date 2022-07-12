@@ -123,6 +123,16 @@
   line-height: 22px;
   color: #ffffff;
   text-align: center;
+  transition: 400ms cubic-bezier(0.54, 0.21, 0.18, 1.35);
+}
+.hero-sale-section-button:hover {
+  background: linear-gradient(
+    90deg,
+    rgb(218, 74, 82, 0.5) 0%,
+    rgb(223, 119, 90, 0.5) 100%
+  );
+  cursor: pointer;
+  transition: 400ms cubic-bezier(0.54, 0.21, 0.18, 1.35);
 }
 
 /* ////////////////// */

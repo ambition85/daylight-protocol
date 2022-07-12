@@ -1,17 +1,15 @@
 import React from "react";
 import "./style.css";
 
-const Button = ({ children, onclick }) => {
+const Button = (props) => {
+  const { children, onclick } = props;
   const clickHandler = () => {
     if (!!onclick) {
       onclick();
     }
   };
   return (
-    <div
-      className="button-container hover-effect"
-      onClick={() => clickHandler()}
-    >
+    <div {...props} className="button-container" onClick={() => clickHandler()}>
       {children}
     </div>
   );

@@ -2,9 +2,8 @@
 import React, { createContext, useEffect, useState } from "react";
 import Web3Modal from "web3modal";
 import WalletConnectProvider from "@walletconnect/web3-provider";
-import { Contract, ethers } from "ethers";
-// import {
-// } from "../utils/constants";
+import { ethers } from "ethers";
+import { mainnetNetwork, testnetNetwork } from "../utils/constants";
 // import { useDispatch } from "react-redux";
 //
 export const WalletWeb3Context = createContext();
@@ -13,6 +12,7 @@ export const WalletWeb3Provider = ({ children }) => {
   const [web3Modal, setWeb3Modal] = useState(null);
   const [provider, setprovider] = useState(null);
   const [wallet, setwallet] = useState(null);
+  const [isWrongNetwork, setisWrongNetwork] = useState(false);
   useEffect(() => {
     const newWeb3Modal = new Web3Modal({
       network: "avalanche",
@@ -52,7 +52,13 @@ export const WalletWeb3Provider = ({ children }) => {
       // const librarySigner = libraryWeb3.getSigner();
       const accountsWeb3 = await libraryWeb3.listAccounts();
       const network = await libraryWeb3.getNetwork();
-      console.log(network);
+      let currentNetwork =
+        process.env.REACT_APP_NETWORK_ENV === "mainnet"
+          ? process.env.REACT_APP_MAINNET_CHAINID
+          : process.env.REACT_APP_TESTNET_CHAINID;
+      if (network.chainId !== parseInt(currentNetwork)) {
+        setisWrongNetwork(true);
+      }
       let walletAddress;
       if (accountsWeb3) {
         walletAddress = accountsWeb3[0];
@@ -65,8 +71,26 @@ export const WalletWeb3Provider = ({ children }) => {
   };
   //disconnect wallet
   const disconnectWallet = () => {
+    resetState();
     web3Modal.clearCachedProvider();
-    // setWalletDisconnect(dispatch);
+  };
+  //update network
+  const updateNetworkWallet = async () => {
+    const library = new ethers.providers.Web3Provider(provider);
+    await library.provider.request({
+      method: "wallet_addEthereumChain",
+      params: [
+        process.env.REACT_APP_NETWORK_ENV === "mainnet"
+          ? mainnetNetwork
+          : testnetNetwork,
+      ],
+    });
+  };
+  //reset network
+  const resetState = async () => {
+    setprovider(() => null);
+    setwallet(() => null);
+    setisWrongNetwork(() => false);
   };
   useEffect(() => {
     if (web3Modal?.cachedProvider) {
@@ -112,6 +136,8 @@ export const WalletWeb3Provider = ({ children }) => {
         connectWallet,
         disconnectWallet,
         wallet,
+        isWrongNetwork,
+        updateNetworkWallet,
       }}
     >
       {children}

@@ -1,10 +1,11 @@
 import React, { Suspense } from "react";
 import { WalletWeb3Provider } from "./context/WalletWeb3Context";
+import AOS from "aos";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 ///////////////////////////////////////
 const Home = React.lazy(() => import("./Pages/Home"));
-const Dapp = React.lazy(() => import("./Pages/Dapp"));
-
+//animation aos init
+AOS.init();
 const App = () => {
   return (
     <WalletWeb3Provider>
@@ -12,7 +13,6 @@ const App = () => {
         <BrowserRouter>
           <Routes>
             <Route path="/" element={<Home />} exact />
-            <Route path="/dapp" element={<Dapp />} exact />
           </Routes>
         </BrowserRouter>
       </Suspense>
