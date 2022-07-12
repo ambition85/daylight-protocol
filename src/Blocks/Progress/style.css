@@ -2,7 +2,7 @@
   padding: 55px 0px;
   display: flex;
   justify-content: center;
-  align-items: center;
+  align-items: flex-start;
   gap: 64px;
   flex-wrap: wrap;
   width: 100%;

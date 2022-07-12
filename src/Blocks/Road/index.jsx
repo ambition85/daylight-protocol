@@ -4,7 +4,7 @@ import icon1 from "../../assets/img/icons/crossChainDex.svg";
 import icon2 from "../../assets/img/icons/graph.svg";
 import icon3 from "../../assets/img/icons/layer.svg";
 import icon4 from "../../assets/img/icons/rocket.svg";
-import crossChainBg from "../../assets/img/brand/crossChainBg.svg";
+import crossChainBg from "../../assets/img/brand/crossChainBg.png";
 import "./style.css";
 
 const Road = () => {

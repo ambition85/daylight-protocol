@@ -134,6 +134,12 @@
   cursor: pointer;
   transition: 400ms cubic-bezier(0.54, 0.21, 0.18, 1.35);
 }
+.hero-sale-section-button:disabled,
+.hero-sale-section-button:hover[disabled] {
+  background: linear-gradient(90deg, #da4a52 0%, #df775a 100%);
+  opacity: 0.5;
+  cursor: not-allowed;
+}
 
 /* ////////////////// */
 .hero-sale-process-container {
@@ -186,6 +192,41 @@
 .hero-sale-process-option-text {
   width: 80px;
   text-align: center;
+}
+
+.hero-sale-section-connected-a {
+  font-family: "Play";
+  font-style: normal;
+  font-weight: 700;
+  font-size: 18px;
+  line-height: 21px;
+}
+.hero-sale-section-connected-b {
+  font-family: "Play";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 21px;
+  gap: 6px;
+}
+.hero-sale-section-connected-status {
+  background: #14ff00;
+  border-radius: 50%;
+  height: 9.54px;
+  width: 9.54px;
+}
+.hero-sale-section-connected-divider {
+  opacity: 0.5;
+  border: 1px solid #d9d9d9;
+  width: 100%;
+  height: 1px;
+  margin-top: 24px;
+}
+.connected-failed {
+  color: #ff0000;
+}
+.connected-success {
+  color: #14ff00;
 }
 @media screen and (max-width: 1280px) {
   .hero-sale-container {

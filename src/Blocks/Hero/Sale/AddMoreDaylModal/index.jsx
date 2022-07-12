@@ -5,7 +5,7 @@ import ArrowLeftIcon from "../../../../assets/img/icons/arrowLeft.svg";
 import usdcIcon from "../../../../assets/img/coins/usdc.svg";
 import daylIcon from "../../../../assets/img/coins/dayl.svg";
 import switchIcon from "../../../../assets/img/icons/switch.svg";
-const AddDaylModal = ({ onClose }) => {
+const AddMoreDaylModal = ({ onClose }) => {
   const [isRange, setisRange] = useState(15);
   const [isCurrent, setisCurrent] = useState("usdc");
   const switchHandler = () => {
@@ -28,9 +28,13 @@ const AddDaylModal = ({ onClose }) => {
             classnamestyle="hover-effect adddaylmodal--header-back aic"
           />
         </div>
-        Add $DAYL
+        Add More $DAYL
       </div>
-
+      {/* /////////// */}
+      <div className="adddaylmodal--current aic">
+        <div>My current $DAYL Investment</div>
+        <div className="adddaylmodal--current-b">1000000000</div>
+      </div>
       {/* /////////// */}
       <div className="adddaylmodal--infostack-a">
         <div className="adddaylmodal--infostack-a-info aic">
@@ -158,10 +162,10 @@ const AddDaylModal = ({ onClose }) => {
         type="button"
         onClick={() => onClose()}
       >
-        Add $DAYL
+        Add More $DAYL
       </button>
     </div>
   );
 };
 
-export default AddDaylModal;
+export default AddMoreDaylModal;
