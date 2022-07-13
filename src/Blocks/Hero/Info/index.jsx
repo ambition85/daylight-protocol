@@ -1,6 +1,7 @@
 import React from "react";
 import "./style.css";
 import Button from "../../../components/Button";
+import Icon from "../../../components/Icon";
 import TelegramIcon from "../../../assets/img/icons/telegram.svg";
 import DiscordIcon from "../../../assets/img/icons/discord.svg";
 import TwitterIcon from "../../../assets/img/icons/twitter.svg";
@@ -16,8 +17,7 @@ const Info = ({ addDaylToken }) => {
         data-aos-offset="-100"
         data-aos-easing="ease-in"
       >
-        Decentralized Earning
-        <br /> Built for Sustainability and Ecosystem Inclusion
+        Built for Sustainability and Ecosystem Inclusion
       </div>
       <div
         className="hero-info--subtitle"
@@ -42,42 +42,26 @@ const Info = ({ addDaylToken }) => {
         Add $DAYL to Metamask
       </Button>
       <div className="hero-info--socials">
-        <div
-          className="hero-info--socials-icon hover-effect aic"
-          data-aos="fade-down"
-          data-aos-delay="200"
-          data-aos-offset="-100"
-          data-aos-easing="ease-in-out"
-        >
-          <img src={MediumIcon} alt="social icon" />
-        </div>
-        <div
-          className="hero-info--socials-icon hover-effect aic"
-          data-aos="fade-down"
-          data-aos-delay="300"
-          data-aos-offset="-100"
-          data-aos-easing="ease-in-out"
-        >
-          <img src={TelegramIcon} alt="social icon" />
-        </div>
-        <div
-          className="hero-info--socials-icon hover-effect aic"
-          data-aos="fade-down"
-          data-aos-delay="400"
-          data-aos-offset="-100"
-          data-aos-easing="ease-in-out"
-        >
-          <img src={DiscordIcon} alt="social icon" />
-        </div>
-        <div
-          className="hero-info--socials-icon hover-effect aic"
-          data-aos="fade-down"
-          data-aos-delay="500"
-          data-aos-offset="-100"
-          data-aos-easing="ease-in-out"
-        >
-          <img src={TwitterIcon} alt="social icon" />
-        </div>
+        <Icon
+          imgsrc={MediumIcon}
+          link="https://medium.com/@DaylightProtocol"
+          classnamestyle="hero-info--socials-icon aic hover-effect"
+        />
+        <Icon
+          imgsrc={TelegramIcon}
+          link="https://t.me/Daylightprotocol"
+          classnamestyle="hero-info--socials-icon aic hover-effect"
+        />
+        <Icon
+          imgsrc={DiscordIcon}
+          link="https://discord.gg/dbkSDvS9Hd"
+          classnamestyle="hero-info--socials-icon aic hover-effect"
+        />
+        <Icon
+          imgsrc={TwitterIcon}
+          link="https://twitter.com/DaylightDeFi"
+          classnamestyle="hero-info--socials-icon aic hover-effect"
+        />
       </div>
     </div>
   );

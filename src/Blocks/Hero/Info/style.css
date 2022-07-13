@@ -9,7 +9,7 @@
 .hero-info--title {
   width: 533.14px;
   height: 177px;
-  font-family: "Unica One";
+  font-family: "Aldrich";
   font-style: normal;
   font-weight: 400;
   font-size: 50px;
@@ -21,9 +21,10 @@
   font-weight: 400;
   font-size: 17px;
   line-height: 20px;
-  margin-bottom: 12px;
-  width: 399.8px;
-  height: 138px;
+  margin-top: 12px;
+  margin-bottom: 14px;
+  width: 532.17px;
+  height: 115px;
 }
 .hero-info--socials {
   margin-top: 16px;

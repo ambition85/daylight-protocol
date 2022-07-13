@@ -11,9 +11,12 @@ const DefiAccess = () => {
       </div>
       <div className="defiaccess-container-inner">
         <div className="defiaccess--info">
-          <div className="defiaccess--info-title">Unparalleled DeFi Access</div>
+          <div className="defiaccess--info-title">
+            Sustainable Wealth Generation
+          </div>
           <div className="defiaccess--info-sub">
-            Bridging the gap between CeFi and DeFi
+            Paving the way for DeFi wealth generation with inclusion,
+            innovation, and sustainability.
           </div>
         </div>
         <div className="defiaccess-brand">

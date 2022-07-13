@@ -1,15 +1,13 @@
 .dexsection-container {
-  display: flex;
   justify-content: flex-start;
-  align-items: center;
   flex-direction: column;
   margin-top: 120px;
-
   color: #ffffff;
   font-family: "Play";
   font-style: normal;
   font-weight: 400;
 }
+
 .dexsection--title {
   font-size: 56px;
   line-height: 65px;
@@ -18,24 +16,9 @@
   font-size: 27px;
   line-height: 31px;
 }
-.dexsection--animation {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 903.53px;
-  height: 700.54px;
-  background: radial-gradient(
-    21.82% 22.83% at 52.31% 38.58%,
-    rgba(243, 245, 101, 0.8) 0%,
-    rgba(198, 62, 62, 0) 99.85%
-  );
-  mix-blend-mode: normal;
-  transform: rotate(0.65deg);
-}
 .dexsection--animation-img {
-  width: 100%;
-  height: 100%;
-  object-fit: contain;
+  width: 700px;
+  height: 700px;
 }
 .dexsection--description {
   font-size: 27px;
@@ -43,4 +26,36 @@
   text-align: center;
   width: 828.77px;
   height: 90.06px;
+}
+.dexsection--animation-img-mobile {
+  display: none;
+}
+
+@media screen and (max-width: 1000px) {
+  .dexsection-container {
+    padding: 0px 32px;
+  }
+  .dexsection--title,
+  .dexsection--subtitle,
+  .dexsection--description {
+    width: 100%;
+    text-align: center;
+  }
+}
+@media screen and (max-width: 800px) {
+  .dexsection-container {
+    gap: 32px;
+    padding: 0px 0px;
+  }
+  .dexsection--animation-img,
+  .dexsection--title,
+  .dexsection--subtitle,
+  .dexsection--description {
+    display: none;
+  }
+
+  .dexsection--animation-img-mobile {
+    display: flex;
+    width: 100vw;
+  }
 }

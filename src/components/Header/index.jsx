@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import { WalletWeb3Context } from "../../context/WalletWeb3Context";
 //
 import "./style.css";
@@ -8,11 +8,12 @@ import LogoBrand from "../../assets/img/brand/logo.svg";
 import Button from "../Button";
 // import User from "../User";
 import { shortenAddress } from "../../utils/utils";
+import Menu from "./Menu";
 
 const Header = () => {
   const { connectWallet, wallet, isWrongNetwork, updateNetworkWallet } =
     useContext(WalletWeb3Context);
-
+  const [isOpen, setIsOpen] = useState(false);
   const web3ButtonHandler = () => {
     if (isWrongNetwork) {
       updateNetworkWallet();
@@ -41,6 +42,12 @@ const Header = () => {
             "Connect Wallet"
           )}
         </Button>
+      </div>
+      <div className="header--menu">
+        <button type="button" onClick={() => setIsOpen(() => true)}>
+          MENU
+        </button>
+        <Menu isOpen={isOpen} close={() => setIsOpen(() => false)} />
       </div>
     </nav>
   );

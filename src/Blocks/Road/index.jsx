@@ -6,46 +6,44 @@ import icon3 from "../../assets/img/icons/layer.svg";
 import icon4 from "../../assets/img/icons/rocket.svg";
 import crossChainBg from "../../assets/img/brand/crossChainBg.png";
 import "./style.css";
+import Icon from "../../components/Icon";
 
 const Road = () => {
   return (
-    <div className="roadsection-container">
-      <img
-        className="roadsection--img-icon"
-        src={crossChainBg}
-        alt="raod"
-        loading="lazy"
-        draggable="false"
+    <div className="roadsection-container aic">
+      <Icon
+        imgsrc={crossChainBg}
+        classnamestyle="roadsection--img-icon aic hover-effect"
       />
-      <div className="roadsection--absolute">
-        <div className="roadsection--absolute-fake" />
+
+      <div className="roadsection--fake aic">
         <div className="roadsection--bulletpoints">
           <BulletPoint
             img={icon1}
-            title="Cross-Chain Dex"
+            title="Extreme Utility"
             desc={
-              "Unparalleled DeFi access, high liquidity, low slippage and cross-chain swaps with the best exchange rates."
+              "Daylight’s Utility is far beyond anything an autostaking token has accomplished, with redefined purpose, fair earning opportunities, and supporting sub-protocols in the Daylight ecosystem."
             }
           />
           <BulletPoint
             img={icon2}
             title="Conditional Orders"
             desc={
-              "Central limit order book capabilities with the feel and functionality of a traditional exchange."
+              "Daylight is focused on asset appreciation through a selective and high auto-staking APY, giving it a competitive placement in DeFi 3,0, while providing real ecosystem aspects that showcase inclusivity and extendability."
             }
           />
           <BulletPoint
             img={icon3}
-            title="Liquidity & Staking Pools"
+            title="Asset and Ecosystem Appreciation"
             desc={
-              "Earn incentives by providing liquidity or staking single assets."
+              "Daylight is focused on asset appreciation through a selective and high auto-staking APY, giving it a competitive placement in DeFi 3,0, while providing real ecosystem aspects that showcase inclusivity and extendability."
             }
           />
           <BulletPoint
             img={icon4}
-            title="Launchpad"
+            title="Superior Liquidity and Sustainability"
             desc={
-              "Earn incentives by providing liquidity or staking single assets."
+              "Daylight and the team behind the protocol are on a mission to expand decentralized finance horizons by discovering and building the most versatile and inclusive protocol in the ecosystem to contribute to sustainable and collective wealth generation. DeFi is limitless, and we are here to drive harmony between TradFi & DeFi through research, development, and execution. "
             }
           />
         </div>

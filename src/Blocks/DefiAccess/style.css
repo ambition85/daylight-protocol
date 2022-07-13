@@ -34,8 +34,8 @@
   flex-direction: column;
 }
 .defiaccess--info-title {
-  width: 325.61px;
-  height: 135.75px;
+  width: 626.88px;
+  height: 136px;
   font-family: "Play";
   font-style: normal;
   font-weight: 400;
@@ -44,9 +44,8 @@
   color: #ffffff;
 }
 .defiaccess--info-sub {
-  width: 295.49px;
-  height: 77.87px;
-
+  width: 501px;
+  height: 110px;
   font-family: "Play";
   font-style: normal;
   font-weight: 400;
@@ -66,4 +65,34 @@
   height: 100%;
   object-fit: contain;
 }
-/* @media screen and (max-width: 650px) {} */
+@media screen and (max-width: 1150px) {
+  .defiaccess-container {
+    margin-bottom: 200px;
+  }
+  .defiaccess-container-inner {
+    padding: 0px 32px;
+  }
+}
+
+@media screen and (max-width: 700px) {
+  .defiaccess--info-title {
+    width: 100%;
+    height: 100%;
+
+    font-size: 56px;
+    line-height: 65px;
+  }
+  .defiaccess--info-sub {
+    width: 100%;
+    height: 100%;
+
+    font-size: 27px;
+    line-height: 31px;
+  }
+  .defiaccess-brand {
+    width: 100%;
+    height: 100%;
+
+    transform: rotate(55.83deg);
+  }
+}
