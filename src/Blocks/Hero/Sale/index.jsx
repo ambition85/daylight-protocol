@@ -21,8 +21,12 @@ const Sale = ({ rate, startTime, endTime, totalUsdc, totalDayl, usdcBalance, tot
     setProgressPercent((totalUsdc / total) * 100 + "%");
   }, [totalUsdc]);
   const curTime = Date.now() / 1000
-  console.log("times:", startTime, endTime, curTime)
-
+  const showModal = () => {
+    if (!wallet) {
+      return toast.error('Connect your wallet')
+    }
+    setisModalOpen(() => true)
+  }
   return (
     <div className="hero-sale-container-outer">
       {/* //MODAL ON FIXED POSITION  */}

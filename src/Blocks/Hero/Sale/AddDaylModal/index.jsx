@@ -9,8 +9,8 @@ import usdcIcon from "../../../../assets/img/coins/usdc.svg";
 import daylIcon from "../../../../assets/img/coins/dayl.svg";
 import switchIcon from "../../../../assets/img/icons/switch.svg";
 import { localeString } from "../../../../utils/utils";
-const AddDaylModal = ({ startTime, endTime, rate, usdcBalance, whitelisted, onClose, buyDayl }) => {
-  const [isRange, setisRange] = useState(15);
+const AddDaylModal = ({ startTime, endTime, totalDayl, rate, usdcBalance, whitelisted, onClose, buyDayl }) => {
+  const [isRange, setisRange] = useState(100);
   const [isCurrent, setisCurrent] = useState("usdc");
   const switchHandler = () => {
     setisCurrent((prev) => {
@@ -34,8 +34,7 @@ const AddDaylModal = ({ startTime, endTime, rate, usdcBalance, whitelisted, onCl
     }
     onClose()
   }
-  console.log('usdc balance:', usdcBalance)
-
+  console.log('totaldayl:', totalDayl)
   return (
     <div
       className="adddaylmodal-container"
@@ -53,7 +52,11 @@ const AddDaylModal = ({ startTime, endTime, rate, usdcBalance, whitelisted, onCl
         </div>
         Add $DAYL
       </div>
-
+      {/* /////////// */}
+      <div className="adddaylmodal--current aic">
+        <div>My current $DAYL Investment</div>
+        <div className="adddaylmodal--current-b">{(new Big(totalDayl)).div((new Big(10)).pow(18)).toFixed(2)}</div>
+      </div>
       {/* /////////// */}
       <div className="adddaylmodal--infostack-a">
         <div className="adddaylmodal--infostack-a-info aic">
