@@ -3,7 +3,6 @@ import React from "react";
 const ChainOption = ({ img, title, button, onclick }) => {
   const buttonClickHandler = () => {
     if (!!onclick) {
-      console.log("entro");
       onclick();
     }
   };

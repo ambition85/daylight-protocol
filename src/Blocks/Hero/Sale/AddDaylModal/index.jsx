@@ -18,7 +18,6 @@ const AddDaylModal = ({ startTime, endTime, totalDayl, rate, usdcBalance, whitel
     });
   };
   const addDayl = async () => {
-    console.log('buying dayl:', { usdcBalance, isRange })
     if (!whitelisted) {
       toast.error('You are not whitelisted')
     } else if (Date.now() / 1000 < startTime) {
@@ -34,7 +33,6 @@ const AddDaylModal = ({ startTime, endTime, totalDayl, rate, usdcBalance, whitel
     }
     onClose()
   }
-  console.log('totaldayl:', totalDayl)
   return (
     <div
       className="adddaylmodal-container"

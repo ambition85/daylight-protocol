@@ -27,7 +27,6 @@ const Sale = ({ rate, startTime, endTime, claimTime, totalUsdc, totalDayl, usdcB
     }
     setisModalOpen(() => true)
   }
-  console.log('times:', curTime, claimTime)
   return (
     <div className="hero-sale-container-outer">
       {/* //MODAL ON FIXED POSITION  */}

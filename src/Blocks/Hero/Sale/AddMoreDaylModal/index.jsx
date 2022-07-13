@@ -19,7 +19,6 @@ const AddMoreDaylModal = ({ startTime, endTime, totalDayl, rate, usdcBalance, wh
     });
   };
   const addDayl = async () => {
-    console.log('buying dayl:', { usdcBalance, isRange })
     if (!whitelisted) {
       toast.error('You are not whitelisted')
     } else if (Date.now() / 1000 < startTime) {
