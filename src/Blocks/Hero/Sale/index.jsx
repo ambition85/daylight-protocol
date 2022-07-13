@@ -1,4 +1,8 @@
 import React, { useContext, useState } from "react";
+import { toast } from 'react-toastify'
+import Countdown from "react-countdown"
+import Big from 'big.js'
+
 import { WalletWeb3Context } from "../../../context/WalletWeb3Context";
 import "./style.css";
 import logoToken from "../../../assets/img/brand/logoToken.svg";
@@ -7,27 +11,33 @@ import Modal from "../../../components/Modal";
 import AddDaylModal from "./AddDaylModal";
 import AddMoreDaylModal from "./AddMoreDaylModal";
 
-const Sale = ({ progress, total }) => {
+const Sale = ({ rate, startTime, endTime, totalUsdc, totalDayl, usdcBalance, total, whitelisted, claimable, buyDayl }) => {
   const [isModalOpen, setisModalOpen] = useState(false);
   const [isModalMoreDaylOpen, setisModalMoreDaylOpen] = useState(false);
   const [progressPercent, setProgressPercent] = useState("30px");
   const { connectWallet, wallet, isWrongNetwork } =
     useContext(WalletWeb3Context);
   React.useEffect(() => {
-    setProgressPercent((progress / total) * 100 + "%");
-  }, [progress]);
-
+    setProgressPercent((totalUsdc / total) * 100 + "%");
+  }, [totalUsdc]);
+  const curTime = Date.now() / 1000
+  const showModal = () => {
+    if (!wallet) {
+      return toast.error('Connect your wallet')
+    }
+    setisModalOpen(() => true)
+  }
   return (
     <div className="hero-sale-container-outer">
       {/* //MODAL ON FIXED POSITION  */}
       <Modal visible={isModalOpen} onClose={() => setisModalOpen(false)}>
-        <AddDaylModal onClose={() => setisModalOpen(false)} />
+        <AddDaylModal startTime={startTime} endTime={endTime} totalDayl={totalDayl} totalUsdc={totalUsdc} usdcBalance={usdcBalance} rate={rate} whitelisted={whitelisted} onClose={() => setisModalOpen(false)} buyDayl={buyDayl} />
       </Modal>
       <Modal
         visible={isModalMoreDaylOpen}
         onClose={() => setisModalMoreDaylOpen(false)}
       >
-        <AddMoreDaylModal onClose={() => setisModalMoreDaylOpen(false)} />
+        <AddMoreDaylModal onClose={() => setisModalMoreDaylOpen(false)} startTime={startTime} endTime={endTime} totalDayl={totalDayl} totalUsdc={totalUsdc} usdcBalance={usdcBalance} rate={rate} whitelisted={whitelisted} buyDayl={buyDayl} />
       </Modal>
       <div className="hero-sale-container">
         {/* //////////////// 1 */}
@@ -51,8 +61,8 @@ const Sale = ({ progress, total }) => {
           </div>
           <div className="hero-sale-section-price-a">
             <div className="hero-sale-section-price-title">Price</div>
-            <div className="hero-sale-section-price-amount">$0.025</div>
-            <div className="hero-sale-section-price-estimated">0.025 $USDC</div>
+            <div className="hero-sale-section-price-amount">${new Big(1).mul(new Big(10).pow(12)).div(new Big(rate)).toString()}</div>
+            <div className="hero-sale-section-price-estimated">{new Big(1).mul(new Big(10).pow(12)).div(new Big(rate)).toString()} $USDC</div>
           </div>
         </div>
         {/* //////////////// 2 */}
@@ -62,12 +72,14 @@ const Sale = ({ progress, total }) => {
             style={{ alignItems: "flex-start" }}
           >
             <div className="hero-sale-section-price-title">Round 1</div>
-            <div className="hero-sale-section-price-amount">PRE-SALE</div>
+            <div className="hero-sale-section-price-amount">{curTime < startTime ? 'PRE-SALE NOT STARTED' : (curTime < endTime ? 'PRE-SALE' : 'PRE-SALE ENDED')}</div>
           </div>
           <div className="hero-sale-section-price">
             <div className="hero-sale-section-price-title">Time left</div>
             <div className="hero-sale-section-price-amount">
-              00:00:00 [Hours]
+              {
+                curTime < startTime ? 'PRE-SALE NOT STARTED' : (curTime < endTime ? <Countdown date={endTime * 1000} renderer={({ hours, minutes, seconds, completed }) => `${hours < 10 ? '0' : ''}${hours}:${minutes < 10 ? '0' : ''}${minutes}:${seconds < 10 ? '0' : ''}${seconds}`} /> : 'PRE-SALE ENDED')
+              }
             </div>
           </div>
         </div>
@@ -84,7 +96,7 @@ const Sale = ({ progress, total }) => {
           />
         </div>
         <div className="hero-sale-bar-value aic">
-          <div className="hover-effect">{localeString(progress)}</div>/
+          <div className="hover-effect">{localeString(totalUsdc)}</div>/
           <div className="hover-effect">{localeString(total)}</div>
         </div>
         {/* //////////////// 4 */}
@@ -105,7 +117,7 @@ const Sale = ({ progress, total }) => {
               Total Raised (Hard Cap)
             </div>
             <div className="hero-sale-section-price-amount">
-              $0.0 / 6,000,000
+              ${totalUsdc} / 6,000,000
             </div>
           </div>
         </div>
@@ -127,8 +139,8 @@ const Sale = ({ progress, total }) => {
               </div>
             </div>
             <div className="hero-sale-section" style={{ marginTop: "16px" }}>
-              <div className="hero-sale-section-connected-a">$1,000</div>
-              <div className="hero-sale-section-connected-a">40,000 $DAYL</div>
+              <div className="hero-sale-section-connected-a">${localeString(Big(totalDayl).div(Big(rate)).div(Big(10).pow(6)).toString())}</div>
+              <div className="hero-sale-section-connected-a">{localeString(Big(totalDayl).div(Big(10).pow(18)).toString())} $DAYL</div>
             </div>
             <div className="hero-sale-section-connected-divider" />
           </>
@@ -184,7 +196,7 @@ const Sale = ({ progress, total }) => {
               >
                 <div className="hero-sale-section-connected-b">Claimable</div>
                 <div className="hero-sale-section-connected-a">
-                  40,000 $DAYL
+                  {localeString(Big(claimable).toString())} $DAYL
                 </div>
               </div>
               <div
@@ -222,9 +234,8 @@ const Sale = ({ progress, total }) => {
               >
                 <div className="hero-sale-section-connected-b">Pre-Sale</div>
                 <div
-                  className={`hero-sale-section-connected-a ${
-                    false ? "connected-success" : "connected-failed"
-                  }`}
+                  className={`hero-sale-section-connected-a ${false ? "connected-success" : "connected-failed"
+                    }`}
                 >
                   FAILED
                 </div>
@@ -236,7 +247,7 @@ const Sale = ({ progress, total }) => {
                 <div className="hero-sale-section-connected-b">
                   Withdrawable
                 </div>
-                <div className="hero-sale-section-connected-a">$1,000 USDC</div>
+                <div className="hero-sale-section-connected-a">${totalUsdc} USDC</div>
               </div>
             </div>
             {/* //HERO BUTTON FOR CLAIM  */}

@@ -1,18 +1,40 @@
 import React, { useState } from "react";
+import { toast } from 'react-toastify'
+import Big from 'big.js'
+
 import "./style.css";
 import Icon from "../../../../components/Icon";
 import ArrowLeftIcon from "../../../../assets/img/icons/arrowLeft.svg";
 import usdcIcon from "../../../../assets/img/coins/usdc.svg";
 import daylIcon from "../../../../assets/img/coins/dayl.svg";
 import switchIcon from "../../../../assets/img/icons/switch.svg";
-const AddDaylModal = ({ onClose }) => {
-  const [isRange, setisRange] = useState(15);
+import { localeString } from "../../../../utils/utils";
+const AddDaylModal = ({ startTime, endTime, totalDayl, rate, usdcBalance, whitelisted, onClose, buyDayl }) => {
+  const [isRange, setisRange] = useState(100);
   const [isCurrent, setisCurrent] = useState("usdc");
   const switchHandler = () => {
     setisCurrent((prev) => {
       return prev === "usdc" ? "dayl" : "usdc";
     });
   };
+  const addDayl = async () => {
+    console.log('buying dayl:', { usdcBalance, isRange })
+    if (!whitelisted) {
+      toast.error('You are not whitelisted')
+    } else if (Date.now() / 1000 < startTime) {
+      toast.error('Presale not started')
+    } else if (Date.now() / 1000 > endTime) {
+      toast.error('Presale ended')
+    } else {
+      if (usdcBalance.toString() === '0' || isRange === '0') {
+        toast.error('Buying 0 $DAYL')
+      } else {
+        await buyDayl(isRange)
+      }
+    }
+    onClose()
+  }
+  console.log('totaldayl:', totalDayl)
   return (
     <div
       className="adddaylmodal-container"
@@ -30,7 +52,11 @@ const AddDaylModal = ({ onClose }) => {
         </div>
         Add $DAYL
       </div>
-
+      {/* /////////// */}
+      <div className="adddaylmodal--current aic">
+        <div>My current $DAYL Investment</div>
+        <div className="adddaylmodal--current-b">{(new Big(totalDayl)).div((new Big(10)).pow(18)).toFixed(2)}</div>
+      </div>
       {/* /////////// */}
       <div className="adddaylmodal--infostack-a">
         <div className="adddaylmodal--infostack-a-info aic">
@@ -39,7 +65,7 @@ const AddDaylModal = ({ onClose }) => {
             imgsrc={isCurrent === "usdc" ? usdcIcon : daylIcon}
             classnamestyle="hover-effect adddaylmodal--infostack-a-info-token aic"
           />
-          <b>24,000</b>
+          <b>{isCurrent === "usdc" ? localeString((new Big(usdcBalance)).div((new Big(10)).pow(6))) : localeString((new Big(usdcBalance)).mul(new Big(rate)).div((new Big(10)).pow(18)))}</b>
         </div>
         <div className="adddaylmodal--infostack-a-amount">
           Amount {isRange}%
@@ -114,7 +140,7 @@ const AddDaylModal = ({ onClose }) => {
           data-aos-offset="-100"
           data-aos-easing="ease-in-out"
         >
-          <div className="adddaylmodal--tokens-token-amount">0.1</div>
+          <div className="adddaylmodal--tokens-token-amount">{isCurrent === "usdc" ? localeString((new Big(usdcBalance)).mul(isRange).div(100).div((new Big(10)).pow(6))) : localeString((new Big(usdcBalance)).mul(new Big(rate)).mul(isRange).div(100).div((new Big(10)).pow(18))).toString()}</div>
           <div className="adddaylmodal--tokens-token-img aic">
             <Icon
               imgsrc={isCurrent === "usdc" ? usdcIcon : daylIcon}
@@ -143,7 +169,7 @@ const AddDaylModal = ({ onClose }) => {
           data-aos-offset="-100"
           data-aos-easing="ease-in-out"
         >
-          <div className="adddaylmodal--tokens-token-amount">10</div>
+          <div className="adddaylmodal--tokens-token-amount">{isCurrent === "usdc" ? localeString((new Big(usdcBalance)).mul(new Big(rate)).mul(isRange).div(100).div((new Big(10)).pow(18))).toString() : localeString((new Big(usdcBalance)).mul(isRange).div(100).div((new Big(10)).pow(6)))}</div>
           <div className="adddaylmodal--tokens-token-img aic">
             <Icon
               imgsrc={isCurrent === "usdc" ? daylIcon : usdcIcon}
@@ -156,7 +182,7 @@ const AddDaylModal = ({ onClose }) => {
       <button
         className="adddaylmodal--button aic"
         type="button"
-        onClick={() => onClose()}
+        onClick={() => addDayl()}
       >
         Add $DAYL
       </button>

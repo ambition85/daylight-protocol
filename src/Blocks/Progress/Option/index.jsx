@@ -26,8 +26,8 @@ const Option = ({ check, title, date }) => {
                 y2="7.54722"
                 gradientUnits="userSpaceOnUse"
               >
-                <stop stop-color="#DA4A52" />
-                <stop offset="1" stop-color="#DF775A" />
+                <stop stopColor="#DA4A52" />
+                <stop offset="1" stopColor="#DF775A" />
               </linearGradient>
             </defs>
           </svg>

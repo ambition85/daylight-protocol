@@ -34,7 +34,7 @@ const Header = () => {
       </div>
 
       <div className="header--interaction">
-        <Button onclick={() => web3ButtonHandler()}>
+        <Button onClick={() => web3ButtonHandler()}>
           {!!wallet ? (
             <>{isWrongNetwork ? "Wrong Network" : shortenAddress(wallet)}</>
           ) : (
