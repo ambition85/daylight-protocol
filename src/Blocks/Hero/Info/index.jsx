@@ -16,7 +16,7 @@ const Info = ({ addDaylToken }) => {
         data-aos-offset="-100"
         data-aos-easing="ease-in"
       >
-        Dentralized Earning
+        Decentralized Earning
         <br /> Built for Sustainability and Ecosystem Inclusion
       </div>
       <div
