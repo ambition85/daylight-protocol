@@ -40,7 +40,9 @@ const Home = () => {
   const [rate, setRate] = useState('1000000000000')
   const [startTime, setStartTime] = useState(0)
   const [endTime, setEndTime] = useState(0)
+  const [claimTime, setClaimTime] = useState(0)
   const [usdcDecimals, setUsdcDecimals] = useState(6)
+  const [minToVault, setMinToVault] = useState(0)
   const [totalUsdc, setTotalUsdc] = useState('0')
   const [totalDayl, setTotalDayl] = useState('0')
   const [usdcBalance, setUsdcBalance] = useState('0')
@@ -48,7 +50,9 @@ const Home = () => {
   const [minPerWallet, setMinPerWallet] = useState('0')
   const [maxPerWallet, setMaxPerWallet] = useState('0')
   const [hardCap, setHardCap] = useState('0')
+  const [softCap, setSoftCap] = useState('0')
   const [claimable, setClaimable] = useState('0')
+  const [depositAmount, setDepositAmount] = useState('0')
   const { connectWallet, wallet, isWrongNetwork, updateNetworkWallet } = useContext(WalletWeb3Context);
   useEffect(() => {
     (async () => {
@@ -74,9 +78,12 @@ const Home = () => {
       setRate((await presaleReadContract.rate()).toString())
       setStartTime((await presaleReadContract.startTime()).toNumber())
       setEndTime((await presaleReadContract.endTime()).toNumber())
+      setClaimTime((await presaleReadContract.claimTime()).toNumber())
+      setMinToVault((await presaleReadContract.minToVault()).toNumber())
       setMinPerWallet((await presaleReadContract.minPerWallet()).toString())
       setMaxPerWallet((await presaleReadContract.maxPerWallet()).toString())
       setHardCap((await presaleReadContract.hardCap()).toString())
+      setSoftCap((await presaleReadContract.softCap()).toString())
       usdcReadContract = new Contract(USDCAddress, ERC20ABI, new providers.JsonRpcProvider(chainConfig.rpcUrls[0]))
       const usdcDcmls = await usdcReadContract.decimals()
       setUsdcDecimals(usdcDcmls)
@@ -90,6 +97,7 @@ const Home = () => {
       const userInfo = await presaleReadContract.userInfo(wallet)
       console.log('userinfo:', userInfo.totalReward.toString(), userInfo.depositAmount.toString(), userInfo.withdrawnReward.toString())
       setTotalDayl(userInfo.totalReward.toString())
+      setDepositAmount(userInfo.depositAmount.toString())
       setWhitelisted(await presaleReadContract.whitelisted(wallet))
       setClaimable(await presaleReadContract.claimableAmount(wallet))
       setUsdcBalance(await usdcReadContract.balanceOf(wallet))
@@ -109,6 +117,7 @@ const Home = () => {
         const userInfo = await presaleReadContract.userInfo(wallet)
         console.log('userinfo:', userInfo.totalReward.toString(), userInfo.depositAmount.toString(), userInfo.withdrawnReward.toString())
         setTotalDayl(userInfo.totalReward.toString())
+        setDepositAmount(userInfo.depositAmount.toString())
         setWhitelisted(await presaleReadContract.whitelisted(wallet))
         setClaimable(await presaleReadContract.claimableAmount(wallet))
       }
@@ -154,7 +163,8 @@ const Home = () => {
     if (BigNumber.from(totalDayl).add(usdcBalance.mul(BigNumber.from(rate)).mul(BigNumber.from(percent))).div(BigNumber.from(100)).gt(BigNumber.from(maxPerWallet).mul(BigNumber.from(rate)))) {
       return toast('Exceeds maximum amount')
     }
-    if (BigNumber.from(totalUsdc).add(usdcBalance.mul(BigNumber.from(percent))).div(BigNumber.from(100)).gt(BigNumber.from(hardCap))) {
+    let ttlUsdc = await presaleReadContract.totalUSDC()
+    if (ttlUsdc.add(usdcBalance.mul(BigNumber.from(percent))).div(BigNumber.from(100)).gt(BigNumber.from(hardCap))) {
       return toast('Exceeds Hard Cap')
     }
     console.log('Approving:', usdcBalance.mul(BigNumber.from(percent)).div(BigNumber.from(100)).toString(), usdcBalance.mul(BigNumber.from(rate)).mul(BigNumber.from(percent)).div(BigNumber.from(100)).toString())
@@ -169,17 +179,17 @@ const Home = () => {
       tx = await presaleContract.deposit(usdcBalance.mul(BigNumber.from(rate)).mul(BigNumber.from(percent)).div(BigNumber.from(100)).toString(), { from: wallet })
       await tx.wait()
       console.log('Deposited');
-      toast.success('Purchaing Success');
+      toast.success('Depositing Success');
     } catch (err) {
       console.log('error:', err)
     }
-    const ttlUsdc = await presaleReadContract.totalUSDC()
-    console.log('total usdc:', ttlUsdc.toString())
+    ttlUsdc = await presaleReadContract.totalUSDC()
     setTotalUsdc(ttlUsdc.div(BigNumber.from(10).pow(usdcDecimals)).toNumber().toFixed(1))
     if (!!presaleReadContract) {
       const userInfo = await presaleReadContract.userInfo(wallet)
       console.log('userinfo:', userInfo.totalReward.toString(), userInfo.depositAmount.toString(), userInfo.withdrawnReward.toString())
       setTotalDayl(userInfo.totalReward.toString())
+      setDepositAmount(userInfo.depositAmount.toString())
       setClaimable(await presaleReadContract.claimableAmount(wallet))
     }
     if (!!usdcReadContract) {
@@ -188,9 +198,46 @@ const Home = () => {
       setUsdcBalance(await usdcReadContract.balanceOf(wallet))
     }
   }
+  const withdraw = async () => {
+    if (Date.now() / 1000 < claimTime) {
+      return toast.error('Not claim time')
+    }
+    let ttlUsdc = await presaleReadContract.totalUSDC()
+    if (ttlUsdc.gte(BigNumber.from(softCap))) {
+      return toast.error('Unable to withdraw')
+    }
+    if (depositAmount === '0' || minToVault === 100) {
+      return toast.error('No USDC to withdraw')
+    }
+    let tx = await presaleContract.withdraw({ from: wallet })
+    await tx.wait()
+    const userInfo = await presaleReadContract.userInfo(wallet)
+    console.log('userinfo:', userInfo.totalReward.toString(), userInfo.depositAmount.toString(), userInfo.withdrawnReward.toString())
+    setTotalDayl(userInfo.totalReward.toString())
+    setDepositAmount(userInfo.depositAmount.toString())
+    setClaimable(await presaleReadContract.claimableAmount(wallet))
+    ttlUsdc = await presaleReadContract.totalUSDC()
+    console.log('total usdc:', ttlUsdc.toString())
+    setTotalUsdc(ttlUsdc.div(BigNumber.from(10).pow(usdcDecimals)).toNumber(1).toFixed(1))
+    toast.success('Withdraw Success');
+  }
+  const claim = async () => {
+    if (Date.now() / 1000 < claimTime) {
+      return toast.error('Not claim time')
+    }
+    console.log('claimable:', claimable.toString())
+    if (claimable.toString() === '0') {
+      return toast.error('Unable to claim any token')
+    }
+    let tx = await presaleContract.claimToken({ from: wallet })
+    await tx.wait()
+    setClaimable(await presaleReadContract.claimableAmount(wallet))
+    toast.success('Claiming Success');
+  }
+  console.log("times:", startTime, endTime, claimTime)
   return (
     <Body>
-      <Hero rate={rate} startTime={startTime} endTime={endTime} totalUsdc={totalUsdc} walletAddress={wallet} totalDayl={totalDayl} usdcBalance={usdcBalance} whitelisted={whitelisted} claimable={claimable} addDaylToken={addDaylToken} buyDayl={buyDayl} />
+      <Hero rate={rate} startTime={startTime} endTime={endTime} claimTime={claimTime} totalUsdc={totalUsdc} walletAddress={wallet} totalDayl={totalDayl} usdcBalance={usdcBalance} whitelisted={whitelisted} claimable={claimable} hardCap={hardCap} softCap={softCap} addDaylToken={addDaylToken} buyDayl={buyDayl} withdraw={withdraw} claim={claim} />
       <Progress />
       <DefiAccess />
       {/* <ChainSection /> */}

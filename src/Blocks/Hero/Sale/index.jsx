@@ -11,7 +11,7 @@ import Modal from "../../../components/Modal";
 import AddDaylModal from "./AddDaylModal";
 import AddMoreDaylModal from "./AddMoreDaylModal";
 
-const Sale = ({ rate, startTime, endTime, totalUsdc, totalDayl, usdcBalance, total, whitelisted, claimable, buyDayl }) => {
+const Sale = ({ rate, startTime, endTime, claimTime, totalUsdc, totalDayl, usdcBalance, total, whitelisted, claimable, hardCap, softCap, buyDayl, withdraw, claim }) => {
   const [isModalOpen, setisModalOpen] = useState(false);
   const [isModalMoreDaylOpen, setisModalMoreDaylOpen] = useState(false);
   const [progressPercent, setProgressPercent] = useState("30px");
@@ -20,13 +20,14 @@ const Sale = ({ rate, startTime, endTime, totalUsdc, totalDayl, usdcBalance, tot
   React.useEffect(() => {
     setProgressPercent((totalUsdc / total) * 100 + "%");
   }, [totalUsdc]);
-  const curTime = Date.now() / 1000
+  const curTime = Math.floor(Date.now() / 1000)
   const showModal = () => {
     if (!wallet) {
       return toast.error('Connect your wallet')
     }
     setisModalOpen(() => true)
   }
+  console.log('times:', curTime, claimTime)
   return (
     <div className="hero-sale-container-outer">
       {/* //MODAL ON FIXED POSITION  */}
@@ -122,7 +123,7 @@ const Sale = ({ rate, startTime, endTime, totalUsdc, totalDayl, usdcBalance, tot
           </div>
         </div>
         {/* //////////////// connected */}
-        {true && (
+        {!!wallet && (
           <>
             <div className="hero-sale-section" style={{ marginTop: "32px" }}>
               <div className="hero-sale-section-connected-a">My Info</div>
@@ -146,7 +147,7 @@ const Sale = ({ rate, startTime, endTime, totalUsdc, totalDayl, usdcBalance, tot
           </>
         )}
         {/* //////////////// add dayl normal */}
-        {true && (
+        {!!wallet && (
           <div
             className="hero-sale-section"
             style={{
@@ -164,7 +165,7 @@ const Sale = ({ rate, startTime, endTime, totalUsdc, totalDayl, usdcBalance, tot
           </div>
         )}
         {/* //////////////// add MORE dayl normal */}
-        {true && (
+        {!!wallet && (
           <div
             className="hero-sale-section"
             style={{
@@ -182,7 +183,7 @@ const Sale = ({ rate, startTime, endTime, totalUsdc, totalDayl, usdcBalance, tot
           </div>
         )}
         {/* //////////////// CLAIM */}
-        {true && (
+        {!!wallet && (
           <div
             className="hero-sale-section"
             style={{
@@ -196,7 +197,7 @@ const Sale = ({ rate, startTime, endTime, totalUsdc, totalDayl, usdcBalance, tot
               >
                 <div className="hero-sale-section-connected-b">Claimable</div>
                 <div className="hero-sale-section-connected-a">
-                  {localeString(Big(claimable).toString())} $DAYL
+                  {localeString(Big(claimable).div(Big(10).pow(18)).toNumber().toString())} $DAYL
                 </div>
               </div>
               <div
@@ -206,21 +207,25 @@ const Sale = ({ rate, startTime, endTime, totalUsdc, totalDayl, usdcBalance, tot
                 <div className="hero-sale-section-connected-b">
                   Time to Unlock
                 </div>
-                <div className="hero-sale-section-connected-a">20 days</div>
+                <div className="hero-sale-section-connected-a">
+                  {
+                    curTime < claimTime ? <Countdown date={claimTime * 1000} renderer={({ hours, minutes, seconds, completed }) => hours >= 24 ? `${hours / 24} days` : (hours > 0 ? `${hours} hours` : (minutes > 0 ? `${minutes} minutes` : `${seconds} seconds`))} /> : ''
+                  }
+                </div>
               </div>
             </div>
             {/* //HERO BUTTON FOR CLAIM  */}
             <button
               className="hero-sale-section-button"
-              disabled
-              onClick={() => setisModalOpen(() => true)}
+              disabled={curTime < claimTime}
+              onClick={() => claim()}
             >
               Claim
             </button>
           </div>
         )}
         {/* //////////////// WITHDRAW */}
-        {true && (
+        {!!wallet && (
           <div
             className="hero-sale-section"
             style={{
@@ -234,10 +239,10 @@ const Sale = ({ rate, startTime, endTime, totalUsdc, totalDayl, usdcBalance, tot
               >
                 <div className="hero-sale-section-connected-b">Pre-Sale</div>
                 <div
-                  className={`hero-sale-section-connected-a ${false ? "connected-success" : "connected-failed"
+                  className={`hero-sale-section-connected-a ${Big(totalUsdc).gte(Big(softCap).div(Big(10).pow(6))) ? "connected-success" : "connected-failed"
                     }`}
                 >
-                  FAILED
+                  {Big(totalUsdc).gte(Big(softCap).div(Big(10).pow(6))) ? 'SUCCESS' : 'FAILED'}
                 </div>
               </div>
               <div
@@ -253,7 +258,7 @@ const Sale = ({ rate, startTime, endTime, totalUsdc, totalDayl, usdcBalance, tot
             {/* //HERO BUTTON FOR CLAIM  */}
             <button
               className="hero-sale-section-button"
-              onClick={() => setisModalOpen(() => true)}
+              onClick={() => withdraw()}
             >
               Withdraw
             </button>
