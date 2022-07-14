@@ -11,7 +11,7 @@ import Modal from "../../../components/Modal";
 import AddDaylModal from "./AddDaylModal";
 import AddMoreDaylModal from "./AddMoreDaylModal";
 
-const Sale = ({ rate, startTime, endTime, claimTime, totalUsdc, totalDayl, usdcBalance, total, whitelisted, claimable, hardCap, softCap, buyDayl, withdraw, claim }) => {
+const Sale = ({ rate, startTime, endTime, claimTime, totalUsdc, totalDayl, usdcBalance, total, whitelisted, claimable, withdrawable, hardCap, softCap, buyDayl, withdraw, claim }) => {
   const [isModalOpen, setisModalOpen] = useState(false);
   const [isModalMoreDaylOpen, setisModalMoreDaylOpen] = useState(false);
   const [progressPercent, setProgressPercent] = useState("30px");
@@ -251,7 +251,7 @@ const Sale = ({ rate, startTime, endTime, claimTime, totalUsdc, totalDayl, usdcB
                 <div className="hero-sale-section-connected-b">
                   Withdrawable
                 </div>
-                <div className="hero-sale-section-connected-a">${totalUsdc} USDC</div>
+                <div className="hero-sale-section-connected-a">${Big(withdrawable).div(Big(10).pow(6)).toFixed(1)} USDC</div>
               </div>
             </div>
             {/* //HERO BUTTON FOR CLAIM  */}

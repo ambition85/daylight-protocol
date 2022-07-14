@@ -57,6 +57,7 @@ const Home = () => {
   const [softCap, setSoftCap] = useState("0");
   const [claimable, setClaimable] = useState("0");
   const [depositAmount, setDepositAmount] = useState("0");
+  const [withdrawable, setWithdrawable] = useState('0')
   const { connectWallet, wallet, isWrongNetwork, updateNetworkWallet } =
     useContext(WalletWeb3Context);
   useEffect(() => {
@@ -88,7 +89,8 @@ const Home = () => {
       setStartTime((await presaleReadContract.startTime()).toNumber());
       setEndTime((await presaleReadContract.endTime()).toNumber());
       setClaimTime((await presaleReadContract.claimTime()).toNumber());
-      setMinToVault((await presaleReadContract.minToVault()).toNumber());
+      const mtv = await presaleReadContract.minToVault()
+      setMinToVault(mtv.toNumber())
       setMinPerWallet((await presaleReadContract.minPerWallet()).toString());
       setMaxPerWallet((await presaleReadContract.maxPerWallet()).toString());
       setHardCap((await presaleReadContract.hardCap()).toString());
@@ -108,6 +110,7 @@ const Home = () => {
         return;
       }
       const userInfo = await presaleReadContract.userInfo(wallet);
+      setWithdrawable(userInfo.depositAmount.mul(BigNumber.from(100).sub(mtv)).div(BigNumber.from(100)))
       setTotalDayl(userInfo.totalReward.toString());
       setDepositAmount(userInfo.depositAmount.toString());
       setWhitelisted(await presaleReadContract.whitelisted(wallet));
@@ -127,6 +130,9 @@ const Home = () => {
       }
       if (!!presaleReadContract) {
         const userInfo = await presaleReadContract.userInfo(wallet);
+        const mtv = (await presaleReadContract.minToVault()).toNumber()
+        setMinToVault(mtv)
+        setWithdrawable(userInfo.depositAmount.mul(BigNumber.from(100).sub(mtv)).div(BigNumber.from(100)))
         setTotalDayl(userInfo.totalReward.toString());
         setDepositAmount(userInfo.depositAmount.toString());
         setWhitelisted(await presaleReadContract.whitelisted(wallet));
@@ -235,12 +241,15 @@ const Home = () => {
     if (ttlUsdc.gte(BigNumber.from(softCap))) {
       return toast.error("Unable to withdraw");
     }
-    if (depositAmount === "0" || minToVault === 100) {
+    if (withdrawable === '0') {
       return toast.error("No USDC to withdraw");
     }
     let tx = await presaleContract.withdraw({ from: wallet });
     await tx.wait();
     const userInfo = await presaleReadContract.userInfo(wallet);
+    const mtv = (await presaleReadContract.minToVault()).toNumber()
+    setMinToVault(mtv)
+    setWithdrawable(userInfo.depositAmount.mul(BigNumber.from(100).sub(mtv)).div(BigNumber.from(100)))
     setTotalDayl(userInfo.totalReward.toString());
     setDepositAmount(userInfo.depositAmount.toString());
     setClaimable(await presaleReadContract.claimableAmount(wallet));
@@ -272,6 +281,7 @@ const Home = () => {
         totalUsdc={totalUsdc}
         walletAddress={wallet}
         totalDayl={totalDayl}
+        withdrawable={withdrawable}
         usdcBalance={usdcBalance}
         whitelisted={whitelisted}
         claimable={claimable}
