@@ -1,7 +1,7 @@
 import React from "react";
 import "./style.css";
 //
-import LogoBrand from "../../assets/img/brand/logoSmall.svg";
+import LogoBrand from "../../assets/img/brand/logo.svg";
 import mediumIcon from "../../assets/img/socials/medium.svg";
 import discordIcon from "../../assets/img/socials/discord.svg";
 import telegramIcon from "../../assets/img/socials/telegram.svg";
@@ -34,6 +34,19 @@ const Footer = () => {
         />
       </div>
       <div className="footer--bottom aic">
+        <div className="footer--bottom-links aic ">
+          <div className="footer--bottom-link hover-effect">Pre-Sale</div>
+          <div className="footer--bottom-div" />
+          <div className="footer--bottom-link hover-effect">ORION DEX</div>
+          <div className="footer--bottom-div" />
+          <div className="footer--bottom-link hover-effect">Sustainability</div>
+          <div className="footer--bottom-div" />
+          <div className="footer--bottom-link hover-effect">
+            Daylight Porotocol
+          </div>
+          <div className="footer--bottom-div" />
+          <div className="footer--bottom-link hover-effect">Blog</div>
+        </div>
         <Icon
           imgsrc={LogoBrand}
           classnamestyle="footer--bottom-brand aic hover-effect"
@@ -41,15 +54,6 @@ const Footer = () => {
         <div className="footer--bottom-text">
           Daylight Protocol Copyright {new Date().getFullYear()}. All rights
           reserved.
-        </div>
-        <div className="footer--bottom-links aic ">
-          <div className="footer--bottom-link hover-effect">Our Vision</div>
-          <div className="footer--bottom-div" />
-          <div className="footer--bottom-link hover-effect">Mechanics</div>
-          <div className="footer--bottom-div" />
-          <div className="footer--bottom-link hover-effect">Tokenomics</div>
-          <div className="footer--bottom-div" />
-          <div className="footer--bottom-link hover-effect">Blog</div>
         </div>
       </div>
     </div>

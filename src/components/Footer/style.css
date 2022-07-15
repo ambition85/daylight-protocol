@@ -1,6 +1,6 @@
 .footer-container {
   flex-direction: column;
-  margin: 100px 0px 70px 0px;
+  margin: 130px 0px 90px 0px;
   gap: 35px;
 }
 .footer--socials {
@@ -11,7 +11,8 @@
   height: 32px;
 }
 .footer--bottom {
-  gap: 64px;
+  flex-direction: column;
+  gap: 32px;
 }
 .sectionlist-container {
   display: flex;
@@ -21,7 +22,7 @@
   gap: 8px;
 }
 .sectionlist--title {
-  font-family: "Play";
+  font-family: "Dongle";
   font-style: normal;
   font-weight: 700;
   font-size: 18px;
@@ -33,7 +34,7 @@
   text-fill-color: transparent;
 }
 .sectionlist--option {
-  font-family: "Play";
+  font-family: "Dongle";
   font-style: normal;
   font-weight: 400;
   font-size: 18px;
@@ -48,11 +49,11 @@
   align-items: center;
 }
 .footer--bottom-text {
-  font-family: "Play";
+  font-family: "Dongle";
   font-style: normal;
   font-weight: 400;
-  font-size: 12px;
-  line-height: 14px;
+  font-size: 21px;
+  line-height: 30px;
   /* identical to box height */
 
   color: #ffffff;
@@ -62,11 +63,11 @@
 }
 
 .footer--bottom-link {
-  font-family: "Play";
+  font-family: "Dongle";
   font-style: normal;
   font-weight: 400;
-  font-size: 12px;
-  line-height: 14px;
+  font-size: 21px;
+  line-height: 30px;
   color: #ffffff;
 }
 .footer--bottom-div {
@@ -76,18 +77,12 @@
   transform: rotate(90deg);
 }
 
-@media screen and (max-width: 1100px) {
-  .footer--bottom {
-    flex-direction: column;
-    gap: 32px;
-  }
-}
-@media screen and (max-width: 560px) {
+@media screen and (max-width: 735px) {
   .footer--bottom-links {
     gap: 8px;
-    /* flex-direction: column; */
+    flex-direction: column;
   }
   .footer--bottom-div {
-    /* display: none; */
+    display: none;
   }
 }

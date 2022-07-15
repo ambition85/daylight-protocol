@@ -113,3 +113,25 @@
     width: 100%;
   }
 }
+
+.roadsection2-container {
+  margin-top: 180px;
+}
+.roadsection2--img-big {
+  width: 100vw;
+  height: 100%;
+}
+.roadsection2--img-small {
+  display: none;
+}
+
+@media screen and (max-width: 1200px) {
+  .roadsection2--img-big {
+    display: none;
+  }
+  .roadsection2--img-small {
+    width: 150vw;
+    height: 100%;
+    display: flex;
+  }
+}

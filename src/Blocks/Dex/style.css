@@ -59,3 +59,30 @@
     width: 100vw;
   }
 }
+
+.dexsection2-container {
+  margin-top: 120px;
+}
+.dexsection2--img {
+  width: 100vw;
+  height: 100%;
+}
+.dexsection2--img-mobile {
+  display: none;
+}
+
+@media screen and (max-width: 1000px) {
+  .dexsection2--img {
+    width: 140vw;
+  }
+}
+@media screen and (max-width: 600px) {
+  .dexsection2--img {
+    display: none;
+  }
+  .dexsection2--img-mobile {
+    display: flex;
+    width: 100vw;
+    height: 100%;
+  }
+}
