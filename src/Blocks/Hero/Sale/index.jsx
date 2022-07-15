@@ -145,26 +145,8 @@ const Sale = ({ rate, startTime, endTime, claimTime, totalUsdc, totalDayl, usdcB
             <div className="hero-sale-section-connected-divider" />
           </>
         )}
-        {/* //////////////// add dayl normal */}
-        {!!wallet && totalDayl === '0' && (
-          <div
-            className="hero-sale-section"
-            style={{
-              marginTop: "27.32px",
-              justifyContent: "flex-end",
-            }}
-          >
-            {/* //HERO BUTTON FOR ADD  */}
-            <button
-              className="hero-sale-section-button"
-              onClick={() => setisModalOpen(() => true)}
-            >
-              Add $DAYL
-            </button>
-          </div>
-        )}
         {/* //////////////// add MORE dayl normal */}
-        {!!wallet && Date.now() < endTime * 1000 && totalDayl !== '0' && (
+        {!!wallet && Date.now() < endTime * 1000 && (
           <div
             className="hero-sale-section"
             style={{
@@ -177,7 +159,7 @@ const Sale = ({ rate, startTime, endTime, claimTime, totalUsdc, totalDayl, usdcB
               className="hero-sale-section-button"
               onClick={() => setisModalMoreDaylOpen(() => true)}
             >
-              Add More $DAYL
+              Purchase $DAYL
             </button>
           </div>
         )}

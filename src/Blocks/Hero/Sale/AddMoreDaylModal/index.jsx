@@ -58,7 +58,7 @@ const AddMoreDaylModal = ({
             classnamestyle="hover-effect adddaylmodal--header-back aic"
           />
         </div>
-        Add More $DAYL
+        Purchase $DAYL
       </div>
       {/* /////////// */}
       <div className="adddaylmodal--current aic">
@@ -79,10 +79,10 @@ const AddMoreDaylModal = ({
             {isCurrent === "usdc"
               ? localeString(new Big(usdcBalance).div(new Big(10).pow(6)))
               : localeString(
-                  new Big(usdcBalance)
-                    .mul(new Big(rate))
-                    .div(new Big(10).pow(18))
-                )}
+                new Big(usdcBalance)
+                  .mul(new Big(rate))
+                  .div(new Big(10).pow(18))
+              )}
           </b>
         </div>
         <div className="adddaylmodal--infostack-a-amount">
@@ -161,18 +161,18 @@ const AddMoreDaylModal = ({
           <div className="adddaylmodal--tokens-token-amount">
             {isCurrent === "usdc"
               ? localeString(
-                  new Big(usdcBalance)
-                    .mul(isRange)
-                    .div(100)
-                    .div(new Big(10).pow(6))
-                )
+                new Big(usdcBalance)
+                  .mul(isRange)
+                  .div(100)
+                  .div(new Big(10).pow(6))
+              )
               : localeString(
-                  new Big(usdcBalance)
-                    .mul(new Big(rate))
-                    .mul(isRange)
-                    .div(100)
-                    .div(new Big(10).pow(18))
-                ).toString()}
+                new Big(usdcBalance)
+                  .mul(new Big(rate))
+                  .mul(isRange)
+                  .div(100)
+                  .div(new Big(10).pow(18))
+              ).toString()}
           </div>
           <div className="adddaylmodal--tokens-token-img aic">
             <Icon
@@ -205,18 +205,18 @@ const AddMoreDaylModal = ({
           <div className="adddaylmodal--tokens-token-amount">
             {isCurrent === "usdc"
               ? localeString(
-                  new Big(usdcBalance)
-                    .mul(new Big(rate))
-                    .mul(isRange)
-                    .div(100)
-                    .div(new Big(10).pow(18))
-                ).toString()
+                new Big(usdcBalance)
+                  .mul(new Big(rate))
+                  .mul(isRange)
+                  .div(100)
+                  .div(new Big(10).pow(18))
+              ).toString()
               : localeString(
-                  new Big(usdcBalance)
-                    .mul(isRange)
-                    .div(100)
-                    .div(new Big(10).pow(6))
-                )}
+                new Big(usdcBalance)
+                  .mul(isRange)
+                  .div(100)
+                  .div(new Big(10).pow(6))
+              )}
           </div>
           <div className="adddaylmodal--tokens-token-img aic">
             <Icon
@@ -232,7 +232,7 @@ const AddMoreDaylModal = ({
         type="button"
         onClick={() => addDayl()}
       >
-        Add More $DAYL
+        Purchase $DAYL
       </button>
     </div>
   );
