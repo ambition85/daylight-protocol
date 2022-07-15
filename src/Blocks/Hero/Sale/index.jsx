@@ -164,7 +164,7 @@ const Sale = ({ rate, startTime, endTime, claimTime, totalUsdc, totalDayl, usdcB
           </div>
         )}
         {/* //////////////// add MORE dayl normal */}
-        {!!wallet && totalDayl !== '0' && (
+        {!!wallet && Date.now() < endTime * 1000 && totalDayl !== '0' && (
           <div
             className="hero-sale-section"
             style={{
@@ -182,7 +182,7 @@ const Sale = ({ rate, startTime, endTime, claimTime, totalUsdc, totalDayl, usdcB
           </div>
         )}
         {/* //////////////// CLAIM */}
-        {!!wallet && (
+        {!!wallet && Date.now() < endTime * 1000 && (
           <div
             className="hero-sale-section"
             style={{
