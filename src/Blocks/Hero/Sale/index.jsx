@@ -146,7 +146,7 @@ const Sale = ({ rate, startTime, endTime, claimTime, totalUsdc, totalDayl, usdcB
           </>
         )}
         {/* //////////////// add dayl normal */}
-        {!!wallet && (
+        {!!wallet && totalDayl === '0' && (
           <div
             className="hero-sale-section"
             style={{
@@ -164,7 +164,7 @@ const Sale = ({ rate, startTime, endTime, claimTime, totalUsdc, totalDayl, usdcB
           </div>
         )}
         {/* //////////////// add MORE dayl normal */}
-        {!!wallet && (
+        {!!wallet && totalDayl !== '0' && (
           <div
             className="hero-sale-section"
             style={{
@@ -189,7 +189,7 @@ const Sale = ({ rate, startTime, endTime, claimTime, totalUsdc, totalDayl, usdcB
               marginTop: "27.32px",
             }}
           >
-            <div className="hero-sale-section" style={{ width: "60%" }}>
+            <div className="hero-sale-section" style={{ width: claimable.toString() === '0' ? '100%' : "60%" }}>
               <div
                 className="hero-sale-section-price"
                 style={{ alignItems: "flex-start", gap: "16px" }}
@@ -214,13 +214,15 @@ const Sale = ({ rate, startTime, endTime, claimTime, totalUsdc, totalDayl, usdcB
               </div>
             </div>
             {/* //HERO BUTTON FOR CLAIM  */}
-            <button
-              className="hero-sale-section-button"
-              disabled={curTime < claimTime}
-              onClick={() => claim()}
-            >
-              Claim
-            </button>
+            {
+              claimable.toString() !== '0' && <button
+                className="hero-sale-section-button"
+                disabled={curTime < claimTime}
+                onClick={() => claim()}
+              >
+                Claim
+              </button>
+            }
           </div>
         )}
         {/* //////////////// WITHDRAW */}
@@ -231,7 +233,7 @@ const Sale = ({ rate, startTime, endTime, claimTime, totalUsdc, totalDayl, usdcB
               marginTop: "27.32px",
             }}
           >
-            <div className="hero-sale-section" style={{ width: "60%" }}>
+            <div className="hero-sale-section" style={{ width: withdrawable.toString() === '0' ? "100%" : '60^' }}>
               <div
                 className="hero-sale-section-price"
                 style={{ alignItems: "flex-start", gap: "16px" }}
@@ -255,12 +257,14 @@ const Sale = ({ rate, startTime, endTime, claimTime, totalUsdc, totalDayl, usdcB
               </div>
             </div>
             {/* //HERO BUTTON FOR CLAIM  */}
-            <button
-              className="hero-sale-section-button"
-              onClick={() => withdraw()}
-            >
-              Withdraw
-            </button>
+            {
+              withdrawable.toString() !== '0' && <button
+                className="hero-sale-section-button"
+                onClick={() => withdraw()}
+              >
+                Withdraw
+              </button>
+            }
           </div>
         )}
       </div>
