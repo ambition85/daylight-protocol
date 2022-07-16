@@ -43,27 +43,32 @@ let provider,
   usdcContract;
 
 const Home = () => {
-  //state for handling wallet profile
-  const [isWalletOptionsOpen, setisWalletOptionsOpen] = useState(false);
 
-  const [rate, setRate] = useState("1000000000000");
-  const [startTime, setStartTime] = useState(0);
-  const [endTime, setEndTime] = useState(0);
-  const [claimTime, setClaimTime] = useState(0);
-  const [usdcDecimals, setUsdcDecimals] = useState(6);
-  const [minToVault, setMinToVault] = useState(0);
-  const [totalUsdc, setTotalUsdc] = useState("0");
-  const [totalDayl, setTotalDayl] = useState("0");
-  const [usdcBalance, setUsdcBalance] = useState("0");
-  const [whitelisted, setWhitelisted] = useState(false);
-  const [minPerWallet, setMinPerWallet] = useState("0");
-  const [maxPerWallet, setMaxPerWallet] = useState("0");
-  const [hardCap, setHardCap] = useState("0");
-  const [softCap, setSoftCap] = useState("0");
-  const [claimable, setClaimable] = useState("0");
-  const [depositAmount, setDepositAmount] = useState("0");
-  const [withdrawable, setWithdrawable] = useState("0");
-  const { wallet } = useContext(WalletWeb3Context);
+  const usdcDecimals = 6
+const [isWalletOptionsOpen, setisWalletOptionsOpen] = useState(false);
+  const [rate, setRate] = useState('1000000000000')
+  const [startTime, setStartTime] = useState(0)
+  const [endTime, setEndTime] = useState(0)
+  const [claimTime, setClaimTime] = useState(0)
+  const [minToVault, setMinToVault] = useState(0)
+  const [totalUsdc, setTotalUsdc] = useState('0')
+  const [totalDayl, setTotalDayl] = useState('0')
+  const [totalWithdrawn, setTotalWithdrawn] = useState('0')
+  const [usdcBalance, setUsdcBalance] = useState('0')
+  const [usdcAllowance, setUsdcAllowance] = useState(false)
+  const [whitelisted, setWhitelisted] = useState(false)
+  const [minPerWallet, setMinPerWallet] = useState('0')
+  const [maxPerWallet, setMaxPerWallet] = useState('0')
+  const [hardCap, setHardCap] = useState('0')
+  const [softCap, setSoftCap] = useState('0')
+  const [claimable, setClaimable] = useState('0')
+  const [depositAmount, setDepositAmount] = useState('0')
+  const [withdrawable, setWithdrawable] = useState('0')
+
+  const [presaleState, setPresaleState] = useState(0)
+
+  const { connectWallet, wallet, isWrongNetwork, updateNetworkWallet } = useContext(WalletWeb3Context);
+
   useEffect(() => {
     (async () => {
       try {
@@ -83,49 +88,72 @@ const Home = () => {
           }
         }
       }
-      provider = new providers.Web3Provider(window.ethereum);
-      presaleReadContract = new Contract(
-        PresaleAddress,
-        PresaleABI,
-        new providers.JsonRpcProvider(chainConfig.rpcUrls[0])
-      );
-      setRate((await presaleReadContract.rate()).toString());
-      setStartTime((await presaleReadContract.startTime()).toNumber());
-      setEndTime((await presaleReadContract.endTime()).toNumber());
-      setClaimTime((await presaleReadContract.claimTime()).toNumber());
-      const mtv = await presaleReadContract.minToVault();
-      setMinToVault(mtv.toNumber());
-      setMinPerWallet((await presaleReadContract.minPerWallet()).toString());
-      setMaxPerWallet((await presaleReadContract.maxPerWallet()).toString());
-      setHardCap((await presaleReadContract.hardCap()).toString());
-      setSoftCap((await presaleReadContract.softCap()).toString());
-      usdcReadContract = new Contract(
-        USDCAddress,
-        ERC20ABI,
-        new providers.JsonRpcProvider(chainConfig.rpcUrls[0])
-      );
-      const usdcDcmls = await usdcReadContract.decimals();
-      setUsdcDecimals(usdcDcmls);
-      const ttlUsdc = await presaleReadContract.totalUSDC();
-      setTotalUsdc(
-        ttlUsdc.div(BigNumber.from(10).pow(usdcDecimals)).toNumber(1).toFixed(1)
-      );
+      provider = new providers.Web3Provider(window.ethereum)
+      presaleReadContract = new Contract(PresaleAddress, PresaleABI, new providers.JsonRpcProvider(chainConfig.rpcUrls[0]))
+      usdcReadContract = new Contract(USDCAddress, ERC20ABI, new providers.JsonRpcProvider(chainConfig.rpcUrls[0]))
+
+      if (!!provider) {
+        let signer = provider.getSigner();
+        presaleContract = new Contract(PresaleAddress, PresaleABI, signer)
+        usdcContract = new Contract(USDCAddress, ERC20ABI, signer)
+      }
+
+      const [rate, startTime, endTime, claimTime, minTo, maxTo, hardCap, softCap, ttlUsdc] = await Promise.all([
+        presaleReadContract.rate(),
+        presaleReadContract.startTime(),
+        presaleReadContract.endTime(),
+        presaleReadContract.claimTime(),
+        presaleReadContract.minPerWallet(),
+        presaleReadContract.maxPerWallet(),
+        presaleReadContract.hardCap(),
+        presaleReadContract.softCap(),
+        presaleReadContract.totalUSDC()
+      ])
+
+      setRate(rate.toString())
+      setStartTime((startTime).toNumber())
+      setEndTime((endTime).toNumber())
+      setClaimTime((claimTime).toNumber())
+      setMinPerWallet((minTo).toString())
+      setMaxPerWallet((maxTo).toString())
+      setHardCap((hardCap).toString())
+      setSoftCap((softCap).toString())
+      setTotalUsdc(ttlUsdc.div(BigNumber.from(10).pow(usdcDecimals)).toNumber(1).toFixed(1))
+
+      console.log(startTime.toNumber() < new Date() / 1000, endTime.toNumber(), new Date() / 1000)
+
+      // Set Presale State
+      if (startTime.toNumber() < new Date() / 1000) setPresaleState(1) // If start time passed
+      if (endTime.toNumber() < new Date() / 1000) setPresaleState(2) // If end time passed
+      if (claimTime.toNumber() < new Date() / 1000) {
+        if (ttlUsdc.toNumber() > softCap.toNumber())
+          setPresaleState(3) // if Claimtime passed
+        else
+          setPresaleState(4)
+      }
+
       if (!wallet) {
         return;
       }
-      const userInfo = await presaleReadContract.userInfo(wallet);
-      setWithdrawable(
-        userInfo.depositAmount
-          .mul(BigNumber.from(100).sub(mtv))
-          .div(BigNumber.from(100))
-      );
-      setTotalDayl(userInfo.totalReward.toString());
-      setDepositAmount(userInfo.depositAmount.toString());
-      setWhitelisted(await presaleReadContract.whitelisted(wallet));
-      setClaimable(await presaleReadContract.claimableAmount(wallet));
-      setUsdcBalance(await usdcReadContract.balanceOf(wallet));
-    })();
-  }, []);
+
+      const [userInfo, whitelisted, claimable, usdcBalance, usdcAllowance] = await Promise.all([
+        presaleReadContract.userInfo(wallet),
+        presaleReadContract.whitelisted(wallet),
+        presaleReadContract.claimableAmount(wallet),
+        usdcReadContract.balanceOf(wallet),
+        usdcReadContract.allowance(wallet, PresaleAddress)
+      ])
+
+      setTotalDayl(userInfo.totalReward.toString())
+      setDepositAmount(userInfo.depositAmount.toString())
+      setTotalWithdrawn(userInfo.withdrawnReward.toString())
+      setWhitelisted(whitelisted)
+      setClaimable(claimable)
+      setUsdcBalance(usdcBalance)
+      setUsdcAllowance(!usdcAllowance.lt(maxTo))
+      console.log("Alloance: ", usdcAllowance.gt(maxTo), usdcAllowance, maxTo)
+    })()
+  }, [])
   useEffect(() => {
     (async () => {
       if (!!provider) {
@@ -136,26 +164,24 @@ const Home = () => {
       if (!wallet) {
         return;
       }
-      if (!!presaleReadContract) {
-        const userInfo = await presaleReadContract.userInfo(wallet);
-        const mtv = (await presaleReadContract.minToVault()).toNumber();
-        setMinToVault(mtv);
-        setWithdrawable(
-          userInfo.depositAmount
-            .mul(BigNumber.from(100).sub(mtv))
-            .div(BigNumber.from(100))
-        );
-        setTotalDayl(userInfo.totalReward.toString());
-        setDepositAmount(userInfo.depositAmount.toString());
-        setWhitelisted(await presaleReadContract.whitelisted(wallet));
-        setClaimable(await presaleReadContract.claimableAmount(wallet));
+      if (!!presaleReadContract && !!usdcReadContract) {
+        const [userInfo, whitelisted, claimable, usdcBalance] = await Promise.all([
+          presaleReadContract.userInfo(wallet),
+          presaleReadContract.whitelisted(wallet),
+          presaleReadContract.claimableAmount(wallet),
+          usdcReadContract.balanceOf(wallet)
+        ])
+
+        setTotalDayl(userInfo.totalReward.toString())
+        setDepositAmount(userInfo.depositAmount.toString())
+        setTotalWithdrawn(userInfo.withdrawnReward.toString())
+        setWhitelisted(whitelisted)
+        setClaimable(claimable)
+        setUsdcBalance(usdcBalance)
       }
-      if (!!usdcReadContract) {
-        const balance = await usdcReadContract.balanceOf(wallet);
-        setUsdcBalance(await usdcReadContract.balanceOf(wallet));
-      }
-    })();
-  }, [wallet, provider, presaleReadContract, usdcReadContract]);
+    })()
+  }, [wallet, provider, presaleReadContract, usdcReadContract])
+
   const addDaylToken = async () => {
     try {
       // wasAdded is a boolean. Like any RPC method, an error may be thrown.
@@ -174,8 +200,20 @@ const Home = () => {
     } catch (error) {
       console.log(error);
     }
-  };
-  const buyDayl = async (percent) => {
+  }
+
+  const approve = async () => {
+    if (!usdcContract || !presaleContract || !presaleReadContract) {
+      return
+    }
+    let tx = await usdcContract.approve(PresaleAddress, usdcBalance.mul(BigNumber.from(maxPerWallet)).toString(), { from: wallet })
+    await tx.wait()
+    let allowance = await usdcContract.allowance(wallet, PresaleAddress);
+
+    setUsdcAllowance(allowance)
+  }
+
+  const buyDayl = async percent => {
     if (!usdcContract || !presaleContract || !presaleReadContract) {
       return;
     }
@@ -206,27 +244,9 @@ const Home = () => {
       return toast("Exceeds Hard Cap");
     }
     try {
-      let preAllowance = await usdcContract.allowance(wallet, PresaleAddress);
-      let tx = await usdcContract.approve(
-        PresaleAddress,
-        usdcBalance
-          .mul(BigNumber.from(percent))
-          .div(BigNumber.from(100))
-          .toString(),
-        { from: wallet }
-      );
-      await tx.wait();
-      preAllowance = await usdcContract.allowance(wallet, PresaleAddress);
-      tx = await presaleContract.deposit(
-        usdcBalance
-          .mul(BigNumber.from(rate))
-          .mul(BigNumber.from(percent))
-          .div(BigNumber.from(100))
-          .toString(),
-        { from: wallet }
-      );
-      await tx.wait();
-      toast.success("Depositing Success");
+      let tx = await presaleContract.deposit(usdcBalance.mul(BigNumber.from(rate)).mul(BigNumber.from(percent)).div(BigNumber.from(100)).toString(), { from: wallet })
+      await tx.wait()
+      toast.success('Depositing Success');
     } catch (err) {
       console.log("error:", err);
     }
@@ -244,7 +264,8 @@ const Home = () => {
       const balance = await usdcReadContract.balanceOf(wallet);
       setUsdcBalance(await usdcReadContract.balanceOf(wallet));
     }
-  };
+  }
+
   const withdraw = async () => {
     if (Date.now() / 1000 < claimTime) {
       return toast.error("Not claim time");
@@ -282,38 +303,23 @@ const Home = () => {
     if (claimable.toString() === "0") {
       return toast.error("Unable to claim any token");
     }
-    let tx = await presaleContract.claimToken({ from: wallet });
-    await tx.wait();
-    setClaimable(await presaleReadContract.claimableAmount(wallet));
-    toast.success("Claiming Success");
-  };
+    console.log("Claimable: ", claimable, presaleContract)
+    let tx = await presaleContract.claimToken({ from: wallet })
+    await tx.wait()
+    setClaimable(await presaleReadContract.claimableAmount(wallet))
+    toast.success('Claiming Success');
+  }
+
   return (
     <Body>
+
       <WalletMenu
         wallet={wallet}
         isWalletOptionsOpen={isWalletOptionsOpen}
         setisWalletOptionsOpen={setisWalletOptionsOpen}
       />
-      <Hero
-        setisWalletOptionsOpen={setisWalletOptionsOpen}
-        rate={rate}
-        startTime={startTime}
-        endTime={endTime}
-        claimTime={claimTime}
-        totalUsdc={totalUsdc}
-        walletAddress={wallet}
-        totalDayl={totalDayl}
-        withdrawable={withdrawable}
-        usdcBalance={usdcBalance}
-        whitelisted={whitelisted}
-        claimable={claimable}
-        hardCap={hardCap}
-        softCap={softCap}
-        addDaylToken={addDaylToken}
-        buyDayl={buyDayl}
-        withdraw={withdraw}
-        claim={claim}
-      />
+      <Hero state={presaleState} rate={rate} startTime={startTime} endTime={endTime} claimTime={claimTime} totalUsdc={totalUsdc} walletAddress={wallet} totalDayl={totalDayl} withdrawable={withdrawable} totalWithdrawn={totalWithdrawn} usdcBalance={usdcBalance} whitelisted={whitelisted} claimable={claimable} hardCap={hardCap} softCap={softCap} allowance={usdcAllowance} approve={approve} addDaylToken={addDaylToken} buyDayl={buyDayl} withdraw={withdraw} claim={claim} />
+
       <Progress />
       <DefiAccess />
       <ChainsSection />
