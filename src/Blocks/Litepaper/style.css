@@ -1,0 +1,59 @@
+.litepaper-container {
+  gap: 128px;
+  margin-top: 200px;
+  flex-wrap: wrap;
+}
+.litepaper-logo {
+  width: 393.84px;
+  height: 393.84px;
+}
+.litepaper--info {
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 30px;
+}
+.litepaper--info-title {
+  font-family: "Space Grotesk";
+  font-style: normal;
+  font-weight: 500;
+  font-size: 56px;
+  line-height: 68px;
+  color: #ffffff;
+}
+.litepaper--info-button {
+  padding: 16px 32px;
+
+  width: 345px;
+  height: 53px;
+
+  /* Fire Gradient */
+
+  background: linear-gradient(90deg, #da4a52 0%, #df775a 100%);
+  /* White */
+
+  border: 2px solid #ffffff;
+  border-radius: 10px;
+
+  font-family: "Play";
+  font-style: normal;
+  font-weight: 700;
+  font-size: 18px;
+  line-height: 21px;
+  /* identical to box height */
+
+  /* White */
+
+  color: #ffffff;
+}
+
+@media screen and (max-width: 540px) {
+  .litepaper-logo {
+    width: 90vw;
+    height: 100%;
+  }
+  .litepaper--info {
+    flex-direction: column;
+    align-items: center;
+    gap: 30px;
+  }
+}

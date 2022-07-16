@@ -23,3 +23,9 @@
   border: 2px solid rgb(255, 255, 255, 0.6);
   cursor: pointer;
 }
+@media screen and (max-width: 680px) {
+  .button-container {
+    font-size: 16px;
+    line-height: 19px;
+  }
+}

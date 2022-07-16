@@ -1,11 +1,18 @@
-@import url("https://fonts.googleapis.com/css2?family=Aldrich&family=Play:wght@400;700&display=swap");
-@import url("https://fonts.googleapis.com/css2?family=Aldrich&family=Dongle:wght@300;400;700&family=Space+Grotesk:wght@300;400;500;600;700&display=swap");
-
+@import url("https://fonts.googleapis.com/css2?family=Dongle:wght@300;400;700&family=Play:wght@400;700&family=Space+Grotesk:wght@300;400;500;600;700&display=swap");
 :root {
   --black: #0f0f0f;
-  /* font-family: "Unica One"; */
 }
-
+.web3modal-modal-container {
+  font-family: "Dongle" !important;
+}
+.web3modal-provider-name {
+  font-size: 28px !important;
+  margin: 0px !important;
+}
+.web3modal-provider-description {
+  font-size: 24px !important;
+  margin: 0px !important;
+}
 .aic {
   display: flex;
   justify-content: center;

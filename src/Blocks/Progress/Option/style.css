@@ -8,11 +8,11 @@
 }
 .progress-option--title {
   margin-top: 7px;
-  font-family: "Play";
+  font-family: "Dongle";
   font-style: normal;
   font-weight: 700;
-  font-size: 18px;
-  line-height: 21px;
+  font-size: 27px;
+  line-height: 39px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -31,11 +31,11 @@
 }
 
 .progress-option--date {
-  font-family: "Play";
+  font-family: "Dongle";
   font-style: normal;
   font-weight: 400;
-  font-size: 18px;
-  line-height: 21px;
+  font-size: 27px;
+  line-height: 27px;
   text-align: center;
 
   color: #ffffff;

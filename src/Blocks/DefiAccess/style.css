@@ -36,21 +36,21 @@
 .defiaccess--info-title {
   width: 626.88px;
   height: 136px;
-  font-family: "Play";
+  font-family: "Space Grotesk";
   font-style: normal;
-  font-weight: 400;
+  font-weight: 500;
   font-size: 56px;
-  line-height: 65px;
+  line-height: 68px;
   color: #ffffff;
 }
 .defiaccess--info-sub {
   width: 501px;
-  height: 110px;
-  font-family: "Play";
+  height: 59.89px;
+  font-family: "Dongle";
   font-style: normal;
   font-weight: 400;
-  font-size: 27px;
-  line-height: 31px;
+  font-size: 37px;
+  line-height: 34px;
 
   color: #ffffff;
 }

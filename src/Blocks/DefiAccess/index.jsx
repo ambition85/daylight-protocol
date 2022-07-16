@@ -5,7 +5,7 @@ import defiBg from "../../assets/img/brand/defiBg.svg";
 
 const DefiAccess = () => {
   return (
-    <div className="defiaccess-container">
+    <div className="defiaccess-container" id="sustainability">
       <div className="defiaccess--backgroung">
         <img src={defiBg} alt="defiBg" className="defiaccess--backgroung-img" />
       </div>

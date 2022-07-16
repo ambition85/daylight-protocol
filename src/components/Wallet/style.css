@@ -22,8 +22,9 @@
 
   background: #191919;
   border-radius: 29px;
-  position: absolute;
+  position: fixed;
   top: 100px;
+  right: 170px;
   transition: 300ms cubic-bezier(0.54, 0.21, 0.18, 1.35);
   visibility: visible;
   opacity: 1;
@@ -42,8 +43,9 @@
 
   background: #191919;
   border-radius: 29px;
-  position: absolute;
+  position: fixed;
   top: 100px;
+  right: 170px;
   transition: 300ms cubic-bezier(0.54, 0.21, 0.18, 1.35);
   visibility: hidden;
   opacity: 0;
@@ -64,6 +66,7 @@
 }
 .walletmenu--option:hover {
   color: rgb(255, 255, 255, 0.6);
+  cursor: pointer;
 }
 .walletmenu--divider {
   width: 100%;
@@ -71,11 +74,15 @@
 
   border: 1px solid #2e2f2f;
 }
-@media screen and (max-width: 1000px) {
+@media screen and (max-width: 1300px) {
   .walletmenu--open {
-    top: -170px;
+    top: 50%;
+    right: 50%;
+    transform: translate(50%, 50%);
   }
   .walletmenu--close {
-    top: -170px;
+    top: 50%;
+    right: 50%;
+    transform: translate(50%, 50%);
   }
 }
