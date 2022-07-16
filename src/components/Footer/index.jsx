@@ -1,5 +1,7 @@
 import React from "react";
 import "./style.css";
+import { HashLink } from "react-router-hash-link";
+
 //
 import LogoBrand from "../../assets/img/brand/logo.svg";
 import mediumIcon from "../../assets/img/socials/medium.svg";
@@ -35,17 +37,46 @@ const Footer = () => {
       </div>
       <div className="footer--bottom aic">
         <div className="footer--bottom-links aic ">
-          <div className="footer--bottom-link hover-effect">Pre-Sale</div>
+          <HashLink
+            smooth={true}
+            to="#presale"
+            className="hover-effect footer--bottom-link"
+          >
+            Pre-Sale
+          </HashLink>
           <div className="footer--bottom-div" />
-          <div className="footer--bottom-link hover-effect">ORION DEX</div>
+          <HashLink
+            smooth={true}
+            to="#sustainability"
+            className="hover-effect footer--bottom-link"
+          >
+            Sustainability
+          </HashLink>
           <div className="footer--bottom-div" />
-          <div className="footer--bottom-link hover-effect">Sustainability</div>
+          <HashLink
+            smooth={true}
+            to="#dex"
+            className="hover-effect footer--bottom-link"
+          >
+            DEX
+          </HashLink>
           <div className="footer--bottom-div" />
-          <div className="footer--bottom-link hover-effect">
-            Daylight Porotocol
-          </div>
+
+          <HashLink
+            smooth={true}
+            to="#daylight"
+            className="hover-effect footer--bottom-link"
+          >
+            Daylight Protocol
+          </HashLink>
           <div className="footer--bottom-div" />
-          <div className="footer--bottom-link hover-effect">Blog</div>
+          <HashLink
+            smooth={true}
+            to="#blog"
+            className="hover-effect footer--bottom-link"
+          >
+            Blog
+          </HashLink>
         </div>
         <Icon
           imgsrc={LogoBrand}

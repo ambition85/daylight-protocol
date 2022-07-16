@@ -1,18 +1,19 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import { WalletWeb3Context } from "../../context/WalletWeb3Context";
+import { HashLink } from "react-router-hash-link";
 //
 import "./style.css";
 //
 import LogoBrand from "../../assets/img/brand/logo.svg";
 import menuIcon from "../../assets/img/icons/menu.svg";
+import walletIcon from "../../assets/img/icons/wallet.svg";
+import downTabIcon from "../../assets/img/icons/downTab.svg";
 //
-// import User from "../User";
 import { shortenAddress } from "../../utils/utils";
 import Menu from "./Menu";
 import Icon from "../Icon";
-import WalletMenu from "./Wallet";
 
-const Header = () => {
+const Header = ({ setisWalletOptionsOpen }) => {
   const { connectWallet, wallet, isWrongNetwork, updateNetworkWallet } =
     useContext(WalletWeb3Context);
   const [isOpen, setIsOpen] = useState(false);
@@ -20,45 +21,145 @@ const Header = () => {
     if (isWrongNetwork) {
       updateNetworkWallet();
     } else {
-      connectWallet();
+      if (!!wallet) {
+        setisWalletOptionsOpen((prev) => !prev);
+      } else {
+        setisWalletOptionsOpen(false);
+        connectWallet();
+      }
     }
   };
-  return (
-    <nav className="header-container">
-      <div className="header--brand">
-        <img src={LogoBrand} alt="daylight protocol brand" />
-      </div>
-      <div className="header--links">
-        <div className="hover-effect header--link">Pre-Sale</div>
-        <div className="hover-effect header--link">ORION DEX</div>
-        <div className="hover-effect header--link">Sustainability</div>
-        <div className="hover-effect header--link">Daylight Porotocol</div>
-        <div className="hover-effect header--link">Blog</div>
-      </div>
 
-      <div onClick={() => web3ButtonHandler()} className="header--button aic">
+  const [scrollValue, setScrollValue] = useState(0);
+
+  useEffect(() => {
+    const onScroll = (e) => {
+      setScrollValue(e.target.documentElement.scrollTop);
+    };
+
+    window.addEventListener("scroll", onScroll);
+
+    return () => window.removeEventListener("scroll", onScroll);
+  }, [scrollValue]);
+  return (
+    <>
+      <div
+        className={
+          scrollValue > 1
+            ? "header-container-outer aic fixed-header"
+            : "header-container-outer aic"
+        }
+      >
+        <nav className="header-container">
+          <Icon
+            imgsrc={LogoBrand}
+            href="/"
+            classnamestyle="header--brand hover-effect aic"
+          />
+
+          <div className="header--links">
+            <HashLink
+              smooth={true}
+              to="#presale"
+              className="hover-effect header--link"
+            >
+              Pre-Sale
+            </HashLink>
+            <HashLink
+              smooth={true}
+              to="#sustainability"
+              className="hover-effect header--link"
+            >
+              Sustainability
+            </HashLink>
+            <HashLink
+              smooth={true}
+              to="#dex"
+              className="hover-effect header--link"
+            >
+              DEX
+            </HashLink>
+
+            <HashLink
+              smooth={true}
+              to="#daylight"
+              className="hover-effect header--link"
+            >
+              Daylight Protocol
+            </HashLink>
+            <HashLink
+              smooth={true}
+              to="#blog"
+              className="hover-effect header--link"
+            >
+              Blog
+            </HashLink>
+          </div>
+
+          <div className="header--buttons aic">
+            <div className="header--litepaper aic">Litepaper</div>
+            <div
+              onClick={() => web3ButtonHandler()}
+              className="header--button aic"
+            >
+              {!!wallet ? (
+                <>
+                  {isWrongNetwork ? (
+                    "Wrong Network"
+                  ) : (
+                    <div className="walletmenu-container aic">
+                      <Icon
+                        imgsrc={walletIcon}
+                        classnamestyle="walletmenu--icon-wallet aic "
+                      />
+                      {shortenAddress(wallet)}
+                      <Icon
+                        imgsrc={downTabIcon}
+                        classnamestyle="walletmenu--icon-tab aic "
+                      />
+                    </div>
+                  )}
+                </>
+              ) : (
+                "Connect Wallet"
+              )}
+            </div>
+          </div>
+          <div className="header--menu">
+            <button type="button" onClick={() => setIsOpen(() => true)}>
+              <Icon
+                imgsrc={menuIcon}
+                classnamestyle="header--menu-icon hover-effect aic"
+              />
+            </button>
+            <Menu isOpen={isOpen} close={() => setIsOpen(() => false)} />
+          </div>
+        </nav>
+      </div>
+      <div onClick={() => web3ButtonHandler()} className="header--button2 aic">
         {!!wallet ? (
           <>
             {isWrongNetwork ? (
               "Wrong Network"
             ) : (
-              <WalletMenu address={shortenAddress(wallet)} />
+              <div className="walletmenu-container aic">
+                <Icon
+                  imgsrc={walletIcon}
+                  classnamestyle="walletmenu--icon-wallet aic "
+                />
+                {shortenAddress(wallet)}
+                <Icon
+                  imgsrc={downTabIcon}
+                  classnamestyle="walletmenu--icon-tab aic "
+                />
+              </div>
             )}
           </>
         ) : (
           "Connect Wallet"
         )}
       </div>
-      <div className="header--menu">
-        <button type="button" onClick={() => setIsOpen(() => true)}>
-          <Icon
-            imgsrc={menuIcon}
-            classnamestyle="header--menu-icon hover-effect aic"
-          />
-        </button>
-        <Menu isOpen={isOpen} close={() => setIsOpen(() => false)} />
-      </div>
-    </nav>
+    </>
   );
 };
 

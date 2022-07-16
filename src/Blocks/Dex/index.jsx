@@ -5,7 +5,7 @@ import dexMobile from "../../assets/img/brand/dexMobile.svg";
 import Icon from "../../components/Icon";
 const DexSection = () => {
   return (
-    <div className="dexsection2-container aic">
+    <div className="dexsection2-container aic" id="dex">
       <Icon imgsrc={DexImg} classnamestyle="dexsection2--img" />
       <Icon imgsrc={dexMobile} classnamestyle="dexsection2--img-mobile" />
     </div>

@@ -8,6 +8,7 @@ import Hero from "../../Blocks/Hero";
 import Progress from "../../Blocks/Progress";
 import DefiAccess from "../../Blocks/DefiAccess";
 import ChainsSection from "../../Blocks/Chains";
+import Litepaper from "../../Blocks/Litepaper";
 import DexSection from "../../Blocks/Dex";
 import Road from "../../Blocks/Road";
 import Footer from "../../components/Footer";
@@ -21,6 +22,7 @@ import {
   USDCAddress,
 } from "../../constants";
 import PresaleABI from "../../constants/abis/Presale.json";
+import WalletMenu from "../../components/Wallet";
 
 const chainConfig = {
   chainId: "0xA869",
@@ -41,6 +43,9 @@ let provider,
   usdcContract;
 
 const Home = () => {
+  //state for handling wallet profile
+  const [isWalletOptionsOpen, setisWalletOptionsOpen] = useState(false);
+
   const [rate, setRate] = useState("1000000000000");
   const [startTime, setStartTime] = useState(0);
   const [endTime, setEndTime] = useState(0);
@@ -58,8 +63,7 @@ const Home = () => {
   const [claimable, setClaimable] = useState("0");
   const [depositAmount, setDepositAmount] = useState("0");
   const [withdrawable, setWithdrawable] = useState("0");
-  const { connectWallet, wallet, isWrongNetwork, updateNetworkWallet } =
-    useContext(WalletWeb3Context);
+  const { wallet } = useContext(WalletWeb3Context);
   useEffect(() => {
     (async () => {
       try {
@@ -285,7 +289,13 @@ const Home = () => {
   };
   return (
     <Body>
+      <WalletMenu
+        wallet={wallet}
+        isWalletOptionsOpen={isWalletOptionsOpen}
+        setisWalletOptionsOpen={setisWalletOptionsOpen}
+      />
       <Hero
+        setisWalletOptionsOpen={setisWalletOptionsOpen}
         rate={rate}
         startTime={startTime}
         endTime={endTime}
@@ -307,6 +317,7 @@ const Home = () => {
       <Progress />
       <DefiAccess />
       <ChainsSection />
+      <Litepaper />
       <DexSection />
       <Road />
       <Footer />

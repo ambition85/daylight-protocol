@@ -7,6 +7,7 @@ import MediumIcon from "../../../assets/img/icons/medium.svg";
 import TelegramIcon from "../../../assets/img/icons/telegram.svg";
 import DiscordIcon from "../../../assets/img/icons/discord.svg";
 import TwitterIcon from "../../../assets/img/icons/twitter.svg";
+import { HashLink } from "react-router-hash-link";
 
 const Menu = ({ isOpen, close }) => {
   return (
@@ -24,11 +25,47 @@ const Menu = ({ isOpen, close }) => {
       <Icon imgsrc={LogoBrand} classnamestyle="menu--" />
 
       <div className="menu--links aic">
-        <div className="menu--links-link hover-effect">Pre-Sale</div>
-        <div className="menu--links-link hover-effect">ORION DEX</div>
-        <div className="menu--links-link hover-effect">Sustainability</div>
-        <div className="menu--links-link hover-effect">Daylight Porotocol</div>
-        <div className="menu--links-link hover-effect">Blog</div>
+        <HashLink
+          onClick={() => close()}
+          smooth={true}
+          to="#presale"
+          className="hover-effect menu--links-link"
+        >
+          Pre-Sale
+        </HashLink>
+        <HashLink
+          onClick={() => close()}
+          smooth={true}
+          to="#sustainability"
+          className="hover-effect menu--links-link"
+        >
+          Sustainability
+        </HashLink>
+        <HashLink
+          onClick={() => close()}
+          smooth={true}
+          to="#dex"
+          className="hover-effect menu--links-link"
+        >
+          DEX
+        </HashLink>
+
+        <HashLink
+          onClick={() => close()}
+          smooth={true}
+          to="#daylight"
+          className="hover-effect menu--links-link"
+        >
+          Daylight Protocol
+        </HashLink>
+        <HashLink
+          onClick={() => close()}
+          smooth={true}
+          to="#blog"
+          className="hover-effect menu--links-link"
+        >
+          Blog
+        </HashLink>
       </div>
       <div className="menu--bottom aic">
         <div className="menu--socials aic">

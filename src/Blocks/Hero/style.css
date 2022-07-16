@@ -16,6 +16,41 @@
   margin-top: 185px;
   padding: 0px 32px;
 }
+.hero--mascot {
+  width: 139.76px;
+  height: 139.76px;
+  margin-top: 32px;
+}
+.hero--button-presale {
+  margin-top: 32px;
+  padding: 16px 32px;
+
+  height: 53px;
+
+  /* Gradient-Dragon */
+
+  background: linear-gradient(346.4deg, #fbb040 6.59%, #f9ed32 89.94%);
+  border: 2px solid #ffffff;
+  border-radius: 10px;
+  font-family: "Play";
+  font-style: normal;
+  font-weight: 700;
+  font-size: 18px;
+  line-height: 21px;
+  /* identical to box height */
+
+  color: #2d2d2d;
+  transition: 300ms cubic-bezier(0.54, 0.21, 0.18, 1.35);
+}
+.hero--button-presale:hover {
+  background: linear-gradient(
+    346.4deg,
+    rgb(251, 176, 64, 0.6) 6.59%,
+    rgb(249, 237, 50, 0.6) 89.94%
+  );
+  border: 2px solid rgb(255, 255, 255, 0.6);
+  color: #000000;
+}
 @media screen and (max-width: 1280px) {
   .hero-container {
     flex-wrap: wrap-reverse;

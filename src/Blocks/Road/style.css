@@ -1,119 +1,3 @@
-.roadsection-container {
-  margin-top: 180px;
-  justify-content: space-between;
-  width: 100vw;
-}
-.roadsection--img-icon {
-  width: 50vw;
-  height: 100%;
-}
-.roadsection--fake {
-  width: 50vw;
-  justify-content: flex-start;
-  padding-left: 100px;
-}
-.roadsection--bulletpoints {
-  flex-shrink: 0;
-  display: flex;
-  justify-content: flex-start;
-  align-items: flex-start;
-  flex-direction: column;
-  gap: 30px;
-}
-.bulletpoint-container {
-  display: flex;
-  justify-content: flex-start;
-  align-items: flex-start;
-  gap: 32px;
-}
-.bulletpoint--img {
-  width: 52px;
-  height: 52px;
-}
-.bulletpoint--info {
-  display: flex;
-  justify-content: flex-start;
-  align-items: flex-start;
-  flex-direction: column;
-}
-.bulletpoint--info-title {
-  font-family: "Play";
-  font-style: normal;
-  font-weight: 400;
-  font-size: 23px;
-  line-height: 30px;
-
-  display: flex;
-  align-items: center;
-  letter-spacing: 0.035em;
-
-  background: linear-gradient(346.4deg, #fbb040 6.59%, #f9ed32 89.94%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-  text-fill-color: transparent;
-}
-.bulletpoint--info-description {
-  font-family: "Play";
-  font-style: normal;
-  font-weight: 700;
-  font-size: 13px;
-  line-height: 18px;
-  display: flex;
-  align-items: center;
-  letter-spacing: 0.04em;
-
-  color: #ffffff;
-  width: 384px;
-}
-@media screen and (max-width: 1300px) {
-  .roadsection-container {
-    flex-direction: column;
-    justify-content: center;
-
-    gap: 32px;
-  }
-  .roadsection--img-icon {
-    width: 900px;
-    height: 100%;
-  }
-  .roadsection--fake {
-    width: 100%;
-    justify-content: center;
-    padding-left: 0px;
-  }
-}
-@media screen and (max-width: 800px) {
-  .roadsection-container {
-    margin-top: 80px;
-  }
-  .roadsection--img-icon {
-    width: 100%;
-    height: 100%;
-  }
-  .roadsection--bulletpoints {
-    padding: 0px 32px;
-    width: 100%;
-  }
-  .bulletpoint-container {
-    width: 100%;
-  }
-  .bulletpoint--info {
-    width: 100%;
-  }
-  .bulletpoint--info-title {
-    width: 100%;
-    font-size: 16px;
-    line-height: 20px;
-  }
-  .bulletpoint--info-description {
-    font-size: 13px;
-    line-height: 18px;
-    letter-spacing: 1px;
-    width: 100%;
-  }
-}
-
 .roadsection2-container {
   margin-top: 180px;
 }
@@ -121,7 +5,8 @@
   width: 100vw;
   height: 100%;
 }
-.roadsection2--img-small {
+.roadsection2--img-small,
+.roadsection2--img-extra-small {
   display: none;
 }
 
@@ -130,7 +15,17 @@
     display: none;
   }
   .roadsection2--img-small {
-    width: 150vw;
+    width: 100vw;
+    height: 100%;
+    display: flex;
+  }
+}
+@media screen and (max-width: 800px) {
+  .roadsection2--img-small {
+    display: none;
+  }
+  .roadsection2--img-extra-small {
+    width: 100vw;
     height: 100%;
     display: flex;
   }

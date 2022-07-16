@@ -1,27 +1,47 @@
+.header-container-outer {
+  width: 100%;
+  padding: 16px 32px;
+  transition: 400ms cubic-bezier(0.54, 0.21, 0.18, 1.35);
+}
+.fixed-header {
+  background: rgba(255, 255, 255, 0.1);
+  box-shadow: 0px 4px 24px rgba(0, 0, 0, 0.24);
+  backdrop-filter: blur(4px);
+  position: fixed;
+  z-index: 9;
+  transition: 400ms cubic-bezier(0.54, 0.21, 0.18, 1.35);
+}
 .header-container {
+  width: 100%;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  width: 100%;
   max-width: 1440px;
-  margin-top: 24px;
-  padding: 0px 35px;
+  /* padding: 0px 35px; */
 }
-
+.header--brand {
+  width: 126.13px;
+  height: 63.56px;
+}
 .header--links {
   display: flex;
   justify-content: center;
   align-items: center;
   gap: 32px;
+  height: 39px;
 }
 .header--link {
-  height: 19px;
-  font-family: "Play";
+  font-family: "Dongle";
   font-style: normal;
   font-weight: 400;
-  font-size: 16px;
-  line-height: 19px;
+  font-size: 27px;
+  line-height: 39px;
+  /* identical to box height */
+
+  text-align: center;
+
   color: #ffffff;
+  text-decoration: none;
 }
 
 .header--menu {
@@ -31,17 +51,44 @@
   width: 74px;
   height: 55px;
 }
+.header--buttons {
+  gap: 32px;
+}
+.header--litepaper {
+  font-family: "Dongle";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 27px;
+  line-height: 39px;
+  color: #ffffff;
+  padding: 16px 32px;
+  width: 158px;
+  height: 55px;
+  border: 2px solid #ffffff;
+  border-radius: 10px;
+  transition: 400ms cubic-bezier(0.54, 0.21, 0.18, 1.35);
+}
+.header--litepaper:hover {
+  border: 2px solid rgb(255, 255, 255, 0.6);
+  cursor: pointer;
+}
 .header--button {
   padding: 16px 32px;
   background: linear-gradient(90deg, #da4a52 0%, #df775a 100%);
   border: 2px solid #ffffff;
   border-radius: 10px;
-  font-family: "Play";
+  font-family: "Space Grotesk";
   font-style: normal;
   font-weight: 700;
   font-size: 18px;
-  line-height: 21px;
+  line-height: 23px;
+  /* identical to box height */
+  width: 222.97px;
+  height: 55px;
+  /* White */
+
   color: #ffffff;
+  transition: 400ms cubic-bezier(0.54, 0.21, 0.18, 1.35);
 }
 .header--button:hover {
   background: linear-gradient(
@@ -52,13 +99,29 @@
   border: 2px solid rgb(255, 255, 255, 0.6);
   cursor: pointer;
 }
+.header--button2 {
+  display: none;
+}
 
-@media screen and (max-width: 1000px) {
-  .header--links {
+@media screen and (max-width: 1300px) {
+  .header--links,
+  .header--litepaper,
+  .header--buttons {
     display: none;
   }
+  .fixed-header {
+    position: static;
+  }
 
-  .header--button {
+  .header--button2 {
+    padding: 16px 32px;
+    font-family: "Space Grotesk";
+    font-style: normal;
+    font-weight: 700;
+    font-size: 18px;
+    line-height: 23px;
+    color: #ffffff;
+    transition: 400ms cubic-bezier(0.54, 0.21, 0.18, 1.35);
     position: fixed;
     bottom: 0px;
     left: 0px;
@@ -70,8 +133,9 @@
     box-shadow: 0px -5px 24px rgba(0, 0, 0, 0.25);
     border-radius: 10px 10px 0px 0px;
     z-index: 10;
+    display: flex;
   }
-  .header--button:hover {
+  .header--button2:hover {
     cursor: pointer;
     background: linear-gradient(90deg, #da4a52 0%, #df775a 100%);
   }
