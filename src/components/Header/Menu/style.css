@@ -1,0 +1,77 @@
+.menu-container-open {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 10;
+  width: 100vw;
+  height: 100vh;
+  background: linear-gradient(180deg, #471a0e 0%, #95371d 100%);
+  transition: 300ms cubic-bezier(0.54, 0.21, 0.18, 1.35);
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 32px 0px 90px 0px;
+}
+.menu-container-close {
+  position: fixed;
+  top: 0;
+  left: -100vw;
+  z-index: 10;
+  width: 100vw;
+  height: 100vh;
+  background: linear-gradient(180deg, #471a0e 0%, #95371d 100%);
+  transition: 300ms cubic-bezier(0.54, 0.21, 0.18, 1.35);
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 32px 0px 90px 0px;
+}
+.menu--close {
+  position: absolute;
+  top: 0px;
+  left: 0px;
+}
+.menu--close-icon {
+  width: 44px;
+  height: 44px;
+}
+
+.menu--links {
+  flex-direction: column;
+  gap: 32px;
+}
+
+.menu--links-link {
+  font-family: "Play";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 24px;
+  line-height: 28px;
+  /* identical to box height */
+
+  text-align: center;
+
+  color: #ffffff;
+}
+.menu--bottom {
+  flex-direction: column;
+  gap: 8px;
+}
+.menu--socials {
+  gap: 8px;
+}
+.menu--socials-social {
+  width: 42px;
+  height: 42px;
+}
+.menu--copyright {
+  width: 283px;
+  height: 14px;
+
+  font-family: "Play";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 14px;
+  /* identical to box height */
+
+  color: #ffffff;
+}

@@ -12,7 +12,7 @@ import AddDaylModal from "./AddDaylModal";
 import AddMoreDaylModal from "./AddMoreDaylModal";
 import { numberWithCommas } from "../../../utils/utils";
 
-const Sale = ({ totalWithdrawn, allowance, approve, state, rate, startTime, endTime, claimTime, totalUsdc, totalDayl, usdcBalance, total, whitelisted, claimable, hardCap, softCap, buyDayl, withdraw, claim }) => {
+const Sale = ({ withdrawable, totalWithdrawn, allowance, approve, state, rate, startTime, endTime, claimTime, totalUsdc, totalDayl, usdcBalance, total, whitelisted, claimable, hardCap, softCap, buyDayl, withdraw, claim }) => {
   const [isModalOpen, setisModalOpen] = useState(false);
   const [isModalMoreDaylOpen, setisModalMoreDaylOpen] = useState(false);
   const [progressPercent, setProgressPercent] = useState("30px");
@@ -197,7 +197,7 @@ const Sale = ({ totalWithdrawn, allowance, approve, state, rate, startTime, endT
               marginTop: "27.32px",
             }}
           >
-            <div className="hero-sale-section" style={{ width: "60%" }}>
+            <div className="hero-sale-section" style={{ width: claimable.toString() === '0' ? '100%' : "60%" }}>
               <div
                 className="hero-sale-section-price"
                 style={{ alignItems: "flex-start", gap: "16px" }}
@@ -280,7 +280,7 @@ const Sale = ({ totalWithdrawn, allowance, approve, state, rate, startTime, endT
               marginTop: "27.32px",
             }}
           >
-            <div className="hero-sale-section" style={{ width: "60%" }}>
+            <div className="hero-sale-section" style={{ width: withdrawable.toString() === '0' ? "100%" : '60^' }}>
               <div
                 className="hero-sale-section-price"
                 style={{ alignItems: "flex-start", gap: "16px" }}
@@ -300,16 +300,18 @@ const Sale = ({ totalWithdrawn, allowance, approve, state, rate, startTime, endT
                 <div className="hero-sale-section-connected-b">
                   Withdrawable
                 </div>
-                <div className="hero-sale-section-connected-a">${totalUsdc} USDC</div>
+                <div className="hero-sale-section-connected-a">${Big(withdrawable).div(Big(10).pow(6)).toFixed(1)} USDC</div>
               </div>
             </div>
             {/* //HERO BUTTON FOR CLAIM  */}
-            <button
-              className="hero-sale-section-button"
-              onClick={() => withdraw()}
-            >
-              Withdraw
-            </button>
+            {
+              withdrawable.toString() !== '0' && <button
+                className="hero-sale-section-button"
+                onClick={() => withdraw()}
+              >
+                Withdraw
+              </button>
+            }
           </div>
         )}
       </div>

@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import { toast } from 'react-toastify'
-import Big from 'big.js'
+import { toast } from "react-toastify";
+import Big from "big.js";
 
 import "./style.css";
 import Icon from "../../../../components/Icon";
@@ -10,7 +10,16 @@ import daylIcon from "../../../../assets/img/coins/dayl.svg";
 import switchIcon from "../../../../assets/img/icons/switch.svg";
 import { localeString } from "../../../../utils/utils";
 
-const AddMoreDaylModal = ({ startTime, endTime, totalDayl, rate, usdcBalance, whitelisted, onClose, buyDayl }) => {
+const AddMoreDaylModal = ({
+  startTime,
+  endTime,
+  totalDayl,
+  rate,
+  usdcBalance,
+  whitelisted,
+  onClose,
+  buyDayl,
+}) => {
   const [isRange, setisRange] = useState(15);
   const [isCurrent, setisCurrent] = useState("usdc");
   const switchHandler = () => {
@@ -20,20 +29,20 @@ const AddMoreDaylModal = ({ startTime, endTime, totalDayl, rate, usdcBalance, wh
   };
   const addDayl = async () => {
     if (!whitelisted) {
-      toast.error('You are not whitelisted')
+      toast.error("You are not whitelisted");
     } else if (Date.now() / 1000 < startTime) {
-      toast.error('Presale not started')
+      toast.error("Presale not started");
     } else if (Date.now() / 1000 > endTime) {
-      toast.error('Presale ended')
+      toast.error("Presale ended");
     } else {
-      if (usdcBalance.toString() === '0' || isRange === '0') {
-        toast.error('Buying 0 $DAYL')
+      if (usdcBalance.toString() === "0" || isRange === "0") {
+        toast.error("Buying 0 $DAYL");
       } else {
-        await buyDayl(isRange)
+        await buyDayl(isRange);
       }
     }
-    onClose()
-  }
+    onClose();
+  };
   return (
     <div
       className="adddaylmodal-container"
@@ -49,12 +58,14 @@ const AddMoreDaylModal = ({ startTime, endTime, totalDayl, rate, usdcBalance, wh
             classnamestyle="hover-effect adddaylmodal--header-back aic"
           />
         </div>
-        Add More $DAYL
+        Purchase $DAYL
       </div>
       {/* /////////// */}
       <div className="adddaylmodal--current aic">
         <div>My current $DAYL Investment</div>
-        <div className="adddaylmodal--current-b">{(new Big(totalDayl)).div((new Big(10)).pow(18)).toFixed(2)}</div>
+        <div className="adddaylmodal--current-b">
+          {new Big(totalDayl).div(new Big(10).pow(18)).toFixed(2)}
+        </div>
       </div>
       {/* /////////// */}
       <div className="adddaylmodal--infostack-a">
@@ -64,7 +75,15 @@ const AddMoreDaylModal = ({ startTime, endTime, totalDayl, rate, usdcBalance, wh
             imgsrc={isCurrent === "usdc" ? usdcIcon : daylIcon}
             classnamestyle="hover-effect adddaylmodal--infostack-a-info-token aic"
           />
-          <b>{isCurrent === "usdc" ? localeString((new Big(usdcBalance)).div((new Big(10)).pow(6))) : localeString((new Big(usdcBalance)).mul(new Big(rate)).div((new Big(10)).pow(18)))}</b>
+          <b>
+            {isCurrent === "usdc"
+              ? localeString(new Big(usdcBalance).div(new Big(10).pow(6)))
+              : localeString(
+                new Big(usdcBalance)
+                  .mul(new Big(rate))
+                  .div(new Big(10).pow(18))
+              )}
+          </b>
         </div>
         <div className="adddaylmodal--infostack-a-amount">
           Amount {isRange}%
@@ -139,7 +158,22 @@ const AddMoreDaylModal = ({ startTime, endTime, totalDayl, rate, usdcBalance, wh
           data-aos-offset="-100"
           data-aos-easing="ease-in-out"
         >
-          <div className="adddaylmodal--tokens-token-amount">{isCurrent === "usdc" ? localeString((new Big(usdcBalance)).mul(isRange).div(100).div((new Big(10)).pow(6))) : localeString((new Big(usdcBalance)).mul(new Big(rate)).mul(isRange).div(100).div((new Big(10)).pow(18))).toString()}</div>
+          <div className="adddaylmodal--tokens-token-amount">
+            {isCurrent === "usdc"
+              ? localeString(
+                new Big(usdcBalance)
+                  .mul(isRange)
+                  .div(100)
+                  .div(new Big(10).pow(6))
+              )
+              : localeString(
+                new Big(usdcBalance)
+                  .mul(new Big(rate))
+                  .mul(isRange)
+                  .div(100)
+                  .div(new Big(10).pow(18))
+              ).toString()}
+          </div>
           <div className="adddaylmodal--tokens-token-img aic">
             <Icon
               imgsrc={isCurrent === "usdc" ? usdcIcon : daylIcon}
@@ -153,7 +187,7 @@ const AddMoreDaylModal = ({ startTime, endTime, totalDayl, rate, usdcBalance, wh
           onClick={() => switchHandler()}
           data-aos="fade-down"
           data-aos-delay="400"
-          data-aos-offset="-100"
+          data-aos-offset="-200"
           data-aos-easing="ease-in-out"
         >
           <Icon
@@ -165,10 +199,25 @@ const AddMoreDaylModal = ({ startTime, endTime, totalDayl, rate, usdcBalance, wh
           className="adddaylmodal--tokens-token aic"
           data-aos="fade-down"
           data-aos-delay="300"
-          data-aos-offset="-100"
+          data-aos-offset="-200"
           data-aos-easing="ease-in-out"
         >
-          <div className="adddaylmodal--tokens-token-amount">{isCurrent === "usdc" ? localeString((new Big(usdcBalance)).mul(new Big(rate)).mul(isRange).div(100).div((new Big(10)).pow(18))).toString() : localeString((new Big(usdcBalance)).mul(isRange).div(100).div((new Big(10)).pow(6)))}</div>
+          <div className="adddaylmodal--tokens-token-amount">
+            {isCurrent === "usdc"
+              ? localeString(
+                new Big(usdcBalance)
+                  .mul(new Big(rate))
+                  .mul(isRange)
+                  .div(100)
+                  .div(new Big(10).pow(18))
+              ).toString()
+              : localeString(
+                new Big(usdcBalance)
+                  .mul(isRange)
+                  .div(100)
+                  .div(new Big(10).pow(6))
+              )}
+          </div>
           <div className="adddaylmodal--tokens-token-img aic">
             <Icon
               imgsrc={isCurrent === "usdc" ? daylIcon : usdcIcon}
@@ -183,7 +232,7 @@ const AddMoreDaylModal = ({ startTime, endTime, totalDayl, rate, usdcBalance, wh
         type="button"
         onClick={() => addDayl()}
       >
-        Add More $DAYL
+        Purchase $DAYL
       </button>
     </div>
   );

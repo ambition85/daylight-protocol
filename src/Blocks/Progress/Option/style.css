@@ -16,10 +16,12 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  /* white-space: wrap; */
-  /* width: 150px; */
+  width: 229.8px;
   height: 50px;
+
   text-align: center;
+
+  /* Fire Gradient */
 
   background: linear-gradient(90deg, #da4a52 0%, #df775a 100%);
   -webkit-background-clip: text;
