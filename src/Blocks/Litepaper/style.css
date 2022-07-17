@@ -45,4 +45,7 @@
     align-items: center;
     gap: 30px;
   }
+  .litepaper--info-title {
+    text-align: center;
+  }
 }

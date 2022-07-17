@@ -1,67 +1,6 @@
-.dexsection-container {
-  justify-content: flex-start;
-  flex-direction: column;
-  margin-top: 120px;
-  color: #ffffff;
-  font-family: "Play";
-  font-style: normal;
-  font-weight: 400;
-}
-
-.dexsection--title {
-  font-size: 56px;
-  line-height: 65px;
-}
-.dexsection--subtitle {
-  font-size: 27px;
-  line-height: 31px;
-}
-.dexsection--animation-img {
-  width: 700px;
-  height: 700px;
-}
-.dexsection--description {
-  font-size: 27px;
-  line-height: 31px;
-  text-align: center;
-  width: 828.77px;
-  height: 90.06px;
-}
-.dexsection--animation-img-mobile {
-  display: none;
-}
-
-@media screen and (max-width: 1000px) {
-  .dexsection-container {
-    padding: 0px 32px;
-  }
-  .dexsection--title,
-  .dexsection--subtitle,
-  .dexsection--description {
-    width: 100%;
-    text-align: center;
-  }
-}
-@media screen and (max-width: 800px) {
-  .dexsection-container {
-    gap: 32px;
-    padding: 0px 0px;
-  }
-  .dexsection--animation-img,
-  .dexsection--title,
-  .dexsection--subtitle,
-  .dexsection--description {
-    display: none;
-  }
-
-  .dexsection--animation-img-mobile {
-    display: flex;
-    width: 100vw;
-  }
-}
-
 .dexsection2-container {
   margin-top: 120px;
+  padding-top: 100px;
 }
 .dexsection2--img {
   width: 100vw;
@@ -77,6 +16,9 @@
   }
 }
 @media screen and (max-width: 600px) {
+  .dexsection2-container {
+    padding-top: 50px;
+  }
   .dexsection2--img {
     display: none;
   }

@@ -8,7 +8,7 @@ import Icon from "../../components/Icon";
 
 const Road = () => {
   return (
-    <div className="roadsection2-container aic" id="daylight">
+    <div className="roadsection2-container aic" id="sustainability">
       <Icon
         imgsrc={crossChainBig}
         classnamestyle="roadsection2--img-big aic "

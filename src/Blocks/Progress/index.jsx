@@ -14,6 +14,7 @@ const ProgressSecction = () => {
         date="To Be Announced"
       />
       <Option check title="Launch & IDO" date="To Be Announced" />
+      <div id="daylight" className="daylight-workaround" />
     </div>
   );
 };

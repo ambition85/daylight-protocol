@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import "./style.css";
 import Icon from "../../Icon";
 import ArrowLeftIcon from "../../../assets/img/icons/arrowLeft.svg";
@@ -10,9 +10,22 @@ import daylIcon from "../../../assets/img/coins/dayl.svg";
 import { shortenAddressLong } from "../../../utils/utils";
 
 const Profile = ({ wallet, onClose, disconnectWallet }) => {
+  const [iscopyactive, setiscopyactive] = useState(false);
+  useEffect(() => {
+    if (iscopyactive) {
+      const timer = setTimeout(() => {
+        setiscopyactive(() => false);
+      }, 2000);
+      return () => clearTimeout(timer);
+    }
+  }, [iscopyactive]);
   const disconnectHandler = () => {
     disconnectWallet();
     onClose();
+  };
+  const copyClipboard = () => {
+    setiscopyactive(() => true);
+    navigator.clipboard.writeText(wallet);
   };
   return (
     <div
@@ -33,22 +46,24 @@ const Profile = ({ wallet, onClose, disconnectWallet }) => {
       </div>
 
       {/* /////////// */}
-      <div className="profilemodal--box aic">
-        <div className="profilemodal--box-button aic">Wallet</div>
-        <div className="profilemodal--box-button-fake aic">Transactions</div>
-      </div>
-
-      {/* /////////// */}
       <div className="profilemodal--wallet-info aic">
         <div className="profilemodal--wallet-info-title">Your Address</div>
         <div
           className="profilemodal--box aic"
-          style={{ padding: "14px 16px", justifyContent: "space-between" }}
+          style={{ padding: "8px 20px", justifyContent: "space-between" }}
         >
           <div className="profilemodal--box-address">
             {shortenAddressLong(wallet)}
           </div>
-          <div className="profilemodal--box-copy aic">
+          <div
+            className="profilemodal--box-copy aic"
+            onClick={() => copyClipboard()}
+          >
+            <div
+              className={iscopyactive ? "message-copy-active" : "message-copy"}
+            >
+              Copied!
+            </div>
             <Icon
               imgsrc={copyIcon}
               classnamestyle="profilemodal--box-copy-icon aic hover-effect"
@@ -84,6 +99,10 @@ const Profile = ({ wallet, onClose, disconnectWallet }) => {
       <div
         className="profilemodal--box aic"
         style={{ padding: "0px 16px", justifyContent: "space-between" }}
+        data-aos="fade-down"
+        data-aos-delay="200"
+        data-aos-offset="-100"
+        data-aos-easing="ease-in"
       >
         <div className="profilemodal--balance aic">
           <Icon
@@ -101,6 +120,10 @@ const Profile = ({ wallet, onClose, disconnectWallet }) => {
           justifyContent: "space-between",
           marginTop: "7px",
         }}
+        data-aos="fade-down"
+        data-aos-delay="300"
+        data-aos-offset="-100"
+        data-aos-easing="ease-in"
       >
         <div className="profilemodal--balance aic">
           <Icon
@@ -111,9 +134,35 @@ const Profile = ({ wallet, onClose, disconnectWallet }) => {
         </div>
         <div className="profilemodal--balance-amount">0.0</div>
       </div>
+      <div
+        className="profilemodal--box aic"
+        style={{
+          padding: "0px 16px",
+          justifyContent: "space-between",
+          marginTop: "7px",
+        }}
+        data-aos="fade-down"
+        data-aos-delay="400"
+        data-aos-offset="-100"
+        data-aos-easing="ease-in"
+      >
+        <div className="profilemodal--balance aic">
+          <Icon
+            imgsrc={usdcIcon}
+            classnamestyle="profilemodal--box-warning-icon aic hover-effect"
+          />
+          AVAX Balance
+        </div>
+        <div className="profilemodal--balance-amount">0.0</div>
+      </div>
       {/* /////////// */}
-      <div className="profilemodal--scan aic ">
-        View on BscScan
+      <div
+        className="profilemodal--scan aic "
+        onClick={() => {
+          window.open(`https://avascan.info/blockchain/c/address/${wallet}`);
+        }}
+      >
+        View on AvaScan
         <Icon
           imgsrc={frameIcon}
           classnamestyle="profilemodal--box-warning-icon aic"

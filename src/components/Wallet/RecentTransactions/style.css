@@ -1,4 +1,4 @@
-.profilemodal-container {
+.recenttransaction-container {
   position: relative;
   box-sizing: border-box;
   background: rgba(0, 0, 0, 0.9);
@@ -21,24 +21,30 @@
 
   width: 380px;
 }
-.profilemodal--header {
+.recenttransaction--header {
   transform: translateX(-20px);
   margin-bottom: 15px;
 }
-.profilemodal--header-back {
+.recenttransaction--header-back {
   width: 44px;
   height: 44px;
 }
 
-.profilemodal--box {
+.recenttransaction--box {
   padding: 12px 16px;
   gap: 4px;
-
+  cursor: pointer;
   width: 100%;
   background: rgba(245, 255, 252, 0.1);
   border-radius: 10px;
+  transition: 400ms cubic-bezier(0.54, 0.21, 0.18, 1.35);
+  scroll-snap-align: start;
 }
-.profilemodal--box-button {
+.recenttransaction--box:hover .recenttransaction--box-address {
+  transform: scale(1.1);
+  color: #da4a52;
+}
+.recenttransaction--box-button {
   padding: 10px;
   gap: 5px;
   width: 150px;
@@ -52,7 +58,7 @@
   color: #ffffff;
   transition: 400ms cubic-bezier(0.54, 0.21, 0.18, 1.35);
 }
-.profilemodal--box-button:hover {
+.recenttransaction--box-button:hover {
   background: linear-gradient(
     90deg,
     rgb(218, 74, 82, 0.6) 0%,
@@ -60,7 +66,7 @@
   );
   border: 1px solid rgb(255, 255, 255, 0.6);
 }
-.profilemodal--box-button-fake {
+.recenttransaction--box-button-fake {
   padding: 10px;
   gap: 5px;
   width: 150px;
@@ -74,14 +80,14 @@
   color: #ffffff;
   transition: 400ms cubic-bezier(0.54, 0.21, 0.18, 1.35);
 }
-.profilemodal--box-button-fake:hover {
+.recenttransaction--box-button-fake:hover {
   opacity: 1;
   border: 1px solid #ffffff;
   color: #ffffff;
   cursor: pointer;
 }
 
-.profilemodal--button {
+.recenttransaction--button {
   margin-top: 32px;
   height: 54px;
   background: linear-gradient(90deg, #da4a52 0%, #df775a 100%);
@@ -96,7 +102,7 @@
   transition: 400ms cubic-bezier(0.54, 0.21, 0.18, 1.35);
 }
 
-.profilemodal--button:hover {
+.recenttransaction--button:hover {
   background: linear-gradient(
     90deg,
     rgb(218, 74, 82, 0.6) 0%,
@@ -104,14 +110,14 @@
   );
 }
 
-.profilemodal--wallet-info {
+.recenttransaction--wallet-info {
   margin-top: 6px;
   flex-direction: column;
   align-items: flex-start;
   gap: 8px;
   width: 100%;
 }
-.profilemodal--wallet-info-title {
+.recenttransaction--wallet-info-title {
   font-family: "Play";
   font-style: normal;
   font-weight: 400;
@@ -125,26 +131,29 @@
   color: #ffffff;
 }
 
-.profilemodal--box-address {
+.recenttransaction--box-address {
   font-family: "Dongle";
   font-style: normal;
   font-weight: 400;
   font-size: 27px;
-  line-height: 39px;
+  line-height: 27px;
+  align-items: center;
+  color: #ffffff;
+  transition: 400ms cubic-bezier(0.54, 0.21, 0.18, 1.35);
 }
-.profilemodal--box-copy {
+.recenttransaction--box-copy {
 }
-.profilemodal--box-copy-icon {
+.recenttransaction--box-copy-icon {
   width: 24px;
   height: 24px;
 }
 
-.profilemodal--box-warning {
+.recenttransaction--box-warning {
   flex-direction: column;
   align-items: flex-start;
   width: 100%;
 }
-.profilemodal--box-warning-top {
+.recenttransaction--box-warning-top {
   font-family: "Play";
   font-style: normal;
   font-weight: 400;
@@ -159,7 +168,7 @@
 
   color: #ffffff;
 }
-.profilemodal--box-warning-bottom {
+.recenttransaction--box-warning-bottom {
   font-family: "Space Grotesk";
   font-style: normal;
   font-weight: 400;
@@ -171,7 +180,7 @@
   color: #ffffff;
   width: 100%;
 }
-.profilemodal--balance {
+.recenttransaction--balance {
   font-family: "Dongle";
   font-style: normal;
   font-weight: 400;
@@ -186,7 +195,7 @@
   color: #ffffff;
   gap: 4px;
 }
-.profilemodal--balance-amount {
+.recenttransaction--balance-amount {
   font-family: "Dongle";
   font-style: normal;
   font-weight: 400;
@@ -196,8 +205,7 @@
   color: #ffffff;
   width: 50%;
 }
-.profilemodal--scan {
-  margin-top: 16px;
+.recenttransaction--scan {
   width: 100%;
   justify-content: flex-end;
   font-family: "Dongle";
@@ -213,45 +221,55 @@
   text-fill-color: transparent;
   transition: 400ms cubic-bezier(0.54, 0.21, 0.18, 1.35);
 }
-.profilemodal--scan:hover {
+.recenttransaction--scan:hover {
   opacity: 0.5;
   cursor: pointer;
 }
-
-.message-copy {
-  font-family: "Dongle";
-  font-style: normal;
-  font-weight: 400;
-  font-size: 27px;
-  line-height: 39px;
-  text-align: center;
-  color: #ffffff;
-  position: absolute;
-  padding: 5px;
-  border-radius: 10px;
-  background: rgba(245, 255, 252, 0.1);
-  transform: translateY(-65px);
-  border: 1px solid #da4a52;
-  visibility: hidden;
-  opacity: 0;
-  transition: 400ms cubic-bezier(0.54, 0.21, 0.18, 1.35);
+.recenttransaction--box-tx {
+  flex-direction: column;
+  align-items: flex-start;
 }
-.message-copy-active {
+.recenttransaction--box-date {
   font-family: "Dongle";
   font-style: normal;
   font-weight: 400;
-  font-size: 27px;
-  line-height: 39px;
-  text-align: center;
+  font-size: 17px;
+  line-height: 17px;
+  /* identical to box height, or 100% */
+
+  display: flex;
+  align-items: center;
+
+  /* White */
+
   color: #ffffff;
-  position: absolute;
-  padding: 5px;
+}
+
+.recenttransaction--tx-outer {
+  height: 132px;
+  width: 100%;
+  overflow: hidden;
+  /* padding: ; */
+}
+.recenttransaction--tx-inner {
+  padding-right: 5px;
+  height: 100%;
+  width: 100%;
+  overflow-y: scroll;
+  flex-direction: column;
+  justify-content: flex-start;
+  gap: 8px;
+  scroll-behavior: smooth;
+  /* padding-bottom: 100px; */
+  scroll-snap-type: y mandatory;
+}
+
+.recenttransaction--tx-inner::-webkit-scrollbar {
+  cursor: pointer;
+  width: 5px;
+}
+
+.recenttransaction--tx-inner::-webkit-scrollbar-thumb {
   border-radius: 10px;
-  background: rgba(245, 255, 252, 0.1);
-  transform: translateY(-65px);
-  border: 1px solid #da4a52;
-  visibility: visible;
-  opacity: 1;
-  transition: 400ms cubic-bezier(0.54, 0.21, 0.18, 1.35);
-  cursor: copy;
+  background: #1a1a1a;
 }

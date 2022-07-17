@@ -1,7 +1,4 @@
 .button-container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
   padding: 16px 32px;
   background: linear-gradient(90deg, #da4a52 0%, #df775a 100%);
   border: 2px solid #ffffff;

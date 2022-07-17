@@ -1,6 +1,7 @@
 import React, { useState, useContext } from "react";
 import Modal from "../Modal";
 import Profile from "./Profile";
+import RecentTransactions from "./RecentTransactions";
 import "./style.css";
 import { WalletWeb3Context } from "../..//context/WalletWeb3Context";
 
@@ -22,7 +23,13 @@ const WalletMenu = ({ isWalletOptionsOpen, setisWalletOptionsOpen }) => {
       <Modal
         visible={isOpenTransactions}
         onClose={() => setisOpenTransactions(false)}
-      ></Modal>
+      >
+        <RecentTransactions
+          wallet={wallet}
+          onClose={() => setisOpenTransactions(false)}
+          disconnectWallet={disconnectWallet}
+        />
+      </Modal>
 
       {!!wallet && (
         <div
@@ -32,11 +39,22 @@ const WalletMenu = ({ isWalletOptionsOpen, setisWalletOptionsOpen }) => {
         >
           <div
             className="walletmenu--option"
-            onClick={() => setisOpenWallet(true)}
+            onClick={() => {
+              setisOpenWallet(true);
+              setisWalletOptionsOpen(false);
+            }}
           >
             Wallet
           </div>
-          <div className="walletmenu--option">Recent Transactions</div>
+          <div
+            className="walletmenu--option"
+            onClick={() => {
+              setisOpenTransactions(true);
+              setisWalletOptionsOpen(false);
+            }}
+          >
+            Recent Transactions
+          </div>
           <div className="walletmenu--divider" />
           <div className="walletmenu--option" onClick={disconnectWallet}>
             Disconnect
