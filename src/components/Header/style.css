@@ -54,21 +54,43 @@
 .header--buttons {
   gap: 32px;
 }
-.header--litepaper {
+.header--litepaper-left {
+  padding: 16px 32px;
+  width: 127px;
+  height: 55px;
+  border-width: 2px 1px 2px 2px;
+  border-style: solid;
+  border-color: #ffffff;
+  border-radius: 10px 0px 0px 10px;
   font-family: "Dongle";
   font-style: normal;
   font-weight: 400;
   font-size: 27px;
   line-height: 39px;
   color: #ffffff;
-  padding: 16px 32px;
-  width: 158px;
-  height: 55px;
-  border: 2px solid #ffffff;
-  border-radius: 10px;
   transition: 400ms cubic-bezier(0.54, 0.21, 0.18, 1.35);
 }
-.header--litepaper:hover {
+.header--litepaper-right {
+  padding: 16px 32px;
+  width: 136px;
+  height: 55px;
+  border-width: 2px 2px 2px 0.5px;
+  border-style: solid;
+  border-color: #ffffff;
+  border-radius: 0px 10px 10px 0px;
+  font-family: "Dongle";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 27px;
+  line-height: 39px;
+  color: #ffffff;
+  transition: 400ms cubic-bezier(0.54, 0.21, 0.18, 1.35);
+}
+.header--litepaper-left:hover {
+  border: 2px solid rgb(255, 255, 255, 0.6);
+  cursor: pointer;
+}
+.header--litepaper-right:hover {
   border: 2px solid rgb(255, 255, 255, 0.6);
   cursor: pointer;
 }

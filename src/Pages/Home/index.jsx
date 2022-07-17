@@ -23,6 +23,7 @@ import {
 } from "../../constants";
 import PresaleABI from "../../constants/abis/Presale.json";
 import WalletMenu from "../../components/Wallet";
+import BlockText from "../../Blocks/BlockText";
 
 const chainConfig = {
   chainId: "0xA869",
@@ -43,32 +44,39 @@ let provider,
   usdcContract;
 
 const Home = () => {
+  const usdcDecimals = 6;
+  const [isWalletOptionsOpen, setisWalletOptionsOpen] = useState(false);
+  const [rate, setRate] = useState("1000000000000");
+  const [startTime, setStartTime] = useState(0);
+  const [endTime, setEndTime] = useState(0);
+  const [claimTime, setClaimTime] = useState(0);
+  const [minToVault, setMinToVault] = useState(0);
+  const [totalUsdc, setTotalUsdc] = useState("0");
+  const [totalDayl, setTotalDayl] = useState("0");
+  const [totalWithdrawn, setTotalWithdrawn] = useState("0");
+  const [usdcBalance, setUsdcBalance] = useState("0");
+  const [usdcAllowance, setUsdcAllowance] = useState(false);
+  const [whitelisted, setWhitelisted] = useState(false);
+  const [minPerWallet, setMinPerWallet] = useState("0");
+  const [maxPerWallet, setMaxPerWallet] = useState("0");
+  const [hardCap, setHardCap] = useState("0");
+  const [softCap, setSoftCap] = useState("0");
+  const [claimable, setClaimable] = useState("0");
+  const [depositAmount, setDepositAmount] = useState("0");
+  const [withdrawable, setWithdrawable] = useState("0");
+  const [presaleState, setPresaleState] = useState(0);
+  const { wallet } = useContext(WalletWeb3Context);
+  const [offsetY, setoffsetY] = useState(0);
 
-  const usdcDecimals = 6
-const [isWalletOptionsOpen, setisWalletOptionsOpen] = useState(false);
-  const [rate, setRate] = useState('1000000000000')
-  const [startTime, setStartTime] = useState(0)
-  const [endTime, setEndTime] = useState(0)
-  const [claimTime, setClaimTime] = useState(0)
-  const [minToVault, setMinToVault] = useState(0)
-  const [totalUsdc, setTotalUsdc] = useState('0')
-  const [totalDayl, setTotalDayl] = useState('0')
-  const [totalWithdrawn, setTotalWithdrawn] = useState('0')
-  const [usdcBalance, setUsdcBalance] = useState('0')
-  const [usdcAllowance, setUsdcAllowance] = useState(false)
-  const [whitelisted, setWhitelisted] = useState(false)
-  const [minPerWallet, setMinPerWallet] = useState('0')
-  const [maxPerWallet, setMaxPerWallet] = useState('0')
-  const [hardCap, setHardCap] = useState('0')
-  const [softCap, setSoftCap] = useState('0')
-  const [claimable, setClaimable] = useState('0')
-  const [depositAmount, setDepositAmount] = useState('0')
-  const [withdrawable, setWithdrawable] = useState('0')
-
-  const [presaleState, setPresaleState] = useState(0)
-
-  const { connectWallet, wallet, isWrongNetwork, updateNetworkWallet } = useContext(WalletWeb3Context);
-
+  const handlescroll = () => {
+    setoffsetY(window.pageYOffset);
+  };
+  useEffect(() => {
+    window.addEventListener("scroll", handlescroll);
+    return () => {
+      window.removeEventListener("scroll", handlescroll);
+    };
+  }, []);
   useEffect(() => {
     (async () => {
       try {
@@ -88,17 +96,35 @@ const [isWalletOptionsOpen, setisWalletOptionsOpen] = useState(false);
           }
         }
       }
-      provider = new providers.Web3Provider(window.ethereum)
-      presaleReadContract = new Contract(PresaleAddress, PresaleABI, new providers.JsonRpcProvider(chainConfig.rpcUrls[0]))
-      usdcReadContract = new Contract(USDCAddress, ERC20ABI, new providers.JsonRpcProvider(chainConfig.rpcUrls[0]))
+      provider = new providers.Web3Provider(window.ethereum);
+      presaleReadContract = new Contract(
+        PresaleAddress,
+        PresaleABI,
+        new providers.JsonRpcProvider(chainConfig.rpcUrls[0])
+      );
+      usdcReadContract = new Contract(
+        USDCAddress,
+        ERC20ABI,
+        new providers.JsonRpcProvider(chainConfig.rpcUrls[0])
+      );
 
       if (!!provider) {
         let signer = provider.getSigner();
-        presaleContract = new Contract(PresaleAddress, PresaleABI, signer)
-        usdcContract = new Contract(USDCAddress, ERC20ABI, signer)
+        presaleContract = new Contract(PresaleAddress, PresaleABI, signer);
+        usdcContract = new Contract(USDCAddress, ERC20ABI, signer);
       }
 
-      const [rate, startTime, endTime, claimTime, minTo, maxTo, hardCap, softCap, ttlUsdc] = await Promise.all([
+      const [
+        rate,
+        startTime,
+        endTime,
+        claimTime,
+        minTo,
+        maxTo,
+        hardCap,
+        softCap,
+        ttlUsdc,
+      ] = await Promise.all([
         presaleReadContract.rate(),
         presaleReadContract.startTime(),
         presaleReadContract.endTime(),
@@ -107,53 +133,52 @@ const [isWalletOptionsOpen, setisWalletOptionsOpen] = useState(false);
         presaleReadContract.maxPerWallet(),
         presaleReadContract.hardCap(),
         presaleReadContract.softCap(),
-        presaleReadContract.totalUSDC()
-      ])
+        presaleReadContract.totalUSDC(),
+      ]);
 
-      setRate(rate.toString())
-      setStartTime((startTime).toNumber())
-      setEndTime((endTime).toNumber())
-      setClaimTime((claimTime).toNumber())
-      setMinPerWallet((minTo).toString())
-      setMaxPerWallet((maxTo).toString())
-      setHardCap((hardCap).toString())
-      setSoftCap((softCap).toString())
-      setTotalUsdc(ttlUsdc.div(BigNumber.from(10).pow(usdcDecimals)).toNumber(1).toFixed(1))
-
-      console.log(startTime.toNumber() < new Date() / 1000, endTime.toNumber(), new Date() / 1000)
+      setRate(rate.toString());
+      setStartTime(startTime.toNumber());
+      setEndTime(endTime.toNumber());
+      setClaimTime(claimTime.toNumber());
+      setMinPerWallet(minTo.toString());
+      setMaxPerWallet(maxTo.toString());
+      setHardCap(hardCap.toString());
+      setSoftCap(softCap.toString());
+      setTotalUsdc(
+        ttlUsdc.div(BigNumber.from(10).pow(usdcDecimals)).toNumber(1).toFixed(1)
+      );
 
       // Set Presale State
-      if (startTime.toNumber() < new Date() / 1000) setPresaleState(1) // If start time passed
-      if (endTime.toNumber() < new Date() / 1000) setPresaleState(2) // If end time passed
+      if (startTime.toNumber() < new Date() / 1000) setPresaleState(1); // If start time passed
+      if (endTime.toNumber() < new Date() / 1000) setPresaleState(2); // If end time passed
       if (claimTime.toNumber() < new Date() / 1000) {
         if (ttlUsdc.toNumber() > softCap.toNumber())
-          setPresaleState(3) // if Claimtime passed
-        else
-          setPresaleState(4)
+          setPresaleState(3); // if Claimtime passed
+        else setPresaleState(4);
       }
 
       if (!wallet) {
         return;
       }
 
-      const [userInfo, whitelisted, claimable, usdcBalance, usdcAllowance] = await Promise.all([
-        presaleReadContract.userInfo(wallet),
-        presaleReadContract.whitelisted(wallet),
-        presaleReadContract.claimableAmount(wallet),
-        usdcReadContract.balanceOf(wallet),
-        usdcReadContract.allowance(wallet, PresaleAddress)
-      ])
+      const [userInfo, whitelisted, claimable, usdcBalance, usdcAllowance] =
+        await Promise.all([
+          presaleReadContract.userInfo(wallet),
+          presaleReadContract.whitelisted(wallet),
+          presaleReadContract.claimableAmount(wallet),
+          usdcReadContract.balanceOf(wallet),
+          usdcReadContract.allowance(wallet, PresaleAddress),
+        ]);
 
-      setTotalDayl(userInfo.totalReward.toString())
-      setDepositAmount(userInfo.depositAmount.toString())
-      setTotalWithdrawn(userInfo.withdrawnReward.toString())
-      setWhitelisted(whitelisted)
-      setClaimable(claimable)
-      setUsdcBalance(usdcBalance)
-      setUsdcAllowance(!usdcAllowance.lt(maxTo))
-      console.log("Alloance: ", usdcAllowance.gt(maxTo), usdcAllowance, maxTo)
-    })()
-  }, [])
+      setTotalDayl(userInfo.totalReward.toString());
+      setDepositAmount(userInfo.depositAmount.toString());
+      setTotalWithdrawn(userInfo.withdrawnReward.toString());
+      setWhitelisted(whitelisted);
+      setClaimable(claimable);
+      setUsdcBalance(usdcBalance);
+      setUsdcAllowance(!usdcAllowance.lt(maxTo));
+    })();
+  }, []);
   useEffect(() => {
     (async () => {
       if (!!provider) {
@@ -165,23 +190,23 @@ const [isWalletOptionsOpen, setisWalletOptionsOpen] = useState(false);
         return;
       }
       if (!!presaleReadContract && !!usdcReadContract) {
-        const [userInfo, whitelisted, claimable, usdcBalance] = await Promise.all([
-          presaleReadContract.userInfo(wallet),
-          presaleReadContract.whitelisted(wallet),
-          presaleReadContract.claimableAmount(wallet),
-          usdcReadContract.balanceOf(wallet)
-        ])
+        const [userInfo, whitelisted, claimable, usdcBalance] =
+          await Promise.all([
+            presaleReadContract.userInfo(wallet),
+            presaleReadContract.whitelisted(wallet),
+            presaleReadContract.claimableAmount(wallet),
+            usdcReadContract.balanceOf(wallet),
+          ]);
 
-        setTotalDayl(userInfo.totalReward.toString())
-        setDepositAmount(userInfo.depositAmount.toString())
-        setTotalWithdrawn(userInfo.withdrawnReward.toString())
-        setWhitelisted(whitelisted)
-        setClaimable(claimable)
-        setUsdcBalance(usdcBalance)
+        setTotalDayl(userInfo.totalReward.toString());
+        setDepositAmount(userInfo.depositAmount.toString());
+        setTotalWithdrawn(userInfo.withdrawnReward.toString());
+        setWhitelisted(whitelisted);
+        setClaimable(claimable);
+        setUsdcBalance(usdcBalance);
       }
-    })()
-  }, [wallet, provider, presaleReadContract, usdcReadContract])
-
+    })();
+  }, [wallet, provider, presaleReadContract, usdcReadContract]);
   const addDaylToken = async () => {
     try {
       // wasAdded is a boolean. Like any RPC method, an error may be thrown.
@@ -200,20 +225,22 @@ const [isWalletOptionsOpen, setisWalletOptionsOpen] = useState(false);
     } catch (error) {
       console.log(error);
     }
-  }
-
+  };
   const approve = async () => {
     if (!usdcContract || !presaleContract || !presaleReadContract) {
-      return
+      return;
     }
-    let tx = await usdcContract.approve(PresaleAddress, usdcBalance.mul(BigNumber.from(maxPerWallet)).toString(), { from: wallet })
-    await tx.wait()
+    let tx = await usdcContract.approve(
+      PresaleAddress,
+      usdcBalance.mul(BigNumber.from(maxPerWallet)).toString(),
+      { from: wallet }
+    );
+    await tx.wait();
     let allowance = await usdcContract.allowance(wallet, PresaleAddress);
 
-    setUsdcAllowance(allowance)
-  }
-
-  const buyDayl = async percent => {
+    setUsdcAllowance(allowance);
+  };
+  const buyDayl = async (percent) => {
     if (!usdcContract || !presaleContract || !presaleReadContract) {
       return;
     }
@@ -244,9 +271,16 @@ const [isWalletOptionsOpen, setisWalletOptionsOpen] = useState(false);
       return toast("Exceeds Hard Cap");
     }
     try {
-      let tx = await presaleContract.deposit(usdcBalance.mul(BigNumber.from(rate)).mul(BigNumber.from(percent)).div(BigNumber.from(100)).toString(), { from: wallet })
-      await tx.wait()
-      toast.success('Depositing Success');
+      let tx = await presaleContract.deposit(
+        usdcBalance
+          .mul(BigNumber.from(rate))
+          .mul(BigNumber.from(percent))
+          .div(BigNumber.from(100))
+          .toString(),
+        { from: wallet }
+      );
+      await tx.wait();
+      toast.success("Depositing Success");
     } catch (err) {
       console.log("error:", err);
     }
@@ -264,8 +298,7 @@ const [isWalletOptionsOpen, setisWalletOptionsOpen] = useState(false);
       const balance = await usdcReadContract.balanceOf(wallet);
       setUsdcBalance(await usdcReadContract.balanceOf(wallet));
     }
-  }
-
+  };
   const withdraw = async () => {
     if (Date.now() / 1000 < claimTime) {
       return toast.error("Not claim time");
@@ -303,30 +336,52 @@ const [isWalletOptionsOpen, setisWalletOptionsOpen] = useState(false);
     if (claimable.toString() === "0") {
       return toast.error("Unable to claim any token");
     }
-    console.log("Claimable: ", claimable, presaleContract)
-    let tx = await presaleContract.claimToken({ from: wallet })
-    await tx.wait()
-    setClaimable(await presaleReadContract.claimableAmount(wallet))
-    toast.success('Claiming Success');
-  }
+    let tx = await presaleContract.claimToken({ from: wallet });
+    await tx.wait();
+    setClaimable(await presaleReadContract.claimableAmount(wallet));
+    toast.success("Claiming Success");
+  };
 
   return (
     <Body>
-
       <WalletMenu
-        wallet={wallet}
         isWalletOptionsOpen={isWalletOptionsOpen}
         setisWalletOptionsOpen={setisWalletOptionsOpen}
       />
-      <Hero state={presaleState} rate={rate} startTime={startTime} endTime={endTime} claimTime={claimTime} totalUsdc={totalUsdc} walletAddress={wallet} totalDayl={totalDayl} withdrawable={withdrawable} totalWithdrawn={totalWithdrawn} usdcBalance={usdcBalance} whitelisted={whitelisted} claimable={claimable} hardCap={hardCap} softCap={softCap} allowance={usdcAllowance} approve={approve} addDaylToken={addDaylToken} buyDayl={buyDayl} withdraw={withdraw} claim={claim} />
+      <Hero
+        offsetY={offsetY}
+        setisWalletOptionsOpen={setisWalletOptionsOpen}
+        state={presaleState}
+        rate={rate}
+        startTime={startTime}
+        endTime={endTime}
+        claimTime={claimTime}
+        totalUsdc={totalUsdc}
+        walletAddress={wallet}
+        totalDayl={totalDayl}
+        withdrawable={withdrawable}
+        totalWithdrawn={totalWithdrawn}
+        usdcBalance={usdcBalance}
+        whitelisted={whitelisted}
+        claimable={claimable}
+        hardCap={hardCap}
+        softCap={softCap}
+        allowance={usdcAllowance}
+        approve={approve}
+        addDaylToken={addDaylToken}
+        buyDayl={buyDayl}
+        withdraw={withdraw}
+        claim={claim}
+      />
 
       <Progress />
-      <DefiAccess />
+      <DefiAccess offsetY={offsetY} />
+      <BlockText offsetY={offsetY} />
       <ChainsSection />
       <Litepaper />
       <DexSection />
       <Road />
-      <Footer />
+      <Footer offsetY={offsetY} />
       <ToastContainer />
     </Body>
   );

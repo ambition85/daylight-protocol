@@ -36,10 +36,10 @@ const Menu = ({ isOpen, close }) => {
         <HashLink
           onClick={() => close()}
           smooth={true}
-          to="#sustainability"
+          to="#daylight"
           className="hover-effect menu--links-link"
         >
-          Sustainability
+          Daylight Protocol
         </HashLink>
         <HashLink
           onClick={() => close()}
@@ -49,14 +49,13 @@ const Menu = ({ isOpen, close }) => {
         >
           DEX
         </HashLink>
-
         <HashLink
           onClick={() => close()}
           smooth={true}
-          to="#daylight"
+          to="#sustainability"
           className="hover-effect menu--links-link"
         >
-          Daylight Protocol
+          Sustainability
         </HashLink>
         <HashLink
           onClick={() => close()}

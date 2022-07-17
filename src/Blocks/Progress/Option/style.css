@@ -12,17 +12,15 @@
   font-style: normal;
   font-weight: 700;
   font-size: 27px;
-  line-height: 39px;
+  line-height: 21px;
+
+  width: 229.8px;
+  height: 50px;
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 229.8px;
-  height: 50px;
-
   text-align: center;
-
-  /* Fire Gradient */
-
+  align-self: center;
   background: linear-gradient(90deg, #da4a52 0%, #df775a 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;

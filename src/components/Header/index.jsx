@@ -67,10 +67,10 @@ const Header = ({ setisWalletOptionsOpen }) => {
             </HashLink>
             <HashLink
               smooth={true}
-              to="#sustainability"
+              to="#daylight"
               className="hover-effect header--link"
             >
-              Sustainability
+              Daylight Protocol
             </HashLink>
             <HashLink
               smooth={true}
@@ -79,13 +79,12 @@ const Header = ({ setisWalletOptionsOpen }) => {
             >
               DEX
             </HashLink>
-
             <HashLink
               smooth={true}
-              to="#daylight"
+              to="#sustainability"
               className="hover-effect header--link"
             >
-              Daylight Protocol
+              Sustainability
             </HashLink>
             <HashLink
               smooth={true}
@@ -95,9 +94,11 @@ const Header = ({ setisWalletOptionsOpen }) => {
               Blog
             </HashLink>
           </div>
-
           <div className="header--buttons aic">
-            <div className="header--litepaper aic">Litepaper</div>
+            <div className="aic">
+              <div className="header--litepaper-left aic">Litepaper</div>
+              <div className="header--litepaper-right aic">Website</div>
+            </div>
             <div
               onClick={() => web3ButtonHandler()}
               className="header--button aic"

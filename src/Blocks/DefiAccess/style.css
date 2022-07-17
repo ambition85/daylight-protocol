@@ -33,6 +33,23 @@
   align-items: flex-start;
   flex-direction: column;
 }
+.defiaccess--info-header {
+  gap: 9px;
+  margin-bottom: 9.6px;
+}
+.defiaccess--info-header-icon {
+  width: 15.11px;
+  height: 13.03px;
+}
+.defiaccess--info-header-title {
+  font-family: "Space Grotesk";
+  font-style: normal;
+  font-weight: 700;
+  font-size: 17px;
+  line-height: 34px;
+  color: #ffffff;
+  border-bottom: 1px solid #f54f00;
+}
 .defiaccess--info-title {
   width: 626.88px;
   height: 136px;

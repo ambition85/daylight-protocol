@@ -1,5 +1,5 @@
 .litepaper-container {
-  gap: 128px;
+  gap: 32px;
   margin-top: 200px;
   flex-wrap: wrap;
 }
@@ -22,27 +22,16 @@
 }
 .litepaper--info-button {
   padding: 16px 32px;
-
-  width: 345px;
+  width: 160px;
   height: 53px;
-
-  /* Fire Gradient */
-
   background: linear-gradient(90deg, #da4a52 0%, #df775a 100%);
-  /* White */
-
   border: 2px solid #ffffff;
   border-radius: 10px;
-
   font-family: "Play";
   font-style: normal;
   font-weight: 700;
   font-size: 18px;
   line-height: 21px;
-  /* identical to box height */
-
-  /* White */
-
   color: #ffffff;
 }
 

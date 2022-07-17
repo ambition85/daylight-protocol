@@ -4,11 +4,11 @@ import Profile from "./Profile";
 import "./style.css";
 import { WalletWeb3Context } from "../..//context/WalletWeb3Context";
 
-const WalletMenu = ({ isWalletOptionsOpen }) => {
+const WalletMenu = ({ isWalletOptionsOpen, setisWalletOptionsOpen }) => {
   //state for openning profile menu
   const [isOpenWallet, setisOpenWallet] = useState(false);
   const [isOpenTransactions, setisOpenTransactions] = useState(false);
-  const { disconnectWallet, wallet } = useContext(WalletWeb3Context);
+  const { wallet, disconnectWallet } = useContext(WalletWeb3Context);
 
   return (
     <>

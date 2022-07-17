@@ -1,0 +1,22 @@
+.flameslayer-container {
+  height: 100%;
+  width: 100vw;
+  position: relative;
+  z-index: 0;
+}
+.flameslayer-container-left,
+.flameslayer-container-right {
+  position: absolute;
+  bottom: 0;
+}
+.flameslayer-container-left {
+  left: 0px;
+}
+.flameslayer-container-right {
+  right: 0px;
+}
+@media screen and (max-width: 1300px) {
+  .flameslayer-container {
+    display: none;
+  }
+}
