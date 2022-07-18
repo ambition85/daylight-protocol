@@ -13,7 +13,7 @@ import { shortenAddress } from "../../utils/utils";
 import Menu from "./Menu";
 import Icon from "../Icon";
 
-const Header = ({ setisWalletOptionsOpen }) => {
+const Header = ({ setisWalletOptionsOpen, offsetY }) => {
   const { connectWallet, wallet, isWrongNetwork, updateNetworkWallet } =
     useContext(WalletWeb3Context);
   const [isOpen, setIsOpen] = useState(false);
@@ -42,7 +42,12 @@ const Header = ({ setisWalletOptionsOpen }) => {
     return () => window.removeEventListener("scroll", onScroll);
   }, [scrollValue]);
   const scrollWithOffset = (el, offset) => {
-    const elementPosition = el.offsetTop - offset;
+    let elementPosition;
+    if (offsetY === 0) {
+      elementPosition = el.offsetTop - offset - 100;
+    } else {
+      elementPosition = el.offsetTop - offset;
+    }
     window.scroll({
       top: elementPosition,
       left: 0,

@@ -33,7 +33,10 @@ const HeroSection = ({
 }) => {
   return (
     <div className="hero-container-header" id="presale">
-      <Header setisWalletOptionsOpen={setisWalletOptionsOpen} />
+      <Header
+        setisWalletOptionsOpen={setisWalletOptionsOpen}
+        offsetY={offsetY}
+      />
       <div className="hero-container">
         <Sale
           withdrawable={withdrawable}
