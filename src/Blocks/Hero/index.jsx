@@ -64,7 +64,14 @@ const HeroSection = ({
           imgsrc={LogoMascot}
           classnamestyle="hero--mascot aic hover-effect"
         />
-        <div className="hero--button-presale aic">Apply Now</div>
+        <div
+          className="hero--button-presale aic"
+          onClick={() => {
+            window.open("https://ugensgmyg93.typeform.com/to/ZweqBEDd");
+          }}
+        >
+          Apply Now
+        </div>
         <div className="hero--banner aic">
           Receive an EXCLUSIVE Whitelist for the Daylight Protocol Pre-Sale
         </div>
