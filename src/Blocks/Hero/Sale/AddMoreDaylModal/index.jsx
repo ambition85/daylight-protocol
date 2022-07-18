@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { toast } from "react-toastify";
 import Big from "big.js";
 
-import "./style.css";
+import "../AddDaylModal/style.css";
 import Icon from "../../../../components/Icon";
 import ArrowLeftIcon from "../../../../assets/img/icons/arrowLeft.svg";
 import usdcIcon from "../../../../assets/img/coins/usdc.svg";
@@ -21,11 +21,43 @@ const AddMoreDaylModal = ({
   buyDayl,
 }) => {
   const [isRange, setisRange] = useState(15);
+  const [isFormData, setisFormData] = useState({
+    usdcValue: "",
+    daylValue: "",
+  });
   const [isCurrent, setisCurrent] = useState("usdc");
   const switchHandler = () => {
     setisCurrent((prev) => {
       return prev === "usdc" ? "dayl" : "usdc";
     });
+  };
+  const onChangeHandler = (e) => {
+    const { name, value } = e.target;
+    setisFormData((prev) => {
+      return {
+        ...prev,
+        [name]: value,
+      };
+    });
+  };
+  const onSubmitHandler = (e) => {
+    e.preventDefault();
+    const { usdcValue, daylValue } = isFormData;
+    if (!usdcValue || !daylValue) {
+      toast.error("Please fill all fields");
+      return;
+    }
+    const usdcValueBig = Big(usdcValue);
+    const daylValueBig = Big(daylValue);
+    if (usdcValueBig.gt(usdcBalance)) {
+      toast.error("You don't have enough usdc");
+      return;
+    }
+    if (daylValueBig.gt(totalDayl)) {
+      toast.error("You don't have enough dayl");
+      return;
+    }
+    // buyDayl(usdcValueBig, daylValueBig);
   };
   const addDayl = async () => {
     if (!whitelisted) {
@@ -79,10 +111,10 @@ const AddMoreDaylModal = ({
             {isCurrent === "usdc"
               ? localeString(new Big(usdcBalance).div(new Big(10).pow(6)))
               : localeString(
-                new Big(usdcBalance)
-                  .mul(new Big(rate))
-                  .div(new Big(10).pow(18))
-              )}
+                  new Big(usdcBalance)
+                    .mul(new Big(rate))
+                    .div(new Big(10).pow(18))
+                )}
           </b>
         </div>
         <div className="adddaylmodal--infostack-a-amount">
@@ -158,7 +190,24 @@ const AddMoreDaylModal = ({
           data-aos-offset="-100"
           data-aos-easing="ease-in-out"
         >
-          <div className="adddaylmodal--tokens-token-amount">
+          <input
+            className="adddaylmodal--tokens-token-amount"
+            type="number"
+            name={isCurrent === "usdc" ? "usdcValue" : "daylValue"}
+            value={
+              isCurrent === "usdc" ? isFormData.usdcValue : isFormData.daylValue
+            }
+            onChange={(e) => onChangeHandler(e)}
+            aria-disabled={false}
+            placeholder={
+              isCurrent === "usdc" ? "Add USDC Tokens" : "Add DAYL Tokens"
+            }
+            step={0.001}
+            required
+            min={0}
+            pattern="\d*"
+          />{" "}
+          {/* <div className="adddaylmodal--tokens-token-amount">
             {isCurrent === "usdc"
               ? localeString(
                 new Big(usdcBalance)
@@ -173,7 +222,7 @@ const AddMoreDaylModal = ({
                   .div(100)
                   .div(new Big(10).pow(18))
               ).toString()}
-          </div>
+          </div> */}
           <div className="adddaylmodal--tokens-token-img aic">
             <Icon
               imgsrc={isCurrent === "usdc" ? usdcIcon : daylIcon}
@@ -202,7 +251,24 @@ const AddMoreDaylModal = ({
           data-aos-offset="-200"
           data-aos-easing="ease-in-out"
         >
-          <div className="adddaylmodal--tokens-token-amount">
+          <input
+            className="adddaylmodal--tokens-token-amount"
+            type="number"
+            name={isCurrent !== "usdc" ? "usdcValue" : "daylValue"}
+            value={
+              isCurrent !== "usdc" ? isFormData.usdcValue : isFormData.daylValue
+            }
+            placeholder={
+              isCurrent === "usdc" ? "Add USDC Tokens" : "Add DAYL Tokens"
+            }
+            onChange={(e) => onChangeHandler(e)}
+            aria-disabled={false}
+            step={0.001}
+            required
+            min={0}
+            pattern="\d*"
+          />
+          {/* <div className="adddaylmodal--tokens-token-amount">
             {isCurrent === "usdc"
               ? localeString(
                 new Big(usdcBalance)
@@ -217,7 +283,7 @@ const AddMoreDaylModal = ({
                   .div(100)
                   .div(new Big(10).pow(6))
               )}
-          </div>
+          </div> */}
           <div className="adddaylmodal--tokens-token-img aic">
             <Icon
               imgsrc={isCurrent === "usdc" ? daylIcon : usdcIcon}

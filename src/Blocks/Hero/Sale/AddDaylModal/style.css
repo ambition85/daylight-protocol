@@ -10,17 +10,18 @@
   justify-content: flex-start;
   align-items: flex-start;
   flex-direction: column;
-  font-family: "Play";
-  font-style: normal;
-  font-weight: 700;
-  font-size: 24px;
-  line-height: 28px;
-  color: #ffffff;
+
   width: 380px;
 }
 .adddaylmodal--header {
   transform: translateX(-20px);
   margin-bottom: 32px;
+  font-family: "Space Grotesk";
+  font-style: normal;
+  font-weight: 700;
+  font-size: 24px;
+  line-height: 31px;
+  color: #ffffff;
 }
 .adddaylmodal--header-back {
   width: 44px;
@@ -33,17 +34,37 @@
   height: 66px;
   background: rgba(245, 255, 252, 0.1);
   border-radius: 10px;
-  font-family: "Play";
+  font-family: "Dongle" !important;
   font-style: normal;
   font-weight: 400;
-  font-size: 12px;
-  line-height: 14px;
+  font-size: 21px !important;
+  line-height: 21px !important;
+  /* identical to box height, or 100% */
+
+  display: flex;
+  align-items: center;
+
+  /* White */
+
+  color: #ffffff;
   flex-direction: column;
   margin-bottom: 30px;
 }
 .adddaylmodal--current-b {
-  font-size: 17px;
-  line-height: 20px;
+  font-family: "Dongle";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 27px !important;
+  line-height: 27px !important;
+  /* identical to box height, or 100% */
+
+  display: flex;
+  align-items: center;
+  text-align: center;
+
+  /* White */
+
+  color: #ffffff;
 }
 
 .adddaylmodal--infostack-a {
@@ -55,18 +76,28 @@
 }
 .adddaylmodal--infostack-a-info {
   gap: 5px;
-  font-size: 15px;
-  line-height: 17px;
+  font-family: "Dongle";
+  font-style: normal;
   font-weight: 400;
+  font-size: 32px !important;
+  line-height: 39px !important;
+
+  color: #ffffff;
 }
 .adddaylmodal--infostack-a-info-token {
   height: 24px;
   width: 24px;
 }
 .adddaylmodal--infostack-a-amount {
-  font-size: 15px;
-  line-height: 17px;
+  font-family: "Dongle";
+  font-style: normal;
   font-weight: 400;
+  font-size: 27px !important;
+  line-height: 39px !important;
+
+  text-align: right;
+
+  color: #ffffff;
 }
 .adddaylmodal--range {
   width: 100%;
@@ -169,11 +200,15 @@ input[type="range"].adddaylmodal--range:focus::-ms-fill-upper {
   border: 1px solid #ffffff;
   border-radius: 10px;
   width: 73px;
-  height: 35px;
+  padding: 10px;
+  height: 43px;
+  font-family: "Space Grotesk" !important;
   font-style: normal;
-  font-weight: 700;
-  font-size: 12px;
-  line-height: 15px;
+  font-weight: 700 !important;
+  font-size: 18px !important;
+  line-height: 23px !important;
+  /* identical to box height */
+
   color: #ffffff;
 }
 .adddaylmodal--buttons-button:hover {
@@ -203,10 +238,40 @@ input[type="range"].adddaylmodal--range:focus::-ms-fill-upper {
   border-radius: 10px;
   justify-content: space-between;
 }
-/* .adddaylmodal--tokens-token-amount {
-} */
+.adddaylmodal--tokens-token-amount {
+  background-color: transparent;
+  font-family: "Dongle";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 27px;
+  line-height: 39px;
+  display: flex;
+  align-items: center;
+  color: #ffffff;
+}
+.adddaylmodal--tokens-token-amount::-webkit-outer-spin-button,
+.adddaylmodal--tokens-token-amount::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+.adddaylmodal--tokens-token-amount {
+  -moz-appearance: textfield;
+}
 .adddaylmodal--tokens-token-img {
   gap: 7px;
+  font-family: "Dongle";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 27px;
+  line-height: 39px;
+  /* identical to box height */
+
+  display: flex;
+  align-items: center;
+
+  color: #ffffff;
 }
 .adddaylmodal--tokens-token-switch {
   position: absolute;
@@ -225,11 +290,13 @@ input[type="range"].adddaylmodal--range:focus::-ms-fill-upper {
   background: linear-gradient(90deg, #da4a52 0%, #df775a 100%);
   border-radius: 10px;
   width: 100%;
-  font-family: "play";
+  font-family: "Space Grotesk" !important;
   font-style: normal;
   font-weight: 700;
-  font-size: 18px;
-  line-height: 22px;
+  font-size: 18px !important;
+  line-height: 23px !important;
+  /* identical to box height */
+
   color: #ffffff;
 }
 .adddaylmodal--button:hover {

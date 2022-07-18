@@ -346,6 +346,12 @@ const Sale = ({
             </button>
           </div>
         )}
+        <button
+          className="hero-sale-section-button"
+          onClick={() => setisModalMoreDaylOpen(() => true)}
+        >
+          TESTER
+        </button>
         {/* //////////////// CLAIM */}
         {!!wallet && state == 2 && (
           <div
