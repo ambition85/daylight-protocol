@@ -60,10 +60,7 @@ const HeroSection = ({
         <Info addDaylToken={addDaylToken} />
       </div>
       <div className="hero--footer aic">
-        <Icon
-          imgsrc={LogoMascot}
-          classnamestyle="hero--mascot aic hover-effect"
-        />
+        <Icon imgsrc={LogoMascot} classnamestyle="hero--mascot aic " />
         <div
           className="hero--button-presale aic"
           onClick={() => {

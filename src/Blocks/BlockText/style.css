@@ -1,13 +1,13 @@
 .blocktext-container {
-  height: 555px;
+  height: 100%;
   font-family: "Dongle";
   font-style: normal;
   font-weight: 400;
   font-size: 37px;
   line-height: 34px;
   text-align: center;
-
   color: #ffffff;
-  max-width: 501px;
-  margin-bottom: 150px;
+  max-width: 1083px;
+  margin: 300px 0px;
+  padding: 0px 32px;
 }

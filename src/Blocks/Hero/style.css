@@ -46,11 +46,12 @@
 .hero--button-presale:hover {
   background: linear-gradient(
     346.4deg,
-    rgb(251, 176, 64, 0.6) 6.59%,
-    rgb(249, 237, 50, 0.6) 89.94%
+    rgb(251, 176, 64, 0.9) 6.59%,
+    rgb(249, 237, 50, 0.9) 89.94%
   );
   border: 2px solid rgb(255, 255, 255, 0.6);
   color: #000000;
+  cursor: pointer;
 }
 .hero--banner {
   transform: translateY(-20px);

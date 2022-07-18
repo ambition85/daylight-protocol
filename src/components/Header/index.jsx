@@ -41,6 +41,14 @@ const Header = ({ setisWalletOptionsOpen }) => {
 
     return () => window.removeEventListener("scroll", onScroll);
   }, [scrollValue]);
+  const scrollWithOffset = (el, offset) => {
+    const elementPosition = el.offsetTop - offset;
+    window.scroll({
+      top: elementPosition,
+      left: 0,
+      behavior: "smooth",
+    });
+  };
   return (
     <>
       <div
@@ -68,6 +76,7 @@ const Header = ({ setisWalletOptionsOpen }) => {
             <HashLink
               smooth={true}
               to="#daylight"
+              scroll={(el) => scrollWithOffset(el, 100)}
               className="hover-effect header--link"
             >
               Daylight Protocol

@@ -9,7 +9,7 @@ import FlamesLayer from "../../components/FlamesLayer";
 const DefiAccess = ({ offsetY }) => {
   return (
     <>
-      <div className="defiaccess-container">
+      <div className="defiaccess-container" id="daylight">
         <div className="defiaccess--backgroung">
           <img
             src={defiBg}
