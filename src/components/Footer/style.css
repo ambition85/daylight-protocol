@@ -1,7 +1,10 @@
 .footer-container {
   flex-direction: column;
-  margin: 130px 0px 90px 0px;
+  margin-top: 128px;
   gap: 35px;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  width: 100%;
+  padding: 64px 0px 28px 0px;
 }
 .footer--socials {
   gap: 16px;

@@ -96,6 +96,7 @@ const Header = ({ setisWalletOptionsOpen, offsetY }) => {
             <HashLink
               smooth={true}
               to="#sustainability"
+              scroll={(el) => scrollWithOffset(el, 100)}
               className="hover-effect header--link"
             >
               Sustainability

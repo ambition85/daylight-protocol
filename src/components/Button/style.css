@@ -10,6 +10,7 @@
   font-size: 18px;
   line-height: 21px;
   color: #ffffff;
+  transition: 300ms cubic-bezier(0.54, 0.21, 0.18, 1.35);
 }
 .button-container:hover {
   background: linear-gradient(

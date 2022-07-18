@@ -5,10 +5,10 @@ import ChainIcon from "../../assets/img/brand/chainBg.svg";
 const ChainsSection = () => {
   return (
     <div className="chainsection-container aic">
-      <Icon imgsrc={ChainIcon} classnamestyle="chainsection--logo aic" />
       <div className="chainsection--info">
         Reconstructing Deconstructed Decentralized Finance
       </div>
+      <Icon imgsrc={ChainIcon} classnamestyle="chainsection--logo aic" />
     </div>
   );
 };

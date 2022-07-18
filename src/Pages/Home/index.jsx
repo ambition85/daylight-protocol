@@ -12,6 +12,7 @@ import Litepaper from "../../Blocks/Litepaper";
 import DexSection from "../../Blocks/Dex";
 import Road from "../../Blocks/Road";
 import Footer from "../../components/Footer";
+import SectionDivider from "../../components/SectionDivider";
 import ERC20ABI from "../../constants/abis/ERC20.json";
 
 import "react-toastify/dist/ReactToastify.css";
@@ -373,11 +374,11 @@ const Home = () => {
         withdraw={withdraw}
         claim={claim}
       />
-
       <Progress />
       <DefiAccess offsetY={offsetY} />
       <BlockText offsetY={offsetY} />
       <ChainsSection />
+      <SectionDivider />
       <Litepaper />
       <DexSection />
       <Road />

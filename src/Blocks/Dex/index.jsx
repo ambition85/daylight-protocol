@@ -1,6 +1,6 @@
 import React from "react";
 import "./style.css";
-import DexImg from "../../assets/img/brand/dex3.svg";
+import DexImg from "../../assets/img/brand/dex.svg";
 import dexMobile from "../../assets/img/brand/dexMobile.svg";
 import Icon from "../../components/Icon";
 const DexSection = () => {

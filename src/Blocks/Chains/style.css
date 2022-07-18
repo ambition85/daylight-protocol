@@ -1,19 +1,22 @@
 .chainsection-container {
-  gap: 120px;
-  flex-wrap: wrap-reverse;
+  gap: 64px;
+  flex-wrap: wrap;
   width: 100%;
+  padding: 128px 0px;
 }
 
 .chainsection--info {
-  width: 467.18px;
+  max-width: 307.35px;
   height: 259.12px;
-
   font-family: "Space Grotesk";
   font-style: normal;
   font-weight: 500;
-  font-size: 56px;
+  font-size: 40px;
   line-height: 68px;
-  text-align: start;
+  /* or 170% */
+
+  display: flex;
+  align-items: center;
 
   color: #ffffff;
 }

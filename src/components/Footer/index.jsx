@@ -75,6 +75,7 @@ const Footer = () => {
             <HashLink
               smooth={true}
               to="#sustainability"
+              scroll={(el) => scrollWithOffset(el, 100)}
               className="hover-effect footer--bottom-link"
             >
               Sustainability

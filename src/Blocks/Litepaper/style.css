@@ -1,6 +1,5 @@
 .litepaper-container {
   gap: 32px;
-  margin-top: 200px;
   flex-wrap: wrap;
 }
 .litepaper-logo {
@@ -20,9 +19,9 @@
   line-height: 68px;
   color: #ffffff;
 }
-.litepaper--info-button {
+.litepaper--button {
   padding: 16px 32px;
-  width: 160px;
+  width: 100%;
   height: 53px;
   background: linear-gradient(90deg, #da4a52 0%, #df775a 100%);
   border: 2px solid #ffffff;
@@ -32,9 +31,19 @@
   font-weight: 700;
   font-size: 18px;
   line-height: 21px;
+  transition: 300ms cubic-bezier(0.54, 0.21, 0.18, 1.35);
+
   color: #ffffff;
 }
-
+.litepaper--button:hover {
+  background: linear-gradient(
+    90deg,
+    rgb(218, 74, 82, 0.6) 0%,
+    rgb(223, 119, 90, 0.6) 100%
+  );
+  border: 2px solid rgb(255, 255, 255, 0.6);
+  cursor: pointer;
+}
 @media screen and (max-width: 540px) {
   .litepaper-logo {
     width: 90vw;
