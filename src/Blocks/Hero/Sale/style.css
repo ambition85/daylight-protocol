@@ -55,6 +55,8 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  background: black;
+  border-radius: 50%;
 }
 .hero-sale-section-brand-img {
   height: 100%;

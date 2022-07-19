@@ -1,13 +1,14 @@
 import React, { useContext, useState } from "react";
-import { toast } from "react-toastify";
+
 import Countdown from "react-countdown";
 import Big from "big.js";
 
 import { WalletWeb3Context } from "../../../context/WalletWeb3Context";
 import "./style.css";
-import logoToken from "../../../assets/img/brand/logoToken.svg";
+import logoToken from "../../../assets/img/coins/dayl.svg";
 import { localeString } from "../../../utils/utils";
 import Modal from "../../../components/Modal";
+import Icon from "../../../components/Icon";
 import AddDaylModal from "./AddDaylModal";
 import AddMoreDaylModal from "./AddMoreDaylModal";
 import { numberWithCommas } from "../../../utils/utils";
@@ -49,12 +50,6 @@ const Sale = ({
     setProgressPercent(() => newValue);
   }, [totalUsdc]);
   const curTime = Math.floor(Date.now() / 1000);
-  // const showModal = () => {
-  //   if (!wallet) {
-  //     return toast.error("Connect your wallet");
-  //   }
-  //   setisModalOpen(() => true);
-  // };
 
   return (
     <div className="hero-sale-container-outer">
@@ -92,13 +87,17 @@ const Sale = ({
         {/* //////////////// 1 */}
         <div className="hero-sale-section-a">
           <div className="hero-sale-section-brand">
-            <div className="hero-sale-section-brand-logo hover-effect">
+            <Icon
+              imgsrc={logoToken}
+              classnamestyle="hero-sale-section-brand-logo hover-effect"
+            />
+            {/* <div className="hero-sale-section-brand-logo hover-effect">
               <img
                 src={logoToken}
                 className="hero-sale-section-brand-img"
                 alt="token brand daylight"
-              />
-            </div>
+              /> 
+            </div>*/}
             <div className="hero-sale-section-brand-title">
               <div className="hero-sale-section-brand-title-name">
                 Daylight Protocol
@@ -211,34 +210,52 @@ const Sale = ({
               </div>
             </div>
             <div className="hero-sale-section" style={{ marginTop: "32px" }}>
-              <div className="hero-sale-section-connected-b">
-                My USDC deposit
+              <div
+                style={{
+                  flexDirection: "column",
+                  alignItems: "flex-start",
+                  gap: "8px",
+                }}
+              >
+                <div className="hero-sale-section-connected-b">
+                  My USDC deposit
+                </div>
+                <div className="hero-sale-section-connected-a">
+                  $
+                  {localeString(
+                    Big(totalDayl).div(Big(rate)).div(Big(10).pow(6)).toString()
+                  )}
+                </div>
               </div>
-              <div className="hero-sale-section-connected-b">
-                My Total Distribution
+              <div
+                style={{ flexDirection: "column", alignItems: "flex-start" }}
+              >
+                <div className="hero-sale-section-connected-b">
+                  My Total Distribution
+                </div>
+                <div className="hero-sale-section-connected-a">
+                  {localeString(Big(totalDayl).div(Big(10).pow(18)).toString())}{" "}
+                  $DAYL
+                </div>
               </div>
-              <div className="hero-sale-section-connected-b">
-                My Total Withdrawn
+              <div
+                style={{
+                  flexDirection: "column",
+                  alignItems: "flex-end",
+                }}
+              >
+                <div className="hero-sale-section-connected-b">
+                  My Total Withdrawn
+                </div>
+                <div className="hero-sale-section-connected-a">
+                  {localeString(
+                    Big(totalWithdrawn).div(Big(10).pow(18)).toString()
+                  )}{" "}
+                  $DAYL
+                </div>
               </div>
             </div>
-            <div className="hero-sale-section" style={{ marginTop: "16px" }}>
-              <div className="hero-sale-section-connected-a">
-                $
-                {localeString(
-                  Big(totalDayl).div(Big(rate)).div(Big(10).pow(6)).toString()
-                )}
-              </div>
-              <div className="hero-sale-section-connected-a">
-                {localeString(Big(totalDayl).div(Big(10).pow(18)).toString())}{" "}
-                $DAYL
-              </div>
-              <div className="hero-sale-section-connected-a">
-                {localeString(
-                  Big(totalWithdrawn).div(Big(10).pow(18)).toString()
-                )}{" "}
-                $DAYL
-              </div>
-            </div>
+
             <div className="hero-sale-section-connected-divider" />
           </>
         ) : (

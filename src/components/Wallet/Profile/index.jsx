@@ -5,8 +5,9 @@ import ArrowLeftIcon from "../../../assets/img/icons/arrowLeft.svg";
 import frameIcon from "../../../assets/img/icons/frame.svg";
 import warningIcon from "../../../assets/img/icons/warning.svg";
 import copyIcon from "../../../assets/img/icons/copy.svg";
-import usdcIcon from "../../../assets/img/coins/usdc.svg";
 import daylIcon from "../../../assets/img/coins/dayl.svg";
+import usdcIcon from "../../../assets/img/coins/usdc.svg";
+import avaxIcon from "../../../assets/img/coins/avax.svg";
 import { shortenAddressLong } from "../../../utils/utils";
 
 const Profile = ({ wallet, onClose, disconnectWallet }) => {
@@ -148,7 +149,7 @@ const Profile = ({ wallet, onClose, disconnectWallet }) => {
       >
         <div className="profilemodal--balance aic">
           <Icon
-            imgsrc={usdcIcon}
+            imgsrc={avaxIcon}
             classnamestyle="profilemodal--box-warning-icon aic hover-effect"
           />
           AVAX Balance
