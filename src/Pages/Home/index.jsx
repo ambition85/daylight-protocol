@@ -26,18 +26,18 @@ import PresaleABI from "../../constants/abis/Presale.json";
 import WalletMenu from "../../components/Wallet";
 import BlockText from "../../Blocks/BlockText";
 import { saveTxHistory } from "../../utils/utils"
-
-export const chainConfig = {
-  chainId: "0xA869",
-  chainName: "Avalanche Testnet",
-  nativeCurrency: {
-    name: "AVAX",
-    symbol: "AVAX",
-    decimals: 18,
-  },
-  rpcUrls: ["https://api.avax-test.network/ext/bc/C/rpc"],
-  blockExplorerUrls: ["https://testnet.snowtrace.io"],
-};
+import { mainnetNetwork as chainConfig } from "../../utils/constants"
+// export const chainConfig = {
+//   chainId: "0xA869",
+//   chainName: "Avalanche Testnet",
+//   nativeCurrency: {
+//     name: "AVAX",
+//     symbol: "AVAX",
+//     decimals: 18,
+//   },
+//   rpcUrls: ["https://api.avax-test.network/ext/bc/C/rpc"],
+//   blockExplorerUrls: ["https://testnet.snowtrace.io"],
+// };
 
 export const usdcDecimals = 6;
 
@@ -249,6 +249,7 @@ const Home = () => {
     setUsdcAllowance(allowance);
   };
   const buyDayl = async (val) => {
+    console.log("Val:", val)
     if (!usdcContract || !presaleContract || !presaleReadContract) {
       return;
     }
@@ -258,14 +259,14 @@ const Home = () => {
     if (
       totalDayl === "0" &&
       BigNumber.from(totalDayl)
-        .add(BigNumber.from(val))
+        .add(BigNumber.from(val).mul(BigNumber.from(rate)))
         .lt(BigNumber.from(minPerWallet).mul(BigNumber.from(rate)))
     ) {
       return toast("Smaller than minimum amount");
     }
     if (
       BigNumber.from(totalDayl)
-        .add((BigNumber.from(val)))
+        .add((BigNumber.from(val)).mul(BigNumber.from(rate)))
         .gt(BigNumber.from(maxPerWallet).mul(BigNumber.from(rate)))
     ) {
       return toast("Exceeds maximum amount");
