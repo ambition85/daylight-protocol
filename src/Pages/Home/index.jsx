@@ -179,7 +179,7 @@ const Home = () => {
       setWhitelisted(whitelisted);
       setClaimable(claimable);
       setUsdcBalance(usdcBalance);
-      setUsdcAllowance(!usdcAllowance.lt(maxTo));
+      setUsdcAllowance(!usdcAllowance.lt(maxPerWallet));
     })();
   }, []);
   useEffect(() => {
