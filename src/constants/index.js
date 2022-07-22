@@ -1,3 +1,3 @@
 export const USDCAddress = '0xB97EF9Ef8734C71904D8002F8b6Bc66Dd9c48a6E'
-export const PresaleTokenAddress = '0xd54D4Dff8681f57701503d72456D22f496A433df'
-export const PresaleAddress = '0x74Ee1374bCa5A94Bee0f189c0892d333E9168524'
+export const PresaleTokenAddress = '0x5B7762e7eF774c12D282ED3B0aA17F713C3e6DA0'
+export const PresaleAddress = '0xB1f21C719e7674c580948Ee048617cE72fAA4eFA'
