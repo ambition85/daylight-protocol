@@ -193,14 +193,16 @@ const Home = () => {
         return;
       }
       if (!!presaleReadContract && !!usdcReadContract) {
-        const [userInfo, whitelisted, claimable, usdcBalance] =
+        const [userInfo, whitelisted, claimable, usdcBalance, usdcAllowance] =
           await Promise.all([
             presaleReadContract.userInfo(wallet),
             presaleReadContract.whitelisted(wallet),
             presaleReadContract.claimableAmount(wallet),
             usdcReadContract.balanceOf(wallet),
+            usdcReadContract.allowance(wallet, PresaleAddress),
           ]);
 
+        setUsdcAllowance(!usdcAllowance.lt(maxTo));
         setTotalDayl(userInfo.totalReward.toString());
         setDepositAmount(userInfo.depositAmount.toString());
         setTotalWithdrawn(userInfo.withdrawnReward.toString());
