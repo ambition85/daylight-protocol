@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { providers, Contract, BigNumber, utils } from "ethers";
 import "./style.css";
 import Icon from "../../Icon";
 import ArrowLeftIcon from "../../../assets/img/icons/arrowLeft.svg";
@@ -10,8 +11,68 @@ import usdcIcon from "../../../assets/img/coins/usdc.svg";
 import avaxIcon from "../../../assets/img/coins/avax.svg";
 import { shortenAddressLong } from "../../../utils/utils";
 
+import {
+  PresaleAddress,
+  PresaleTokenAddress,
+  USDCAddress,
+} from "../../../constants";
+import ERC20ABI from "../../../constants/abis/ERC20.json";
+import PresaleABI from "../../../constants/abis/Presale.json";
+import PresaleTokenABI from "../../../constants/abis/PresaleToken.json";
+import { usdcDecimals, chainConfig } from "../../../Pages/Home/index"
+
+let provider,
+  presaleReadContract,
+  usdcReadContract,
+  presaleTokenContract,
+  usdcContract;
+
 const Profile = ({ wallet, onClose, disconnectWallet }) => {
   const [iscopyactive, setiscopyactive] = useState(false);
+  const [isUsdcLow, setISUSDCLow] = useState(false)
+  const [usdcBal, setUSDCBal] = useState(0)
+  const [daylBal, setDAYLBal] = useState(0)
+  const [avaxBal, setAVXBal] = useState(0)
+  const [minPer, setMinPer] = useState(0)
+
+  useEffect(() => {
+    fetchBalance()
+  }, [])
+
+  const fetchBalance = async () => {
+    provider = new providers.Web3Provider(window.ethereum);
+    presaleReadContract = new Contract(
+      PresaleAddress,
+      PresaleABI,
+      new providers.JsonRpcProvider(chainConfig.rpcUrls[0])
+    );
+    presaleTokenContract = new Contract(
+      PresaleTokenAddress,
+      PresaleTokenABI,
+      new providers.JsonRpcProvider(chainConfig.rpcUrls[0])
+    );
+    usdcReadContract = new Contract(
+      USDCAddress,
+      ERC20ABI,
+      new providers.JsonRpcProvider(chainConfig.rpcUrls[0])
+    );
+
+    const [daylBal, usdcBal, avaxBal, minPer] =
+      await Promise.all([
+        presaleTokenContract.balanceOf(wallet),
+        usdcReadContract.balanceOf(wallet),
+        provider.getBalance(wallet),
+        presaleReadContract.minPerWallet(),
+      ]);
+    console.log("Balance: ", daylBal, usdcBal, avaxBal)
+    setAVXBal(utils.formatEther(avaxBal))
+    setDAYLBal(utils.formatEther(daylBal))
+    setUSDCBal(utils.formatUnits(usdcBal, usdcDecimals))
+    setMinPer(minPer.toString());
+
+    if (minPer.gt(usdcBal)) setISUSDCLow(true)
+  }
+
   useEffect(() => {
     if (iscopyactive) {
       const timer = setTimeout(() => {
@@ -73,7 +134,7 @@ const Profile = ({ wallet, onClose, disconnectWallet }) => {
         </div>
       </div>
       {/* /////////// */}
-      <div
+      {isUsdcLow && <div
         className="profilemodal--box aic"
         style={{
           gap: "8px",
@@ -94,12 +155,12 @@ const Profile = ({ wallet, onClose, disconnectWallet }) => {
             You need USDC for Transactions fees.
           </div>
         </div>
-      </div>
+      </div>}
 
       {/* /////////// */}
       <div
         className="profilemodal--box aic"
-        style={{ padding: "0px 16px", justifyContent: "space-between" }}
+        style={{ marginTop: "10px", padding: "0px 16px", justifyContent: "space-between" }}
         data-aos="fade-down"
         data-aos-delay="200"
         data-aos-offset="-100"
@@ -112,7 +173,7 @@ const Profile = ({ wallet, onClose, disconnectWallet }) => {
           />
           DAYL Balance
         </div>
-        <div className="profilemodal--balance-amount">0.0</div>
+        <div className="profilemodal--balance-amount">{daylBal}</div>
       </div>
       <div
         className="profilemodal--box aic"
@@ -133,7 +194,7 @@ const Profile = ({ wallet, onClose, disconnectWallet }) => {
           />
           USDC Balance
         </div>
-        <div className="profilemodal--balance-amount">0.0</div>
+        <div className="profilemodal--balance-amount">{usdcBal}</div>
       </div>
       <div
         className="profilemodal--box aic"
@@ -154,7 +215,7 @@ const Profile = ({ wallet, onClose, disconnectWallet }) => {
           />
           AVAX Balance
         </div>
-        <div className="profilemodal--balance-amount">0.0</div>
+        <div className="profilemodal--balance-amount">{avaxBal}</div>
       </div>
       {/* /////////// */}
       <div

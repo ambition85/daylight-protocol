@@ -30,6 +30,8 @@ const HeroSection = ({
   buyDayl,
   withdraw,
   claim,
+  minPerWallet,
+  maxPerWallet
 }) => {
   return (
     <div className="hero-container-header" id="presale">
@@ -52,13 +54,14 @@ const HeroSection = ({
           totalDayl={totalDayl}
           usdcBalance={usdcBalance}
           claimable={claimable}
-          total={6000000}
           hardCap={hardCap}
           softCap={softCap}
           whitelisted={whitelisted}
           buyDayl={buyDayl}
           withdraw={withdraw}
           claim={claim}
+          minPerWallet={minPerWallet}
+          maxPerWallet={maxPerWallet}
         />
         <Info addDaylToken={addDaylToken} />
       </div>

@@ -26,7 +26,6 @@ const Sale = ({
   totalUsdc,
   totalDayl,
   usdcBalance,
-  total,
   whitelisted,
   claimable,
   hardCap,
@@ -34,13 +33,15 @@ const Sale = ({
   buyDayl,
   withdraw,
   claim,
+  minPerWallet,
+  maxPerWallet
 }) => {
   const [isModalOpen, setisModalOpen] = useState(false);
   const [isModalMoreDaylOpen, setisModalMoreDaylOpen] = useState(false);
   const [progressPercent, setProgressPercent] = useState("30px");
   const { connectWallet, wallet } = useContext(WalletWeb3Context);
   React.useEffect(() => {
-    let newValue = (totalUsdc / total) * 100;
+    let newValue = (totalUsdc / hardCap * 1e6) * 100;
     if (newValue < 5) {
       newValue = "30px";
     } else {
@@ -61,6 +62,8 @@ const Sale = ({
           totalDayl={totalDayl}
           totalUsdc={totalUsdc}
           usdcBalance={usdcBalance}
+          minPerWallet={minPerWallet}
+          maxPerWallet={maxPerWallet}
           rate={rate}
           whitelisted={whitelisted}
           onClose={() => setisModalOpen(false)}
@@ -136,8 +139,8 @@ const Sale = ({
               {curTime < startTime
                 ? "PRE-SALE NOT STARTED"
                 : curTime < endTime
-                ? "PRE-SALE"
-                : "PRE-SALE ENDED"}
+                  ? "PRE-SALE"
+                  : "PRE-SALE ENDED"}
             </div>
           </div>
           <div className="hero-sale-section-price">
@@ -149,8 +152,7 @@ const Sale = ({
                 <Countdown
                   date={endTime * 1000}
                   renderer={({ hours, minutes, seconds, completed }) =>
-                    `${hours < 10 ? "0" : ""}${hours}:${
-                      minutes < 10 ? "0" : ""
+                    `${hours < 10 ? "0" : ""}${hours}:${minutes < 10 ? "0" : ""
                     }${minutes}:${seconds < 10 ? "0" : ""}${seconds}`
                   }
                 />
@@ -181,7 +183,7 @@ const Sale = ({
         </div>
         <div className="hero-sale-bar-value aic">
           <div className="hover-effect">{localeString(totalUsdc)}</div>/
-          <div className="hover-effect">{localeString(total)}</div>
+          <div className="hover-effect">{localeString(hardCap / 1e6)}</div >
         </div>
         {/* //////////////// 4 */}
         <div className="hero-sale-section" style={{ marginTop: "27.32px" }}>
@@ -347,10 +349,10 @@ const Sale = ({
                         hours >= 24
                           ? `${hours / 24} days`
                           : hours > 0
-                          ? `${hours} hours`
-                          : minutes > 0
-                          ? `${minutes} minutes`
-                          : `${seconds} seconds`
+                            ? `${hours} hours`
+                            : minutes > 0
+                              ? `${minutes} minutes`
+                              : `${seconds} seconds`
                       }
                     />
                   ) : (
@@ -406,10 +408,10 @@ const Sale = ({
                         hours >= 24
                           ? `${hours / 24} days`
                           : hours > 0
-                          ? `${hours} hours`
-                          : minutes > 0
-                          ? `${minutes} minutes`
-                          : `${seconds} seconds`
+                            ? `${hours} hours`
+                            : minutes > 0
+                              ? `${minutes} minutes`
+                              : `${seconds} seconds`
                       }
                     />
                   ) : (
@@ -444,11 +446,10 @@ const Sale = ({
               >
                 <div className="hero-sale-section-connected-b">Pre-Sale</div>
                 <div
-                  className={`hero-sale-section-connected-a ${
-                    Big(totalUsdc).gte(Big(softCap).div(Big(10).pow(6)))
-                      ? "connected-success"
-                      : "connected-failed"
-                  }`}
+                  className={`hero-sale-section-connected-a ${Big(totalUsdc).gte(Big(softCap).div(Big(10).pow(6)))
+                    ? "connected-success"
+                    : "connected-failed"
+                    }`}
                 >
                   {Big(totalUsdc).gte(Big(softCap).div(Big(10).pow(6)))
                     ? "SUCCESS"
