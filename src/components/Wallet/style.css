@@ -16,6 +16,7 @@
   visibility: visible;
   opacity: 1;
   z-index: 9;
+  background-color: rgb(25, 25, 25, 0.5);
 }
 .walletmenu--open {
   display: flex;
@@ -86,11 +87,11 @@
   .walletmenu--open {
     top: 50%;
     right: 50%;
-    transform: translate(50%, 50%);
+    transform: translate(50%, -100px);
   }
   .walletmenu--close {
     top: 50%;
     right: 50%;
-    transform: translate(50%, 50%);
+    transform: translate(50%, -100px);
   }
 }

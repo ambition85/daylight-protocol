@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useState, useRef } from "react";
 
 import Countdown from "react-countdown";
 import Big from "big.js";
@@ -6,12 +6,15 @@ import Big from "big.js";
 import { WalletWeb3Context } from "../../../context/WalletWeb3Context";
 import "./style.css";
 import logoToken from "../../../assets/img/coins/dayl.svg";
-import { localeString } from "../../../utils/utils";
 import Modal from "../../../components/Modal";
 import Icon from "../../../components/Icon";
 import AddDaylModal from "./AddDaylModal";
 import AddMoreDaylModal from "./AddMoreDaylModal";
-import { numberWithCommas } from "../../../utils/utils";
+import {
+  numberWithCommas,
+  formatNumbers,
+  localeString,
+} from "../../../utils/utils";
 
 const Sale = ({
   withdrawable,
@@ -36,12 +39,17 @@ const Sale = ({
   minPerWallet,
   maxPerWallet
 }) => {
+  const progressBarRef = useRef(null);
   const [isModalOpen, setisModalOpen] = useState(false);
   const [isModalMoreDaylOpen, setisModalMoreDaylOpen] = useState(false);
   const [progressPercent, setProgressPercent] = useState("30px");
+  const [progressPercentSoftCap, setProgressPercentSoftCap] = useState("30px");
   const { connectWallet, wallet } = useContext(WalletWeb3Context);
   React.useEffect(() => {
     let newValue = (totalUsdc / hardCap * 1e6) * 100;
+    let newValue2 =
+      (((softCap / hardCap) * 100) / 100) * progressBarRef.current.clientWidth;
+    setProgressPercentSoftCap(newValue2 + "px");
     if (newValue < 5) {
       newValue = "30px";
     } else {
@@ -49,7 +57,7 @@ const Sale = ({
     }
 
     setProgressPercent(() => newValue);
-  }, [totalUsdc]);
+  }, [totalUsdc, progressBarRef.current]);
   const curTime = Math.floor(Date.now() / 1000);
 
   return (
@@ -168,7 +176,12 @@ const Sale = ({
         </div>
 
         {/* //////////////// 3 */}
-        <div className="hero-sale-bar " style={{ marginTop: "16px" }}>
+
+        <div
+          className="hero-sale-bar "
+          ref={progressBarRef}
+          style={{ marginTop: "16px" }}
+        >
           <div
             className="hero-sale-bar-circle "
             style={
@@ -177,8 +190,16 @@ const Sale = ({
                 : { width: progressPercent }
             }
           >
-            <div className="hero-sale-bar-circle-indicator">Soft Cap</div>
-            <div className="hero-sale-bar-circle-divider" />
+            <div
+              className="hero-sale-bar-circle-indicator"
+              style={{ left: progressPercentSoftCap }}
+            >
+              Soft Cap [$2.5M]
+            </div>
+            <div
+              className="hero-sale-bar-circle-divider"
+              style={{ left: progressPercentSoftCap }}
+            />
           </div>
         </div>
         <div className="hero-sale-bar-value aic">
