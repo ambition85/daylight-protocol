@@ -67,11 +67,11 @@ const RecentTransactions = ({ wallet, onClose, disconnectWallet }) => {
                       className="recenttransaction--scan aic "
                       onClick={() => {
                         window.open(
-                          `https://avascan.info/blockchain/c/tx/${item.hash}`
+                          `https://snowtrace.io/tx/${item.hash}`
                         );
                       }}
                     >
-                      View on AvaScan
+                      View on Snowtrace
                       <Icon
                         imgsrc={frameIcon}
                         classnamestyle="recenttransaction--box-warning-icon aic"
