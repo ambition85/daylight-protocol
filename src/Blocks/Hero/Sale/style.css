@@ -120,6 +120,7 @@
   top: -22px;
   right: -20px;
   position: absolute;
+  width: 100px;
 }
 .hero-sale-bar-circle-divider {
   position: absolute;

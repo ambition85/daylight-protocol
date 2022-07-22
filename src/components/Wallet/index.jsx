@@ -36,8 +36,8 @@ const WalletMenu = ({ isWalletOptionsOpen, setisWalletOptionsOpen }) => {
           onClick={() => setisWalletOptionsOpen(false)}
           className={
             isWalletOptionsOpen
-              ? "walletmenu-outer--open"
-              : "walletmenu-outer--close"
+              ? "walletmenu-outer--open aic"
+              : "walletmenu-outer--close aic"
           }
         >
           <div
