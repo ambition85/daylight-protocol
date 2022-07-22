@@ -9,6 +9,14 @@
   width: 16px;
   height: 16px;
 }
+.walletmenu-outer--open {
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  visibility: visible;
+  opacity: 1;
+  z-index: 9;
+}
 .walletmenu--open {
   display: flex;
   flex-direction: column;

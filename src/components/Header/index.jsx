@@ -23,7 +23,9 @@ const Header = ({ setisWalletOptionsOpen, offsetY }) => {
     } else {
       if (!!wallet) {
         setisWalletOptionsOpen((prev) => !prev);
+        setIsOpen(() => false);
       } else {
+        setIsOpen(() => false);
         setisWalletOptionsOpen(false);
         connectWallet();
       }
@@ -55,127 +57,133 @@ const Header = ({ setisWalletOptionsOpen, offsetY }) => {
     });
   };
   return (
-    <>
-      <div
-        className={
-          scrollValue > 1
-            ? "header-container-outer aic fixed-header"
-            : "header-container-outer aic"
-        }
-      >
-        <nav className="header-container">
-          <Icon
-            imgsrc={LogoBrand}
-            href="/"
-            classnamestyle="header--brand hover-effect aic"
-          />
+    <div
+      className={
+        scrollValue > 1
+          ? "header-container-outer aic fixed-header"
+          : "header-container-outer aic"
+      }
+    >
+      <nav className="header-container">
+        <Icon
+          imgsrc={LogoBrand}
+          href="/"
+          classnamestyle="header--brand hover-effect aic"
+        />
 
-          <div className="header--links">
-            <HashLink
-              smooth={true}
-              to="#presale"
-              className="hover-effect header--link"
-            >
-              Pre-Sale
-            </HashLink>
-            <HashLink
-              smooth={true}
-              to="#daylight"
-              scroll={(el) => scrollWithOffset(el, 100)}
-              className="hover-effect header--link"
-            >
-              Daylight Protocol
-            </HashLink>
-            <HashLink
-              smooth={true}
-              to="#dex"
-              className="hover-effect header--link"
-            >
-              DEX
-            </HashLink>
-            <HashLink
-              smooth={true}
-              to="#sustainability"
-              scroll={(el) => scrollWithOffset(el, 100)}
-              className="hover-effect header--link"
-            >
-              Sustainability
-            </HashLink>
-            <HashLink
-              smooth={true}
-              to="#blog"
-              className="hover-effect header--link"
-            >
-              Blog
-            </HashLink>
+        <div className="header--links">
+          <HashLink
+            smooth={true}
+            to="#presale"
+            className="hover-effect header--link"
+          >
+            Pre-Sale
+          </HashLink>
+          <HashLink
+            smooth={true}
+            to="#daylight"
+            scroll={(el) => scrollWithOffset(el, 100)}
+            className="hover-effect header--link"
+          >
+            Daylight Protocol
+          </HashLink>
+          <HashLink
+            smooth={true}
+            to="#dex"
+            className="hover-effect header--link"
+          >
+            DEX
+          </HashLink>
+          <HashLink
+            smooth={true}
+            to="#sustainability"
+            scroll={(el) => scrollWithOffset(el, 100)}
+            className="hover-effect header--link"
+          >
+            Sustainability
+          </HashLink>
+          <HashLink
+            smooth={true}
+            to="#blog"
+            className="hover-effect header--link"
+          >
+            Blog
+          </HashLink>
+        </div>
+        <div className="header--buttons aic">
+          <div className="aic">
+            <div className="header--litepaper-left aic">Litepaper</div>
+            <div className="header--litepaper-right aic">Website</div>
           </div>
-          <div className="header--buttons aic">
-            <div className="aic">
-              <div className="header--litepaper-left aic">Litepaper</div>
-              <div className="header--litepaper-right aic">Website</div>
-            </div>
-            <div
-              onClick={() => web3ButtonHandler()}
-              className="header--button aic"
-            >
-              {!!wallet ? (
-                <>
-                  {isWrongNetwork ? (
-                    "Wrong Network"
-                  ) : (
-                    <div className="walletmenu-container aic">
-                      <Icon
-                        imgsrc={walletIcon}
-                        classnamestyle="walletmenu--icon-wallet aic "
-                      />
-                      {shortenAddress(wallet)}
-                      <Icon
-                        imgsrc={downTabIcon}
-                        classnamestyle="walletmenu--icon-tab aic "
-                      />
-                    </div>
-                  )}
-                </>
-              ) : (
-                "Connect Wallet"
-              )}
-            </div>
-          </div>
-          <div className="header--menu">
-            <button type="button" onClick={() => setIsOpen(() => true)}>
-              <Icon
-                imgsrc={menuIcon}
-                classnamestyle="header--menu-icon hover-effect aic"
-              />
-            </button>
-            <Menu isOpen={isOpen} close={() => setIsOpen(() => false)} />
-          </div>
-        </nav>
-      </div>
-      <div onClick={() => web3ButtonHandler()} className="header--button2 aic">
-        {!!wallet ? (
-          <>
-            {isWrongNetwork ? (
-              "Wrong Network"
+          <div
+            onClick={() => web3ButtonHandler()}
+            className="header--button aic"
+          >
+            {!!wallet ? (
+              <>
+                {isWrongNetwork ? (
+                  "Wrong Network"
+                ) : (
+                  <div className="walletmenu-container aic">
+                    <Icon
+                      imgsrc={walletIcon}
+                      classnamestyle="walletmenu--icon-wallet aic "
+                    />
+                    {shortenAddress(wallet)}
+                    <Icon
+                      imgsrc={downTabIcon}
+                      classnamestyle="walletmenu--icon-tab aic "
+                    />
+                  </div>
+                )}
+              </>
             ) : (
-              <div className="walletmenu-container aic">
-                <Icon
-                  imgsrc={walletIcon}
-                  classnamestyle="walletmenu--icon-wallet aic "
-                />
-                {shortenAddress(wallet)}
-                <Icon
-                  imgsrc={downTabIcon}
-                  classnamestyle="walletmenu--icon-tab aic "
-                />
-              </div>
+              "Connect Wallet"
             )}
-          </>
-        ) : (
-          "Connect Wallet"
-        )}
-      </div>
-    </>
+          </div>
+        </div>
+        <div className="header--menu">
+          <button type="button" onClick={() => setIsOpen(() => true)}>
+            <Icon
+              imgsrc={menuIcon}
+              classnamestyle="header--menu-icon hover-effect aic"
+            />
+          </button>
+          <Menu
+            isOpen={isOpen}
+            close={() => setIsOpen(() => false)}
+            buttonweb3={
+              <div
+                onClick={() => web3ButtonHandler()}
+                className="header--button aic"
+              >
+                {!!wallet ? (
+                  <>
+                    {isWrongNetwork ? (
+                      "Wrong Network"
+                    ) : (
+                      <div className="walletmenu-container aic">
+                        <Icon
+                          imgsrc={walletIcon}
+                          classnamestyle="walletmenu--icon-wallet aic "
+                        />
+                        {shortenAddress(wallet)}
+                        <Icon
+                          imgsrc={downTabIcon}
+                          classnamestyle="walletmenu--icon-tab aic "
+                        />
+                      </div>
+                    )}
+                  </>
+                ) : (
+                  "Connect Wallet"
+                )}
+              </div>
+            }
+          />
+        </div>
+      </nav>
+    </div>
   );
 };
 

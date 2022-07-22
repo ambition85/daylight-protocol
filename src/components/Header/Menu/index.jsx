@@ -9,7 +9,7 @@ import DiscordIcon from "../../../assets/img/icons/discord.svg";
 import TwitterIcon from "../../../assets/img/icons/twitter.svg";
 import { HashLink } from "react-router-hash-link";
 
-const Menu = ({ isOpen, close }) => {
+const Menu = ({ isOpen, close, buttonweb3 }) => {
   return (
     <div
       className={
@@ -65,6 +65,23 @@ const Menu = ({ isOpen, close }) => {
         >
           Blog
         </HashLink>
+        <HashLink
+          onClick={() => close()}
+          smooth={true}
+          to="#blog"
+          className="hover-effect menu--links-link"
+        >
+          Website
+        </HashLink>
+        <HashLink
+          onClick={() => close()}
+          smooth={true}
+          to="#blog"
+          className="hover-effect menu--links-link"
+        >
+          Litepaper
+        </HashLink>
+        {buttonweb3}
       </div>
       <div className="menu--bottom aic">
         <div className="menu--socials aic">

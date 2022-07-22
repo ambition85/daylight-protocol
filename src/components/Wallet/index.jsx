@@ -33,31 +33,40 @@ const WalletMenu = ({ isWalletOptionsOpen, setisWalletOptionsOpen }) => {
 
       {!!wallet && (
         <div
+          onClick={() => setisWalletOptionsOpen(false)}
           className={
-            isWalletOptionsOpen ? "walletmenu--open" : "walletmenu--close"
+            isWalletOptionsOpen
+              ? "walletmenu-outer--open"
+              : "walletmenu-outer--close"
           }
         >
           <div
-            className="walletmenu--option"
-            onClick={() => {
-              setisOpenWallet(true);
-              setisWalletOptionsOpen(false);
-            }}
+            className={
+              isWalletOptionsOpen ? "walletmenu--open" : "walletmenu--close"
+            }
           >
-            Wallet
-          </div>
-          <div
-            className="walletmenu--option"
-            onClick={() => {
-              setisOpenTransactions(true);
-              setisWalletOptionsOpen(false);
-            }}
-          >
-            Recent Transactions
-          </div>
-          <div className="walletmenu--divider" />
-          <div className="walletmenu--option" onClick={disconnectWallet}>
-            Disconnect
+            <div
+              className="walletmenu--option"
+              onClick={() => {
+                setisOpenWallet(true);
+                setisWalletOptionsOpen(false);
+              }}
+            >
+              Wallet
+            </div>
+            <div
+              className="walletmenu--option"
+              onClick={() => {
+                setisOpenTransactions(true);
+                setisWalletOptionsOpen(false);
+              }}
+            >
+              Recent Transactions
+            </div>
+            <div className="walletmenu--divider" />
+            <div className="walletmenu--option" onClick={disconnectWallet}>
+              Disconnect
+            </div>
           </div>
         </div>
       )}

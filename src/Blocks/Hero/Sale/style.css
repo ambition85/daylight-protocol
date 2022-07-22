@@ -95,7 +95,8 @@
   line-height: 14px;
 }
 .hero-sale-bar {
-  background: linear-gradient(90deg, #da4a52 0%, #df775a 100%);
+  background: #660003;
+  box-shadow: inset 0px 4px 4px rgba(0, 0, 0, 0.36);
   border-radius: 20px;
   height: 30px;
   width: 100%;
@@ -106,8 +107,30 @@
   position: absolute;
   height: 30px;
   transition: 700ms cubic-bezier(0.54, 0.21, 0.18, 1.35);
-  background: #fbc33c;
-  border-radius: 20px;
+  background: linear-gradient(90deg, #da4a52 0%, #df775a 100%);
+  border-radius: 20px 0px 0px 20px;
+}
+.hero-sale-bar-circle-indicator {
+  font-family: "Play";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 14px;
+  color: #000000;
+  top: -22px;
+  right: -20px;
+  position: absolute;
+}
+.hero-sale-bar-circle-divider {
+  position: absolute;
+
+  transition: 700ms cubic-bezier(0.54, 0.21, 0.18, 1.35);
+  height: 35px;
+  width: 1px;
+  bottom: 0px;
+  right: 0px;
+  background: #db3500;
+  transition: 700ms cubic-bezier(0.54, 0.21, 0.18, 1.35);
 }
 .hero-sale-bar-value {
   margin-top: 8.37px;

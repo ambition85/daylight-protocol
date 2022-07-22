@@ -15,9 +15,8 @@ export const WalletWeb3Provider = ({ children }) => {
   const [isWrongNetwork, setisWrongNetwork] = useState(false);
   useEffect(() => {
     const newWeb3Modal = new Web3Modal({
-      network: "avalanche",
+      // network: "avalanche",
       cacheProvider: true,
-
       theme: "dark",
       providerOptions: {
         injected: {

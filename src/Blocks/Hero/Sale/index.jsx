@@ -163,15 +163,21 @@ const Sale = ({
         {/* //////////////// 3 */}
         <div className="hero-sale-section-b" style={{ marginTop: "8px" }}>
           <div className="hero-sale-section-nametags">Sale</div>
-          <div className="hero-sale-section-nametags">Coming Soon</div>
         </div>
 
         {/* //////////////// 3 */}
-        <div className="hero-sale-bar ">
+        <div className="hero-sale-bar " style={{ marginTop: "16px" }}>
           <div
-            className="hero-sale-bar-circle hover-effect "
-            style={{ width: progressPercent }}
-          />
+            className="hero-sale-bar-circle "
+            style={
+              progressPercent === "100%"
+                ? { width: progressPercent, borderRadius: "20px" }
+                : { width: progressPercent }
+            }
+          >
+            <div className="hero-sale-bar-circle-indicator">Soft Cap</div>
+            <div className="hero-sale-bar-circle-divider" />
+          </div>
         </div>
         <div className="hero-sale-bar-value aic">
           <div className="hover-effect">{localeString(totalUsdc)}</div>/

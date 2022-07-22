@@ -380,7 +380,9 @@ const Home = () => {
       <ChainsSection />
       <SectionDivider />
       <Litepaper />
-      <DexSection />
+      <SectionDivider />
+      <DexSection offsetY={offsetY} />
+      <SectionDivider />
       <Road />
       <Footer offsetY={offsetY} />
       <ToastContainer />
