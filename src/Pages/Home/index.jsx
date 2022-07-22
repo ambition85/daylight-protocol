@@ -179,7 +179,7 @@ const Home = () => {
       setWhitelisted(whitelisted);
       setClaimable(claimable);
       setUsdcBalance(usdcBalance);
-      setUsdcAllowance(!usdcAllowance.lt(maxPerWallet));
+      setUsdcAllowance(!usdcAllowance.lt(maxTo));
     })();
   }, []);
   useEffect(() => {
@@ -202,7 +202,7 @@ const Home = () => {
             usdcReadContract.allowance(wallet, PresaleAddress),
           ]);
 
-        setUsdcAllowance(!usdcAllowance.lt(maxTo));
+        setUsdcAllowance(!usdcAllowance.lt(maxPerWallet));
         setTotalDayl(userInfo.totalReward.toString());
         setDepositAmount(userInfo.depositAmount.toString());
         setTotalWithdrawn(userInfo.withdrawnReward.toString());
