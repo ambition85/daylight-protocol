@@ -25,18 +25,21 @@ import {
 import PresaleABI from "../../constants/abis/Presale.json";
 import WalletMenu from "../../components/Wallet";
 import BlockText from "../../Blocks/BlockText";
+import { saveTxHistory } from "../../utils/utils"
+import { mainnetNetwork as chainConfig } from "../../utils/constants"
+// export const chainConfig = {
+//   chainId: "0xA869",
+//   chainName: "Avalanche Testnet",
+//   nativeCurrency: {
+//     name: "AVAX",
+//     symbol: "AVAX",
+//     decimals: 18,
+//   },
+//   rpcUrls: ["https://api.avax-test.network/ext/bc/C/rpc"],
+//   blockExplorerUrls: ["https://testnet.snowtrace.io"],
+// };
 
-const chainConfig = {
-  chainId: "0xA869",
-  chainName: "Avalanche Testnet",
-  nativeCurrency: {
-    name: "AVAX",
-    symbol: "AVAX",
-    decimals: 18,
-  },
-  rpcUrls: ["https://api.avax-test.network/ext/bc/C/rpc"],
-  blockExplorerUrls: ["https://testnet.snowtrace.io"],
-};
+export const usdcDecimals = 6;
 
 let provider,
   presaleReadContract,
@@ -45,7 +48,6 @@ let provider,
   usdcContract;
 
 const Home = () => {
-  const usdcDecimals = 6;
   const [isWalletOptionsOpen, setisWalletOptionsOpen] = useState(false);
   const [rate, setRate] = useState("1000000000000");
   const [startTime, setStartTime] = useState(0);
@@ -223,6 +225,8 @@ const Home = () => {
           },
         },
       });
+
+      console.log("Event: ", wasAdded)
     } catch (error) {
       console.log(error);
     }
@@ -237,27 +241,32 @@ const Home = () => {
       { from: wallet }
     );
     await tx.wait();
+    saveTxHistory(tx.hash)
+    console.log("Event: ", tx)
+
     let allowance = await usdcContract.allowance(wallet, PresaleAddress);
 
     setUsdcAllowance(allowance);
   };
-  const buyDayl = async (percent) => {
+  const buyDayl = async (val) => {
+    console.log("Val:", val)
     if (!usdcContract || !presaleContract || !presaleReadContract) {
       return;
     }
+
+    console.log(totalDayl, val)
+    console.log(BigNumber.from(totalDayl), BigNumber.from(val))
     if (
       totalDayl === "0" &&
       BigNumber.from(totalDayl)
-        .add(usdcBalance.mul(BigNumber.from(rate)).mul(BigNumber.from(percent)))
-        .div(BigNumber.from(100))
+        .add(BigNumber.from(val).mul(BigNumber.from(rate)))
         .lt(BigNumber.from(minPerWallet).mul(BigNumber.from(rate)))
     ) {
       return toast("Smaller than minimum amount");
     }
     if (
       BigNumber.from(totalDayl)
-        .add(usdcBalance.mul(BigNumber.from(rate)).mul(BigNumber.from(percent)))
-        .div(BigNumber.from(100))
+        .add((BigNumber.from(val)).mul(BigNumber.from(rate)))
         .gt(BigNumber.from(maxPerWallet).mul(BigNumber.from(rate)))
     ) {
       return toast("Exceeds maximum amount");
@@ -265,22 +274,20 @@ const Home = () => {
     let ttlUsdc = await presaleReadContract.totalUSDC();
     if (
       ttlUsdc
-        .add(usdcBalance.mul(BigNumber.from(percent)))
-        .div(BigNumber.from(100))
+        .add((BigNumber.from(val)))
         .gt(BigNumber.from(hardCap))
     ) {
       return toast("Exceeds Hard Cap");
     }
     try {
       let tx = await presaleContract.deposit(
-        usdcBalance
+        BigNumber.from(val)
           .mul(BigNumber.from(rate))
-          .mul(BigNumber.from(percent))
-          .div(BigNumber.from(100))
           .toString(),
         { from: wallet }
       );
       await tx.wait();
+      saveTxHistory(tx.hash)
       toast.success("Depositing Success");
     } catch (err) {
       console.log("error:", err);
@@ -313,6 +320,7 @@ const Home = () => {
     }
     let tx = await presaleContract.withdraw({ from: wallet });
     await tx.wait();
+    saveTxHistory(tx.hash)
     const userInfo = await presaleReadContract.userInfo(wallet);
     const mtv = (await presaleReadContract.minToVault()).toNumber();
     setMinToVault(mtv);
@@ -339,6 +347,7 @@ const Home = () => {
     }
     let tx = await presaleContract.claimToken({ from: wallet });
     await tx.wait();
+    saveTxHistory(tx.hash)
     setClaimable(await presaleReadContract.claimableAmount(wallet));
     toast.success("Claiming Success");
   };
@@ -368,6 +377,8 @@ const Home = () => {
         hardCap={hardCap}
         softCap={softCap}
         allowance={usdcAllowance}
+        minPerWallet={minPerWallet}
+        maxPerWallet={maxPerWallet}
         approve={approve}
         addDaylToken={addDaylToken}
         buyDayl={buyDayl}

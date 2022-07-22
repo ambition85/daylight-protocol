@@ -24,6 +24,7 @@ export const stringToSHA256 = async (string) => {
 export function numberWithCommas(x) {
   return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 }
+
 export function formatDate(dateString) {
   return new Date(dateString).toLocaleDateString(undefined, {
     // weekday: "long",
@@ -33,6 +34,26 @@ export function formatDate(dateString) {
   });
 }
 
+export function saveTxHistory(txHash) {
+  let txs = []
+  const history = localStorage.getItem("txHistory")
+  if (history) txs = JSON.parse(history)
+
+  txs.push({
+    createAt: Number(new Date()),
+    hash: txHash
+  })
+
+  localStorage.setItem("txHistory", JSON.stringify(txs))
+}
+
+export function getTxHistory() {
+  let txs = []
+  const history = localStorage.getItem("txHistory")
+  if (history) txs = JSON.parse(history)
+
+  return txs
+}
 export const formatNumbers = (value) => {
   const suffixes = ["", "K", "M", "B", "T", "P", "E"];
   const suffixNum = Math.floor(("" + value).length / 3);

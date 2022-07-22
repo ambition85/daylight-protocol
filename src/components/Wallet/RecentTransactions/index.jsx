@@ -1,41 +1,20 @@
-import React from "react";
+import React, { useState } from "react";
 import "./style.css";
 import Icon from "../../Icon";
 import ArrowLeftIcon from "../../../assets/img/icons/arrowLeft.svg";
 import frameIcon from "../../../assets/img/icons/frame.svg";
 import warningIcon from "../../../assets/img/icons/warning.svg";
 
-import { shortenAddress, formatDate } from "../../../utils/utils";
-
-//temp array for recent transactions
-const recentTransactions = [
-  {
-    date: "2020-01-01",
-    txHash: "0x1234567890123456789012345678901234567890",
-  },
-  {
-    date: "2020-11-01",
-    txHash: "0x1234567890123456789012345678901234567891",
-  },
-  {
-    date: "2020-12-01",
-    txHash: "0x1234567890123456789012345678901234567892",
-  },
-  {
-    date: "2021-12-01",
-    txHash: "0x123434343434343783287432003240234567892",
-  },
-  {
-    date: "2022-12-01",
-    txHash: "0x1234343434343437832874320045240234567892",
-  },
-  {
-    date: "2020-06-11",
-    txHash: "0x2234343434343437832874320032402345435892",
-  },
-];
+import { shortenAddress, formatDate, getTxHistory } from "../../../utils/utils";
 
 const RecentTransactions = ({ wallet, onClose, disconnectWallet }) => {
+  const [recentTx, setRecentTx] = useState([])
+
+  useState(() => {
+    const txs = getTxHistory()
+    setRecentTx(txs)
+  }, [])
+
   const disconnectHandler = () => {
     disconnectWallet();
     onClose();
@@ -59,14 +38,14 @@ const RecentTransactions = ({ wallet, onClose, disconnectWallet }) => {
       </div>
 
       {/* /////////// */}
-      {recentTransactions.length > 0 ? (
+      {recentTx.length > 0 ? (
         <div className="recenttransaction--wallet-info aic">
           <div className="recenttransaction--wallet-info-title">
             Your Recent Transactions
           </div>
           <div className="recenttransaction--tx-outer">
             <div className="recenttransaction--tx-inner aic">
-              {recentTransactions.map((item) => {
+              {recentTx.map((item) => {
                 return (
                   <div
                     key={item.txHash}
@@ -78,17 +57,17 @@ const RecentTransactions = ({ wallet, onClose, disconnectWallet }) => {
                   >
                     <div className="recenttransaction--box-tx aic">
                       <div className="recenttransaction--box-date">
-                        Date: {formatDate(item.date)}
+                        Date: {formatDate(item.createAt)}
                       </div>
                       <div className="recenttransaction--box-address">
-                        {shortenAddress(item.txHash)}
+                        {shortenAddress(item.hash)}
                       </div>
                     </div>
                     <div
                       className="recenttransaction--scan aic "
                       onClick={() => {
                         window.open(
-                          `https://avascan.info/blockchain/c/tx/${item.txHash}`
+                          `https://avascan.info/blockchain/c/tx/${item.hash}`
                         );
                       }}
                     >
