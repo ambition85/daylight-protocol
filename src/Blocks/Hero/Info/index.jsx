@@ -39,7 +39,7 @@ const Info = ({ addDaylToken }) => {
         data-aos-easing="ease-in"
         onClick={() => addDaylToken()}
       >
-        Add Pre-Sale Token to Metamask
+        Add Pre-Sale Token to Wallet
       </Button>
       <div className="hero-info--socials">
         <Icon
