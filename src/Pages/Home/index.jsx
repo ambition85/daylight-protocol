@@ -247,6 +247,8 @@ const Home = () => {
     }
   };
   const approve = async () => {
+    const signer = library.getSigner();
+    usdcContract = new Contract(USDCAddress, ERC20ABI, signer);
     if (!usdcContract || !presaleContract || !presaleReadContract) {
       return;
     }
