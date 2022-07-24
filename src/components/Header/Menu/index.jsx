@@ -57,23 +57,19 @@ const Menu = ({ isOpen, close, buttonweb3 }) => {
         >
           Sustainability
         </HashLink>
-
         <HashLink
           onClick={() => close()}
-          smooth={true}
-          to="#blog"
-          className="hover-effect menu--links-link"
-        >
-          Website
-        </HashLink>
-        <HashLink
-          onClick={() => close()}
-          smooth={true}
           to="https://daylight-protocol.gitbook.io/litepaper/"
           className="hover-effect menu--links-link"
         >
           Litepaper
         </HashLink>
+        <div
+          className="hover-effect menu--links-link"
+          style={{ opacity: "0.5" }}
+        >
+          website | coming soon
+        </div>
         {buttonweb3}
       </div>
       <div className="menu--bottom aic">
