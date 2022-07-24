@@ -160,7 +160,8 @@ const Profile = ({ wallet, onClose, disconnectWallet }) => {
 
           </div>
         </div>
-      )}
+      </div>
+      }
 
       {/* /////////// */}
       <div
@@ -250,6 +251,6 @@ const Profile = ({ wallet, onClose, disconnectWallet }) => {
       </button>
     </div>
   );
-};
+}
 
 export default Profile;
