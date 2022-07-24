@@ -72,39 +72,18 @@ const Menu = ({ isOpen, close, buttonweb3 }) => {
         </HashLink>
         <HashLink
           onClick={() => close()}
-          smooth={true}
-          to="#blog"
-          className="hover-effect menu--links-link"
-        >
-          Blog
-        </HashLink>
-        <ClickAwayListener onClickAway={handleTooltipClose}>
-          <div>
-            <LightTooltip
-              onClose={handleTooltipClose}
-              open={open}
-              placement="right"
-              title="Coming Soon">
-              <HashLink
-                smooth={true}
-                to="#blog"
-                className="hover-effect menu--links-link"
-                onClick={handleTooltipOpen}
-              >
-                Website
-              </HashLink>
-            </LightTooltip>
-          </div>
-        </ClickAwayListener>
-        <a
-          href="https://daylight-protocol.gitbook.io/litepaper/"
-          target="_blank"
-          smooth={true}
-          to="#blog"
+
+          to="https://daylight-protocol.gitbook.io/litepaper/"
           className="hover-effect menu--links-link"
         >
           Litepaper
-        </a>
+        </HashLink>
+        <div
+          className="hover-effect menu--links-link"
+          style={{ opacity: "0.5" }}
+        >
+          website | coming soon
+        </div>
 
         {buttonweb3}
       </div>

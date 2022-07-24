@@ -8,7 +8,15 @@ const Litepaper = () => {
       <Icon imgsrc={logoMascot} classnamestyle="litepaper-logo" />
       <div className="aic litepaper--info">
         <div className=" litepaper--info-title">Project Daylight</div>
-        <a href="https://daylight-protocol.gitbook.io/litepaper/" target="blank" className="litepaper--button aic">LITEPAPER</a>
+        <a
+          className="litepaper--button aic"
+          target="_blank"
+          href="https://daylight-protocol.gitbook.io/litepaper/"
+          rel="noreferrer"
+        >
+          LITEPAPER
+        </a>
+
       </div>
     </div>
   );

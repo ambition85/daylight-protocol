@@ -3,8 +3,10 @@ import Header from "../../components/Header";
 import Sale from "./Sale";
 import Info from "./Info";
 import "./style.css";
-import Icon from "../../components/Icon";
-import LogoMascot from "../../assets/img/brand/logoMascot.gif";
+// import Icon from "../../components/Icon";
+import Lottie from "lottie-react";
+import FenixFlying from "../../assets/animations/Fenix-Flying.json";
+// import LogoMascot from "../../assets/img/brand/logoMascot.gif";
 import FlamesLayer from "../../components/FlamesLayer";
 
 const HeroSection = ({
@@ -31,7 +33,7 @@ const HeroSection = ({
   withdraw,
   claim,
   minPerWallet,
-  maxPerWallet
+  maxPerWallet,
 }) => {
   return (
     <div className="hero-container-header" id="presale">
@@ -66,7 +68,10 @@ const HeroSection = ({
         <Info addDaylToken={addDaylToken} />
       </div>
       <div className="hero--footer aic">
-        <Icon imgsrc={LogoMascot} classnamestyle="hero--mascot aic " />
+        <div classnamestyle="hero--mascot aic ">
+          <Lottie animationData={FenixFlying} loop={true} />
+        </div>
+        {/* <Icon imgsrc={LogoMascot} classnamestyle="hero--mascot aic " /> */}
         <div
           className="hero--button-presale aic"
           onClick={() => {

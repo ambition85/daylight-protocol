@@ -132,20 +132,14 @@ const Header = ({ setisWalletOptionsOpen, offsetY }) => {
           >
             Sustainability
           </HashLink>
-          <HashLink
-            smooth={true}
-            to="#blog"
-            className="hover-effect header--link"
-          >
-            Blog
-          </HashLink>
         </div>
         <div className="header--buttons aic">
           <div className="aic">
-            <div className="header--litepaper-left aic"><a style={{ textDecoration: "none", color: "white" }} href="https://daylight-protocol.gitbook.io/litepaper/" target="_blank">Litepaper</a></div>
-            <LightTooltip title="Coming Soon">
-              <div className="header--litepaper-right aic">Website</div>
-            </LightTooltip>
+
+            <div className="header--litepaper-left aic">Litepaper</div>
+            <div className="header--litepaper-right aic">Website</div>
+            <div className="header--litepaper-right-tooltip">coming soon</div>
+
           </div>
           <div
             onClick={() => web3ButtonHandler()}

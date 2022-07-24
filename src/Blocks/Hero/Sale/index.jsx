@@ -40,7 +40,7 @@ const Sale = ({
   withdraw,
   claim,
   minPerWallet,
-  maxPerWallet
+  maxPerWallet,
 }) => {
   const progressBarRef = useRef(null);
   const [isModalOpen, setisModalOpen] = useState(false);
@@ -52,7 +52,7 @@ const Sale = ({
   const [isOpenWallet, setisOpenWallet] = useState(false);
 
   React.useEffect(() => {
-    let newValue = (totalUsdc / hardCap * 1e6) * 100;
+    let newValue = (totalUsdc / hardCap) * 1e6 * 100;
     let newValue2 =
       (((softCap / hardCap) * 100) / 100) * progressBarRef.current.clientWidth;
     setProgressPercentSoftCap(newValue2 + "px");
@@ -168,8 +168,8 @@ const Sale = ({
               {curTime < startTime
                 ? "PRE-SALE NOT STARTED"
                 : curTime < endTime
-                  ? "PRE-SALE"
-                  : "PRE-SALE ENDED"}
+                ? "PRE-SALE"
+                : "PRE-SALE ENDED"}
             </div>
           </div>
           <div className="hero-sale-section-price">
@@ -181,7 +181,8 @@ const Sale = ({
                 <Countdown
                   date={endTime * 1000}
                   renderer={({ hours, minutes, seconds, completed }) =>
-                    `${hours < 10 ? "0" : ""}${hours}:${minutes < 10 ? "0" : ""
+                    `${hours < 10 ? "0" : ""}${hours}:${
+                      minutes < 10 ? "0" : ""
                     }${minutes}:${seconds < 10 ? "0" : ""}${seconds}`
                   }
                 />
@@ -225,7 +226,7 @@ const Sale = ({
         </div>
         <div className="hero-sale-bar-value aic">
           <div className="hover-effect">{localeString(totalUsdc)}</div>/
-          <div className="hover-effect">{localeString(hardCap / 1e6)}</div >
+          <div className="hover-effect">{localeString(hardCap / 1e6)}</div>
         </div>
         {/* //////////////// 4 */}
         <div className="hero-sale-section" style={{ marginTop: "27.32px" }}>
@@ -316,6 +317,20 @@ const Sale = ({
             Purchase Daylight Tokens
           </button>
         )}
+        {/*
+        //// so i can test manulay the modals
+        <button
+          className="hero-sale-section-button"
+          onClick={() => setisModalOpen(() => true)}
+        >
+          Purchase $DAYL
+        </button>
+        <button
+          className="hero-sale-section-button"
+          onClick={() => setisModalMoreDaylOpen(() => true)}
+        >
+          Purchase $DAYL
+        </button> */}
         {/* //////////////// add dayl normal */}
         {!!wallet && state == 1 && !allowance && (
           <div
@@ -391,10 +406,10 @@ const Sale = ({
                         hours >= 24
                           ? `${hours / 24} days`
                           : hours > 0
-                            ? `${hours} hours`
-                            : minutes > 0
-                              ? `${minutes} minutes`
-                              : `${seconds} seconds`
+                          ? `${hours} hours`
+                          : minutes > 0
+                          ? `${minutes} minutes`
+                          : `${seconds} seconds`
                       }
                     />
                   ) : (
@@ -450,10 +465,10 @@ const Sale = ({
                         hours >= 24
                           ? `${hours / 24} days`
                           : hours > 0
-                            ? `${hours} hours`
-                            : minutes > 0
-                              ? `${minutes} minutes`
-                              : `${seconds} seconds`
+                          ? `${hours} hours`
+                          : minutes > 0
+                          ? `${minutes} minutes`
+                          : `${seconds} seconds`
                       }
                     />
                   ) : (
@@ -488,10 +503,11 @@ const Sale = ({
               >
                 <div className="hero-sale-section-connected-b">Pre-Sale</div>
                 <div
-                  className={`hero-sale-section-connected-a ${Big(totalUsdc).gte(Big(softCap).div(Big(10).pow(6)))
-                    ? "connected-success"
-                    : "connected-failed"
-                    }`}
+                  className={`hero-sale-section-connected-a ${
+                    Big(totalUsdc).gte(Big(softCap).div(Big(10).pow(6)))
+                      ? "connected-success"
+                      : "connected-failed"
+                  }`}
                 >
                   {Big(totalUsdc).gte(Big(softCap).div(Big(10).pow(6)))
                     ? "SUCCESS"

@@ -1,6 +1,6 @@
 .footer-container {
   flex-direction: column;
-  margin-top: 128px;
+  margin-top: 64px;
   gap: 35px;
   border-top: 1px solid rgba(255, 255, 255, 0.1);
   width: 100%;
@@ -64,6 +64,9 @@
 .footer--bottom-links {
   gap: 32px;
 }
+.footer--bottom-links2 {
+  display: none;
+}
 
 .footer--bottom-link {
   font-family: "Dongle";
@@ -81,8 +84,18 @@
   transform: rotate(90deg);
 }
 
-@media screen and (max-width: 735px) {
+@media screen and (max-width: 1300px) {
   .footer--bottom-links {
+    display: none;
+  }
+  .footer--bottom-links2 {
+    gap: 32px;
+    display: flex;
+  }
+}
+
+@media screen and (max-width: 735px) {
+  .footer--bottom-links2 {
     gap: 8px;
     flex-direction: column;
   }
