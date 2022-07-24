@@ -74,8 +74,8 @@ export const signMessage = async (provider, account, message) => {
   return provider.getSigner(account).signMessage(message)
 }
 
-export const setupNetwork = async (library) => {
-  const provider = library.provider
+export const setupNetwork = async () => {
+  const provider = window.ethereum
   if (provider) {
     const chainId = parseInt(process.env.REACT_APP_MAINNET_CHAINID, 10)
     try {

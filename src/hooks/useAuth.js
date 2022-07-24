@@ -25,11 +25,11 @@ const useAuth = () => {
       if (connector) {
         activate(connector, async (error) => {
           if (error instanceof UnsupportedChainIdError) {
-            console.log("Has Setup Error")
-            console.log(error)
-            // const hasSetup = await setupNetwork()
-            // activate(connector)
-            toast('Please switch network to Avalanche C-Chain mainnet')
+            const hasSetup = await setupNetwork()
+            if (hasSetup) {
+              activate(connector)
+            } else
+              toast('Please switch network to Avalanche C-Chain mainnet')
 
           } else {
             console.log("Else Error")
