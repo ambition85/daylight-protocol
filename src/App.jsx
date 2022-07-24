@@ -1,8 +1,10 @@
 import React, { Suspense } from "react";
 import { WalletWeb3Provider } from "./context/WalletWeb3Context";
+import { Web3ReactProvider } from '@web3-react/core'
 import AOS from "aos";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Loader from "./components/Loader";
+import { getLibrary } from "./context/WalletWeb3Context";
 ///////////////////////////////////////
 const Home = React.lazy(() => import("./Pages/Home"));
 //animation aos init

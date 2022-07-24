@@ -42,7 +42,7 @@ const Profile = ({ wallet, onClose, disconnectWallet }) => {
   }, [])
 
   const fetchBalance = async () => {
-    provider = new providers.Web3Provider(window.ethereum);
+    provider = new providers.JsonRpcProvider(chainConfig.rpcUrls[0])
     presaleReadContract = new Contract(
       PresaleAddress,
       PresaleABI,
@@ -154,7 +154,7 @@ const Profile = ({ wallet, onClose, disconnectWallet }) => {
             USDC Balance Low.
           </div>
           <div className=" profilemodal--box-warning-bottom">
-            You need USDC for Transactions fees.
+            You need a minimum of 30 $USDC to purchase pre-sale tokens.
           </div>
         </div>
       </div>}

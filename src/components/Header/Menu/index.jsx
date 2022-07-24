@@ -78,24 +78,6 @@ const Menu = ({ isOpen, close, buttonweb3 }) => {
         >
           Blog
         </HashLink>
-        <LightTooltip title="Coming Soon">
-          <HashLink
-            onClick={() => close()}
-            smooth={true}
-            to="#blog"
-            className="hover-effect menu--links-link"
-          >
-            Website
-          </HashLink>
-        </LightTooltip>
-        <HashLink
-          onClick={() => close()}
-          smooth={true}
-          to="#blog"
-          className="hover-effect menu--links-link"
-        >
-          Litepaper
-        </HashLink>
         <ClickAwayListener onClickAway={handleTooltipClose}>
           <div>
             <LightTooltip
@@ -114,6 +96,15 @@ const Menu = ({ isOpen, close, buttonweb3 }) => {
             </LightTooltip>
           </div>
         </ClickAwayListener>
+        <HashLink
+          onClick={() => close()}
+          smooth={true}
+          to="#blog"
+          className="hover-effect menu--links-link"
+        >
+          Litepaper
+        </HashLink>
+
         {buttonweb3}
       </div>
       <div className="menu--bottom aic">

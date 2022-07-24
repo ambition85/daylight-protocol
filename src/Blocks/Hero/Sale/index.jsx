@@ -45,6 +45,7 @@ const Sale = ({
   const [progressPercent, setProgressPercent] = useState("30px");
   const [progressPercentSoftCap, setProgressPercentSoftCap] = useState("30px");
   const { connectWallet, wallet } = useContext(WalletWeb3Context);
+
   React.useEffect(() => {
     let newValue = (totalUsdc / hardCap * 1e6) * 100;
     let newValue2 =

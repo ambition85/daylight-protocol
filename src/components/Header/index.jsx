@@ -1,5 +1,5 @@
 import React, { useContext, useState, useEffect } from "react";
-import { WalletWeb3Context } from "../../context/WalletWeb3Context";
+import { useAuth, WalletWeb3Context } from "../../context/WalletWeb3Context";
 import { HashLink } from "react-router-hash-link";
 import { styled } from '@mui/material/styles';
 import Tooltip, { TooltipProps, tooltipClasses } from '@mui/material/Tooltip';

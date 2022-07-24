@@ -1,8 +1,8 @@
 import { useEffect, useState, useContext } from "react";
 import { providers, Contract, BigNumber } from "ethers";
 import { ToastContainer, toast } from "react-toastify";
-
 import { WalletWeb3Context } from "../../context/WalletWeb3Context";
+
 import Body from "../../Blocks/Body";
 import Hero from "../../Blocks/Hero";
 import Progress from "../../Blocks/Progress";
@@ -69,7 +69,7 @@ const Home = () => {
   const [depositAmount, setDepositAmount] = useState("0");
   const [withdrawable, setWithdrawable] = useState("0");
   const [presaleState, setPresaleState] = useState(0);
-  const { wallet } = useContext(WalletWeb3Context);
+  const { wallet, signer, library, isWrongNetwork, updateNetworkWallet } = useContext(WalletWeb3Context);
   const [offsetY, setoffsetY] = useState(0);
 
   const handlescroll = () => {
@@ -84,14 +84,14 @@ const Home = () => {
   useEffect(() => {
     (async () => {
       try {
-        await window.ethereum.request({
+        await library.provider.request({
           method: "wallet_switchEthereumChain",
           params: [{ chainId: chainConfig.chainId }],
         });
       } catch (switchError) {
         if (switchError.code === 4902) {
           try {
-            await window.ethereum.request({
+            await library.provider.request({
               method: "wallet_addEthereumChain",
               params: [chainConfig],
             });
@@ -113,7 +113,6 @@ const Home = () => {
       );
 
       if (!!provider) {
-        let signer = provider.getSigner();
         presaleContract = new Contract(PresaleAddress, PresaleABI, signer);
         usdcContract = new Contract(USDCAddress, ERC20ABI, signer);
       }
@@ -173,6 +172,7 @@ const Home = () => {
           usdcReadContract.balanceOf(wallet),
           usdcReadContract.allowance(wallet, PresaleAddress),
         ]);
+      console.log("USDC allow: ", usdcAllowance)
 
       setTotalDayl(userInfo.totalReward.toString());
       setDepositAmount(userInfo.depositAmount.toString());
@@ -186,7 +186,6 @@ const Home = () => {
   useEffect(() => {
     (async () => {
       if (!!provider) {
-        let signer = provider.getSigner();
         presaleContract = new Contract(PresaleAddress, PresaleABI, signer);
         usdcContract = new Contract(USDCAddress, ERC20ABI, signer);
       }
@@ -203,6 +202,7 @@ const Home = () => {
             usdcReadContract.allowance(wallet, PresaleAddress),
           ]);
 
+        console.log("USDC allow next: ", usdcBalance, usdcAllowance)
         setUsdcAllowance(!usdcAllowance.lt(maxPerWallet));
         setTotalDayl(userInfo.totalReward.toString());
         setDepositAmount(userInfo.depositAmount.toString());
@@ -213,10 +213,11 @@ const Home = () => {
       }
     })();
   }, [wallet, provider, presaleReadContract, usdcReadContract]);
+
   const addDaylToken = async () => {
     try {
       // wasAdded is a boolean. Like any RPC method, an error may be thrown.
-      const wasAdded = await window.ethereum.request({
+      const wasAdded = await library.provider.request({
         method: "wallet_watchAsset",
         params: {
           type: "ERC20", // Initially only supports ERC20, but eventually more!
@@ -229,6 +230,19 @@ const Home = () => {
         },
       });
 
+      // const wasAdded = await window.ethereum.request({
+      //   method: "wallet_watchAsset",
+      //   params: {
+      //     type: "ERC20", // Initially only supports ERC20, but eventually more!
+      //     options: {
+      //       address: PresaleTokenAddress, // The address that the token is at.
+      //       symbol: "DAYL", // A ticker symbol or shorthand, up to 5 chars.
+      //       decimals: 18, // The number of decimals in the token
+      //       image: "", // A string url of the token logo
+      //     },
+      //   },
+      // });
+
       console.log("Event: ", wasAdded)
     } catch (error) {
       console.log(error);
@@ -238,6 +252,7 @@ const Home = () => {
     if (!usdcContract || !presaleContract || !presaleReadContract) {
       return;
     }
+    console.log("Contract: ", usdcContract)
     let tx = await usdcContract.approve(
       PresaleAddress,
       usdcBalance.mul(BigNumber.from(maxPerWallet)).toString(),
