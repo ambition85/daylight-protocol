@@ -173,8 +173,7 @@ const Sale = ({
             </div>
           </div>
           <div className="hero-sale-section-price">
-            {/* <div className="hero-sale-section-price-title">Time left</div> */}
-            <div className="hero-sale-section-price-amount">Pre-sale</div>
+            <div className="hero-sale-section-price-title">Time left</div>
             <div className="hero-sale-section-price-amount">
               {/* {curTime < startTime ? (
                 "PRE-SALE NOT STARTED"
@@ -190,7 +189,7 @@ const Sale = ({
               ) : (
                 "PRE-SALE ENDED"
               )} */}
-              Opening Soon
+              TBD
             </div>
           </div>
         </div>
