@@ -1,6 +1,9 @@
 import React, { useContext, useState, useEffect } from "react";
 import { WalletWeb3Context } from "../../context/WalletWeb3Context";
 import { HashLink } from "react-router-hash-link";
+import { styled } from '@mui/material/styles';
+import Tooltip, { TooltipProps, tooltipClasses } from '@mui/material/Tooltip';
+import Typography from '@mui/material/Typography';
 //
 import "./style.css";
 //
@@ -113,7 +116,9 @@ const Header = ({ setisWalletOptionsOpen, offsetY }) => {
         <div className="header--buttons aic">
           <div className="aic">
             <div className="header--litepaper-left aic">Litepaper</div>
-            <div className="header--litepaper-right aic">Website</div>
+            <LightTooltip title="Coming Soon">
+              <div className="header--litepaper-right aic">Website</div>
+            </LightTooltip>
           </div>
           <div
             onClick={() => web3ButtonHandler()}
@@ -186,5 +191,20 @@ const Header = ({ setisWalletOptionsOpen, offsetY }) => {
     </div>
   );
 };
+
+const LightTooltip = styled(({ className, ...props }) => (
+  <Tooltip {...props} classes={{ popper: className }} />
+))(({ theme }) => ({
+  [`& .${tooltipClasses.tooltip}`]: {
+    backgroundColor: theme.palette.common.white,
+    color: 'rgba(0, 0, 0, 0.87)',
+    boxShadow: theme.shadows[1],
+    fontSize: 18,
+    width: 150,
+    padding: 13,
+    borderRadius: 10,
+    boxShadow: "0px 4px 24px rgb(0 0 0 / 50%)"
+  },
+}));
 
 export default Header;

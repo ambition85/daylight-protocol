@@ -20,6 +20,7 @@ import ERC20ABI from "../../../constants/abis/ERC20.json";
 import PresaleABI from "../../../constants/abis/Presale.json";
 import PresaleTokenABI from "../../../constants/abis/PresaleToken.json";
 import { usdcDecimals } from "../../../Pages/Home/index"
+// import { testnetNetwork as chainConfig } from "../../../utils/constants"
 import { mainnetNetwork as chainConfig } from "../../../utils/constants"
 
 let provider,

@@ -208,7 +208,7 @@ const AddDaylModal = ({
             USDC Balance Low.
           </div>
           <div className=" profilemodal--box-warning-bottom">
-            You need USDC for Transactions fees.
+            You need a minimum of 30 $USDC to purchase pre-sale tokens.
           </div>
         </div>
       </div>}

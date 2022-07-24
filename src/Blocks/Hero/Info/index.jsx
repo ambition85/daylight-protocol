@@ -54,7 +54,7 @@ const Info = ({ addDaylToken }) => {
         />
         <Icon
           imgsrc={DiscordIcon}
-          link="https://discord.gg/dbkSDvS9Hd"
+          link="https://discord.com/invite/wSagPDSfh3"
           classnamestyle="hero-info--socials-icon aic hover-effect"
         />
         <Icon

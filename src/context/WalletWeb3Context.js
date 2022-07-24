@@ -75,6 +75,7 @@ export const WalletWeb3Provider = ({ children }) => {
   };
   //update network
   const updateNetworkWallet = async () => {
+    console.log("Update:", process.env.REACT_APP_NETWORK_ENV)
     const library = new ethers.providers.Web3Provider(provider);
     await library.provider.request({
       method: "wallet_addEthereumChain",

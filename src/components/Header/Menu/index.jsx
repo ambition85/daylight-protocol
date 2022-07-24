@@ -8,8 +8,21 @@ import TelegramIcon from "../../../assets/img/icons/telegram.svg";
 import DiscordIcon from "../../../assets/img/icons/discord.svg";
 import TwitterIcon from "../../../assets/img/icons/twitter.svg";
 import { HashLink } from "react-router-hash-link";
+import { styled } from '@mui/material/styles';
+import Tooltip, { TooltipProps, tooltipClasses } from '@mui/material/Tooltip';
+import ClickAwayListener from '@mui/material/ClickAwayListener';
 
 const Menu = ({ isOpen, close, buttonweb3 }) => {
+  const [open, setOpen] = React.useState(false);
+
+  const handleTooltipClose = () => {
+    setOpen(false);
+  };
+
+  const handleTooltipOpen = () => {
+    setOpen(true);
+  };
+
   return (
     <div
       className={
@@ -65,14 +78,16 @@ const Menu = ({ isOpen, close, buttonweb3 }) => {
         >
           Blog
         </HashLink>
-        <HashLink
-          onClick={() => close()}
-          smooth={true}
-          to="#blog"
-          className="hover-effect menu--links-link"
-        >
-          Website
-        </HashLink>
+        <LightTooltip title="Coming Soon">
+          <HashLink
+            onClick={() => close()}
+            smooth={true}
+            to="#blog"
+            className="hover-effect menu--links-link"
+          >
+            Website
+          </HashLink>
+        </LightTooltip>
         <HashLink
           onClick={() => close()}
           smooth={true}
@@ -81,6 +96,24 @@ const Menu = ({ isOpen, close, buttonweb3 }) => {
         >
           Litepaper
         </HashLink>
+        <ClickAwayListener onClickAway={handleTooltipClose}>
+          <div>
+            <LightTooltip
+              onClose={handleTooltipClose}
+              open={open}
+              placement="right"
+              title="Coming Soon">
+              <HashLink
+                smooth={true}
+                to="#blog"
+                className="hover-effect menu--links-link"
+                onClick={handleTooltipOpen}
+              >
+                Website
+              </HashLink>
+            </LightTooltip>
+          </div>
+        </ClickAwayListener>
         {buttonweb3}
       </div>
       <div className="menu--bottom aic">
@@ -97,7 +130,7 @@ const Menu = ({ isOpen, close, buttonweb3 }) => {
           />
           <Icon
             imgsrc={DiscordIcon}
-            link="https://discord.gg/dbkSDvS9Hd"
+            link="https://discord.com/invite/wSagPDSfh3"
             classnamestyle="menu--socials-social aic hover-effect"
           />
           <Icon
@@ -113,5 +146,20 @@ const Menu = ({ isOpen, close, buttonweb3 }) => {
     </div>
   );
 };
+
+const LightTooltip = styled(({ className, ...props }) => (
+  <Tooltip {...props} classes={{ popper: className }} />
+))(({ theme }) => ({
+  [`& .${tooltipClasses.tooltip}`]: {
+    backgroundColor: theme.palette.common.white,
+    color: 'rgba(0, 0, 0, 0.87)',
+    boxShadow: theme.shadows[1],
+    fontSize: 15,
+    width: 130,
+    padding: 13,
+    borderRadius: 10,
+    boxShadow: "0px 4px 24px rgb(0 0 0 / 50%)"
+  },
+}));
 
 export default Menu;

@@ -27,6 +27,7 @@ import WalletMenu from "../../components/Wallet";
 import BlockText from "../../Blocks/BlockText";
 import { saveTxHistory } from "../../utils/utils"
 import { mainnetNetwork as chainConfig } from "../../utils/constants"
+// import { testnetNetwork as chainConfig } from "../../utils/constants"
 // export const chainConfig = {
 //   chainId: "0xA869",
 //   chainName: "Avalanche Testnet",
@@ -395,7 +396,7 @@ const Home = () => {
       <Litepaper />
       <SectionDivider />
       <DexSection offsetY={offsetY} />
-      <SectionDivider />
+      {/* <SectionDivider /> */}
       <Road />
       <Footer offsetY={offsetY} />
       <ToastContainer />
