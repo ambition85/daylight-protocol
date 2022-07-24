@@ -99,7 +99,7 @@ const Home = () => {
           }
         }
       }
-      provider = new providers.Web3Provider(window.ethereum);
+      provider = new providers.JsonRpcProvider(chainConfig.rpcUrls[0])
       presaleReadContract = new Contract(
         PresaleAddress,
         PresaleABI,
