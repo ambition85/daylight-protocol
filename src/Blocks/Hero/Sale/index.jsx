@@ -296,6 +296,8 @@ const Sale = ({
             Purchase Daylight Tokens
           </button>
         )}
+        {/*
+        //// so i can test manulay the modals
         <button
           className="hero-sale-section-button"
           onClick={() => setisModalOpen(() => true)}
@@ -307,7 +309,7 @@ const Sale = ({
           onClick={() => setisModalMoreDaylOpen(() => true)}
         >
           Purchase $DAYL
-        </button>
+        </button> */}
         {/* //////////////// add dayl normal */}
         {!!wallet && state == 1 && !allowance && (
           <div

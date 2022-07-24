@@ -10,7 +10,6 @@ const Icon = (props) => {
         src={imgsrc}
         alt="icon-alt"
         draggable="false"
-        loading="lazy"
       />
     </a>
   );

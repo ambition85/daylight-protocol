@@ -34,6 +34,7 @@
   transition: 300ms cubic-bezier(0.54, 0.21, 0.18, 1.35);
 
   color: #ffffff;
+  text-decoration: none;
 }
 .litepaper--button:hover {
   background: linear-gradient(
@@ -56,5 +57,8 @@
   }
   .litepaper--info-title {
     text-align: center;
+  }
+  .litepaper--button {
+    width: calc(100vw - 32px);
   }
 }

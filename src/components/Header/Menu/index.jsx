@@ -57,14 +57,7 @@ const Menu = ({ isOpen, close, buttonweb3 }) => {
         >
           Sustainability
         </HashLink>
-        <HashLink
-          onClick={() => close()}
-          smooth={true}
-          to="#blog"
-          className="hover-effect menu--links-link"
-        >
-          Blog
-        </HashLink>
+
         <HashLink
           onClick={() => close()}
           smooth={true}
@@ -76,7 +69,7 @@ const Menu = ({ isOpen, close, buttonweb3 }) => {
         <HashLink
           onClick={() => close()}
           smooth={true}
-          to="#blog"
+          to="https://daylight-protocol.gitbook.io/litepaper/"
           className="hover-effect menu--links-link"
         >
           Litepaper

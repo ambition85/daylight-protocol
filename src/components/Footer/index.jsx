@@ -1,8 +1,6 @@
 import React from "react";
 import "./style.css";
-// import FlamesLayer from "../FlamesLayer";
 import { HashLink } from "react-router-hash-link";
-
 //
 import LogoBrand from "../../assets/img/brand/logo.svg";
 import mediumIcon from "../../assets/img/socials/medium.svg";
@@ -80,13 +78,38 @@ const Footer = () => {
             >
               Sustainability
             </HashLink>
+          </div>
+          <div className="footer--bottom-links2 aic ">
+            <HashLink
+              smooth={true}
+              to="#presale"
+              className="hover-effect footer--bottom-link"
+            >
+              Pre-Sale
+            </HashLink>
             <div className="footer--bottom-div" />
             <HashLink
               smooth={true}
-              to="#blog"
+              to="#daylight"
               className="hover-effect footer--bottom-link"
             >
-              Blog
+              Daylight Protocol
+            </HashLink>
+            <div className="footer--bottom-div" />
+            <HashLink
+              smooth={true}
+              to="#dex"
+              className="hover-effect footer--bottom-link"
+            >
+              DEX
+            </HashLink>
+            <div className="footer--bottom-div" />
+            <HashLink
+              smooth={true}
+              to="#sustainability"
+              className="hover-effect footer--bottom-link"
+            >
+              Sustainability
             </HashLink>
           </div>
           <Icon
@@ -99,9 +122,6 @@ const Footer = () => {
           </div>
         </div>
       </div>
-      {/* <div style={{ transform: "translateY(400px)" }}>
-        <FlamesLayer offsetY={offsetY - 5000} />
-      </div> */}
     </>
   );
 };
