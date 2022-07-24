@@ -159,13 +159,14 @@ const Home = () => {
         return;
       }
 
-      const [userInfo, whitelisted, claimable, usdcBalance, usdcAllowance] =
+      const [userInfo, whitelisted, claimable, usdcBalance, usdcAllowance, maxPerWallet] =
         await Promise.all([
           presaleReadContract.userInfo(wallet),
           presaleReadContract.whitelisted(wallet),
           presaleReadContract.claimableAmount(wallet),
           usdcReadContract.balanceOf(wallet),
           usdcReadContract.allowance(wallet, PresaleAddress),
+          presaleReadContract.maxPerWallet(),
         ]);
       console.log("USDC allow: ", usdcAllowance)
 
