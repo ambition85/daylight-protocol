@@ -1,7 +1,7 @@
 // Mainnet
 export const USDCAddress = '0xB97EF9Ef8734C71904D8002F8b6Bc66Dd9c48a6E'
-export const PresaleTokenAddress = '0x5B7762e7eF774c12D282ED3B0aA17F713C3e6DA0'
-export const PresaleAddress = '0xB1f21C719e7674c580948Ee048617cE72fAA4eFA'
+export const PresaleTokenAddress = '0xc2f2CF0D1a1Bd8df9c3B299457af09d46C655418'
+export const PresaleAddress = '0xf9DCA2F96cdFeF1769A53a95b20CF373Bd84700f'
 
 // Testnet
 // export const USDCAddress = '0xae1fa9a4aae402575aba142B7848A8bC54fC62d4'

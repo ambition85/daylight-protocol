@@ -159,7 +159,7 @@ const AddDaylModal = ({
             classnamestyle="hover-effect adddaylmodal--header-back aic"
           />
         </div>
-        Add $DAYL
+        Purchase $DAYL
       </div>
       {/* /////////// */}
       <div className="adddaylmodal--current aic">
@@ -409,7 +409,7 @@ const AddDaylModal = ({
             type="button"
             onClick={() => addDayl()}
           >
-            Add $DAYL
+            Purchase $DAYL
           </button>
         </div>
       }

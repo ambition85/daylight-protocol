@@ -168,14 +168,15 @@ const Sale = ({
               {curTime < startTime
                 ? "PRE-SALE NOT STARTED"
                 : curTime < endTime
-                ? "PRE-SALE"
-                : "PRE-SALE ENDED"}
+                  ? "PRE-SALE"
+                  : "PRE-SALE ENDED"}
             </div>
           </div>
           <div className="hero-sale-section-price">
-            <div className="hero-sale-section-price-title">Time left</div>
+            {/* <div className="hero-sale-section-price-title">Time left</div> */}
+            <div className="hero-sale-section-price-amount">Pre-sale</div>
             <div className="hero-sale-section-price-amount">
-              {curTime < startTime ? (
+              {/* {curTime < startTime ? (
                 "PRE-SALE NOT STARTED"
               ) : curTime < endTime ? (
                 <Countdown
@@ -188,7 +189,8 @@ const Sale = ({
                 />
               ) : (
                 "PRE-SALE ENDED"
-              )}
+              )} */}
+              Opening Soon
             </div>
           </div>
         </div>
@@ -406,10 +408,10 @@ const Sale = ({
                         hours >= 24
                           ? `${hours / 24} days`
                           : hours > 0
-                          ? `${hours} hours`
-                          : minutes > 0
-                          ? `${minutes} minutes`
-                          : `${seconds} seconds`
+                            ? `${hours} hours`
+                            : minutes > 0
+                              ? `${minutes} minutes`
+                              : `${seconds} seconds`
                       }
                     />
                   ) : (
@@ -465,10 +467,10 @@ const Sale = ({
                         hours >= 24
                           ? `${hours / 24} days`
                           : hours > 0
-                          ? `${hours} hours`
-                          : minutes > 0
-                          ? `${minutes} minutes`
-                          : `${seconds} seconds`
+                            ? `${hours} hours`
+                            : minutes > 0
+                              ? `${minutes} minutes`
+                              : `${seconds} seconds`
                       }
                     />
                   ) : (
@@ -503,11 +505,10 @@ const Sale = ({
               >
                 <div className="hero-sale-section-connected-b">Pre-Sale</div>
                 <div
-                  className={`hero-sale-section-connected-a ${
-                    Big(totalUsdc).gte(Big(softCap).div(Big(10).pow(6)))
-                      ? "connected-success"
-                      : "connected-failed"
-                  }`}
+                  className={`hero-sale-section-connected-a ${Big(totalUsdc).gte(Big(softCap).div(Big(10).pow(6)))
+                    ? "connected-success"
+                    : "connected-failed"
+                    }`}
                 >
                   {Big(totalUsdc).gte(Big(softCap).div(Big(10).pow(6)))
                     ? "SUCCESS"

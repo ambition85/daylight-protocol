@@ -136,7 +136,7 @@ const Header = ({ setisWalletOptionsOpen, offsetY }) => {
         <div className="header--buttons aic">
           <div className="aic">
 
-            <div className="header--litepaper-left aic">Litepaper</div>
+            <a className="header--litepaper-left aic" style={{ textDecoration: "none" }} href="https://daylight-protocol.gitbook.io/litepaper/" target="_blank">Litepaper</a>
             <div className="header--litepaper-right aic">Website</div>
             <div className="header--litepaper-right-tooltip">coming soon</div>
 

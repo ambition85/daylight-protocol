@@ -70,14 +70,14 @@ const Menu = ({ isOpen, close, buttonweb3 }) => {
         >
           Sustainability
         </HashLink>
-        <HashLink
+        <a
           onClick={() => close()}
-
-          to="https://daylight-protocol.gitbook.io/litepaper/"
+          target="_blank"
+          href="https://daylight-protocol.gitbook.io/litepaper/"
           className="hover-effect menu--links-link"
         >
           Litepaper
-        </HashLink>
+        </a>
         <div
           className="hover-effect menu--links-link"
           style={{ opacity: "0.5" }}

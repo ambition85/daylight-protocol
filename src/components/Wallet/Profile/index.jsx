@@ -38,7 +38,7 @@ const Profile = ({ wallet, onClose, disconnectWallet }) => {
   const [daylBal, setDAYLBal] = useState(0);
   const [avaxBal, setAVXBal] = useState(0);
   const [minPer, setMinPer] = useState(0);
-
+  console.log("Wallet: ", wallet)
   useEffect(() => {
     fetchBalance();
   }, []);
