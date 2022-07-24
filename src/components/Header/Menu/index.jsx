@@ -8,8 +8,21 @@ import TelegramIcon from "../../../assets/img/icons/telegram.svg";
 import DiscordIcon from "../../../assets/img/icons/discord.svg";
 import TwitterIcon from "../../../assets/img/icons/twitter.svg";
 import { HashLink } from "react-router-hash-link";
+import { styled } from '@mui/material/styles';
+import Tooltip, { TooltipProps, tooltipClasses } from '@mui/material/Tooltip';
+import ClickAwayListener from '@mui/material/ClickAwayListener';
 
 const Menu = ({ isOpen, close, buttonweb3 }) => {
+  const [open, setOpen] = React.useState(false);
+
+  const handleTooltipClose = () => {
+    setOpen(false);
+  };
+
+  const handleTooltipOpen = () => {
+    setOpen(true);
+  };
+
   return (
     <div
       className={
@@ -59,6 +72,7 @@ const Menu = ({ isOpen, close, buttonweb3 }) => {
         </HashLink>
         <HashLink
           onClick={() => close()}
+
           to="https://daylight-protocol.gitbook.io/litepaper/"
           className="hover-effect menu--links-link"
         >
@@ -70,6 +84,7 @@ const Menu = ({ isOpen, close, buttonweb3 }) => {
         >
           website | coming soon
         </div>
+
         {buttonweb3}
       </div>
       <div className="menu--bottom aic">
@@ -86,7 +101,7 @@ const Menu = ({ isOpen, close, buttonweb3 }) => {
           />
           <Icon
             imgsrc={DiscordIcon}
-            link="https://discord.gg/wSagPDSfh3"
+            link="https://discord.com/invite/wSagPDSfh3"
             classnamestyle="menu--socials-social aic hover-effect"
           />
           <Icon
@@ -102,5 +117,20 @@ const Menu = ({ isOpen, close, buttonweb3 }) => {
     </div>
   );
 };
+
+const LightTooltip = styled(({ className, ...props }) => (
+  <Tooltip {...props} classes={{ popper: className }} />
+))(({ theme }) => ({
+  [`& .${tooltipClasses.tooltip}`]: {
+    backgroundColor: theme.palette.common.white,
+    color: 'rgba(0, 0, 0, 0.87)',
+    boxShadow: theme.shadows[1],
+    fontSize: 15,
+    width: 130,
+    padding: 13,
+    borderRadius: 10,
+    boxShadow: "0px 4px 24px rgb(0 0 0 / 50%)"
+  },
+}));
 
 export default Menu;

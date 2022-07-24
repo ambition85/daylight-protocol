@@ -1,8 +1,8 @@
 import { useEffect, useState, useContext } from "react";
 import { providers, Contract, BigNumber } from "ethers";
 import { ToastContainer, toast } from "react-toastify";
-
 import { WalletWeb3Context } from "../../context/WalletWeb3Context";
+
 import Body from "../../Blocks/Body";
 import Hero from "../../Blocks/Hero";
 import Progress from "../../Blocks/Progress";
@@ -27,6 +27,10 @@ import WalletMenu from "../../components/Wallet";
 import BlockText from "../../Blocks/BlockText";
 import { saveTxHistory } from "../../utils/utils"
 import { mainnetNetwork as chainConfig } from "../../utils/constants"
+import useActiveWeb3React from "../../hooks/useActiveWeb3React";
+import useAuth from "../../hooks/useAuth";
+
+// import { testnetNetwork as chainConfig } from "../../utils/constants"
 // export const chainConfig = {
 //   chainId: "0xA869",
 //   chainName: "Avalanche Testnet",
@@ -49,7 +53,7 @@ let provider,
 
 const Home = () => {
   const [isWalletOptionsOpen, setisWalletOptionsOpen] = useState(false);
-  const [rate, setRate] = useState("1000000000000");
+  const [rate, setRate] = useState("40000000000000");
   const [startTime, setStartTime] = useState(0);
   const [endTime, setEndTime] = useState(0);
   const [claimTime, setClaimTime] = useState(0);
@@ -68,7 +72,11 @@ const Home = () => {
   const [depositAmount, setDepositAmount] = useState("0");
   const [withdrawable, setWithdrawable] = useState("0");
   const [presaleState, setPresaleState] = useState(0);
-  const { wallet } = useContext(WalletWeb3Context);
+  const { library, chainId, account: wallet, ...web3React } = useActiveWeb3React()
+  const { login } = useAuth()
+
+  console.log("Cahin id: ", chainId)
+
   const [offsetY, setoffsetY] = useState(0);
 
   const handlescroll = () => {
@@ -82,24 +90,11 @@ const Home = () => {
   }, []);
   useEffect(() => {
     (async () => {
-      try {
-        await window.ethereum.request({
-          method: "wallet_switchEthereumChain",
-          params: [{ chainId: chainConfig.chainId }],
-        });
-      } catch (switchError) {
-        if (switchError.code === 4902) {
-          try {
-            await window.ethereum.request({
-              method: "wallet_addEthereumChain",
-              params: [chainConfig],
-            });
-          } catch (err) {
-            console.log("error adding chain:", err);
-          }
-        }
+      if (!wallet) {
+        if (window.ethereum)
+          await login('injected')
       }
-      provider = new providers.Web3Provider(window.ethereum);
+      provider = new providers.JsonRpcProvider(chainConfig.rpcUrls[0])
       presaleReadContract = new Contract(
         PresaleAddress,
         PresaleABI,
@@ -111,8 +106,8 @@ const Home = () => {
         new providers.JsonRpcProvider(chainConfig.rpcUrls[0])
       );
 
-      if (!!provider) {
-        let signer = provider.getSigner();
+      const signer = library && library.getSigner();
+      if (!!signer) {
         presaleContract = new Contract(PresaleAddress, PresaleABI, signer);
         usdcContract = new Contract(USDCAddress, ERC20ABI, signer);
       }
@@ -164,14 +159,16 @@ const Home = () => {
         return;
       }
 
-      const [userInfo, whitelisted, claimable, usdcBalance, usdcAllowance] =
+      const [userInfo, whitelisted, claimable, usdcBalance, usdcAllowance, maxPerWallet] =
         await Promise.all([
           presaleReadContract.userInfo(wallet),
           presaleReadContract.whitelisted(wallet),
           presaleReadContract.claimableAmount(wallet),
           usdcReadContract.balanceOf(wallet),
           usdcReadContract.allowance(wallet, PresaleAddress),
+          presaleReadContract.maxPerWallet(),
         ]);
+      console.log("USDC allow: ", usdcAllowance)
 
       setTotalDayl(userInfo.totalReward.toString());
       setDepositAmount(userInfo.depositAmount.toString());
@@ -184,9 +181,11 @@ const Home = () => {
   }, []);
   useEffect(() => {
     (async () => {
-      if (!!provider) {
-        let signer = provider.getSigner();
+      const signer = library && library.getSigner();
+      console.log("Signer", signer)
+      if (!!signer) {
         presaleContract = new Contract(PresaleAddress, PresaleABI, signer);
+        console.log("presaleContract", presaleContract)
         usdcContract = new Contract(USDCAddress, ERC20ABI, signer);
       }
       if (!wallet) {
@@ -202,6 +201,7 @@ const Home = () => {
             usdcReadContract.allowance(wallet, PresaleAddress),
           ]);
 
+        console.log("USDC allow next: ", usdcBalance, usdcAllowance)
         setUsdcAllowance(!usdcAllowance.lt(maxPerWallet));
         setTotalDayl(userInfo.totalReward.toString());
         setDepositAmount(userInfo.depositAmount.toString());
@@ -212,10 +212,11 @@ const Home = () => {
       }
     })();
   }, [wallet, provider, presaleReadContract, usdcReadContract]);
+
   const addDaylToken = async () => {
     try {
       // wasAdded is a boolean. Like any RPC method, an error may be thrown.
-      const wasAdded = await window.ethereum.request({
+      const wasAdded = await library.provider.request({
         method: "wallet_watchAsset",
         params: {
           type: "ERC20", // Initially only supports ERC20, but eventually more!
@@ -228,15 +229,31 @@ const Home = () => {
         },
       });
 
+      // const wasAdded = await window.ethereum.request({
+      //   method: "wallet_watchAsset",
+      //   params: {
+      //     type: "ERC20", // Initially only supports ERC20, but eventually more!
+      //     options: {
+      //       address: PresaleTokenAddress, // The address that the token is at.
+      //       symbol: "DAYL", // A ticker symbol or shorthand, up to 5 chars.
+      //       decimals: 18, // The number of decimals in the token
+      //       image: "", // A string url of the token logo
+      //     },
+      //   },
+      // });
+
       console.log("Event: ", wasAdded)
     } catch (error) {
       console.log(error);
     }
   };
   const approve = async () => {
+    const signer = library.getSigner();
+    usdcContract = new Contract(USDCAddress, ERC20ABI, signer);
     if (!usdcContract || !presaleContract || !presaleReadContract) {
       return;
     }
+    console.log("Contract: ", usdcContract)
     let tx = await usdcContract.approve(
       PresaleAddress,
       usdcBalance.mul(BigNumber.from(maxPerWallet)).toString(),
@@ -251,6 +268,8 @@ const Home = () => {
     setUsdcAllowance(allowance);
   };
   const buyDayl = async (val) => {
+    const signer = library.getSigner();
+    presaleContract = new Contract(PresaleAddress, PresaleABI, signer);
     console.log("Val:", val)
     if (!usdcContract || !presaleContract || !presaleReadContract) {
       return;
@@ -310,6 +329,8 @@ const Home = () => {
     }
   };
   const withdraw = async () => {
+    const signer = library.getSigner();
+    presaleContract = new Contract(PresaleAddress, PresaleABI, signer);
     if (Date.now() / 1000 < claimTime) {
       return toast.error("Not claim time");
     }
@@ -341,6 +362,8 @@ const Home = () => {
     toast.success("Withdraw Success");
   };
   const claim = async () => {
+    const signer = library.getSigner();
+    presaleContract = new Contract(PresaleAddress, PresaleABI, signer);
     if (Date.now() / 1000 < claimTime) {
       return toast.error("Not claim time");
     }
@@ -395,7 +418,7 @@ const Home = () => {
       <Litepaper />
       <SectionDivider />
       <DexSection offsetY={offsetY} />
-      <SectionDivider />
+      {/* <SectionDivider /> */}
       <Road />
       <Footer offsetY={offsetY} />
       <ToastContainer />

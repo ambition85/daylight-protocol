@@ -65,3 +65,5 @@ export const formatNumbers = (value) => {
   }
   return shortValue + suffixes[suffixNum];
 };
+
+

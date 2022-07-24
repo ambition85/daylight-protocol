@@ -1,6 +1,9 @@
 import React, { useContext, useState, useEffect } from "react";
 import { WalletWeb3Context } from "../../context/WalletWeb3Context";
 import { HashLink } from "react-router-hash-link";
+import { styled } from '@mui/material/styles';
+import Tooltip, { TooltipProps, tooltipClasses } from '@mui/material/Tooltip';
+import Typography from '@mui/material/Typography';
 //
 import "./style.css";
 //
@@ -8,29 +11,53 @@ import LogoBrand from "../../assets/img/brand/logo.svg";
 import menuIcon from "../../assets/img/icons/menu.svg";
 import walletIcon from "../../assets/img/icons/wallet.svg";
 import downTabIcon from "../../assets/img/icons/downTab.svg";
+import Modal from "../Modal";
+import ConnectModal from "../ConnectModal";
+import useAuth from "../../hooks/useAuth";
 //
 import { shortenAddress } from "../../utils/utils";
 import Menu from "./Menu";
 import Icon from "../Icon";
+import useActiveWeb3React from "../../hooks/useActiveWeb3React";
+import { chainId as mainnetChainId } from "../../utils/web3React";
+import { updateNetwork } from "../../utils/web3React";
 
 const Header = ({ setisWalletOptionsOpen, offsetY }) => {
-  const { connectWallet, wallet, isWrongNetwork, updateNetworkWallet } =
-    useContext(WalletWeb3Context);
+  const { library, chainId, account: wallet, ...web3React } = useActiveWeb3React()
+  const isWrongNetwork = chainId != mainnetChainId
+  const [isOpenWallet, setisOpenWallet] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
   const web3ButtonHandler = () => {
-    if (isWrongNetwork) {
-      updateNetworkWallet();
-    } else {
-      if (!!wallet) {
+    if (!!wallet) {
+      if (isWrongNetwork) {
+        updateNetwork();
+      } else {
         setisWalletOptionsOpen((prev) => !prev);
         setIsOpen(() => false);
-      } else {
-        setIsOpen(() => false);
-        setisWalletOptionsOpen(false);
-        connectWallet();
       }
+    } else {
+      setIsOpen(() => false);
+      setisWalletOptionsOpen(false);
+      setisOpenWallet(true)
     }
   };
+
+  const web3MobileButtonHandler = () => {
+    if (!!wallet) {
+      if (isWrongNetwork) {
+        updateNetwork();
+      } else {
+        setisWalletOptionsOpen((prev) => !prev);
+        setIsOpen(() => false);
+      }
+    } else {
+      setIsOpen(() => false);
+      setisWalletOptionsOpen(false);
+      login("walletconnect")
+    }
+  };
+
+  const { login, logout } = useAuth()
 
   const [scrollValue, setScrollValue] = useState(0);
 
@@ -64,6 +91,9 @@ const Header = ({ setisWalletOptionsOpen, offsetY }) => {
           : "header-container-outer aic"
       }
     >
+      <Modal visible={isOpenWallet} onClose={() => setisOpenWallet(false)}>
+        <ConnectModal login={login} onClose={() => setisOpenWallet(false)} />
+      </Modal>
       <nav className="header-container">
         <Icon
           imgsrc={LogoBrand}
@@ -105,9 +135,11 @@ const Header = ({ setisWalletOptionsOpen, offsetY }) => {
         </div>
         <div className="header--buttons aic">
           <div className="aic">
+
             <div className="header--litepaper-left aic">Litepaper</div>
             <div className="header--litepaper-right aic">Website</div>
             <div className="header--litepaper-right-tooltip">coming soon</div>
+
           </div>
           <div
             onClick={() => web3ButtonHandler()}
@@ -148,7 +180,7 @@ const Header = ({ setisWalletOptionsOpen, offsetY }) => {
             close={() => setIsOpen(() => false)}
             buttonweb3={
               <div
-                onClick={() => web3ButtonHandler()}
+                onClick={() => web3MobileButtonHandler()}
                 className="header--button aic"
               >
                 {!!wallet ? (
@@ -180,5 +212,20 @@ const Header = ({ setisWalletOptionsOpen, offsetY }) => {
     </div>
   );
 };
+
+const LightTooltip = styled(({ className, ...props }) => (
+  <Tooltip {...props} classes={{ popper: className }} />
+))(({ theme }) => ({
+  [`& .${tooltipClasses.tooltip}`]: {
+    backgroundColor: theme.palette.common.white,
+    color: 'rgba(0, 0, 0, 0.87)',
+    boxShadow: theme.shadows[1],
+    fontSize: 18,
+    width: 150,
+    padding: 13,
+    borderRadius: 10,
+    boxShadow: "0px 4px 24px rgb(0 0 0 / 50%)"
+  },
+}));
 
 export default Header;

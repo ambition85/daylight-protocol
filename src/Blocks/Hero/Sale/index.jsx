@@ -15,6 +15,9 @@ import {
   formatNumbers,
   localeString,
 } from "../../../utils/utils";
+import useActiveWeb3React from "../../../hooks/useActiveWeb3React";
+import useAuth from "../../../hooks/useAuth";
+import ConnectModal from "../../../components/ConnectModal";
 
 const Sale = ({
   withdrawable,
@@ -44,7 +47,10 @@ const Sale = ({
   const [isModalMoreDaylOpen, setisModalMoreDaylOpen] = useState(false);
   const [progressPercent, setProgressPercent] = useState("30px");
   const [progressPercentSoftCap, setProgressPercentSoftCap] = useState("30px");
-  const { connectWallet, wallet } = useContext(WalletWeb3Context);
+  const { account: wallet } = useActiveWeb3React()
+  const { login } = useAuth()
+  const [isOpenWallet, setisOpenWallet] = useState(false);
+
   React.useEffect(() => {
     let newValue = (totalUsdc / hardCap) * 1e6 * 100;
     let newValue2 =
@@ -60,9 +66,24 @@ const Sale = ({
   }, [totalUsdc, progressBarRef.current]);
   const curTime = Math.floor(Date.now() / 1000);
 
+  const isMobile = window.innerWidth <= 768
+
+  const handlePurchase = () => {
+    console.log("Wallet: ".isMobile, window.innerWidth)
+    if (isMobile) login("walletconnect")
+    else {
+      if (window.ethereum) login("injected")
+      else setisOpenWallet(true)
+    }
+  }
+
   return (
     <div className="hero-sale-container-outer">
       {/* //MODAL ON FIXED POSITION  */}
+      <Modal visible={isOpenWallet} onClose={() => setisOpenWallet(false)}>
+        <ConnectModal login={login} onClose={() => setisOpenWallet(false)} />
+      </Modal>
+
       <Modal visible={isModalOpen} onClose={() => setisModalOpen(false)}>
         <AddDaylModal
           startTime={startTime}
@@ -291,7 +312,7 @@ const Sale = ({
         ) : (
           <button
             className="hero-sale-section-purchase"
-            onClick={connectWallet}
+            onClick={handlePurchase}
           >
             Purchase Daylight Tokens
           </button>

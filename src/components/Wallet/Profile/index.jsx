@@ -19,8 +19,11 @@ import {
 import ERC20ABI from "../../../constants/abis/ERC20.json";
 import PresaleABI from "../../../constants/abis/Presale.json";
 import PresaleTokenABI from "../../../constants/abis/PresaleToken.json";
-import { usdcDecimals } from "../../../Pages/Home/index";
-import { mainnetNetwork as chainConfig } from "../../../utils/constants";
+
+import { usdcDecimals } from "../../../Pages/Home/index"
+// import { testnetNetwork as chainConfig } from "../../../utils/constants"
+import { mainnetNetwork as chainConfig } from "../../../utils/constants"
+
 
 let provider,
   presaleReadContract,
@@ -41,7 +44,7 @@ const Profile = ({ wallet, onClose, disconnectWallet }) => {
   }, []);
 
   const fetchBalance = async () => {
-    provider = new providers.Web3Provider(window.ethereum);
+    provider = new providers.JsonRpcProvider(chainConfig.rpcUrls[0])
     presaleReadContract = new Contract(
       PresaleAddress,
       PresaleABI,
@@ -134,27 +137,27 @@ const Profile = ({ wallet, onClose, disconnectWallet }) => {
         </div>
       </div>
       {/* /////////// */}
-      {isUsdcLow && (
-        <div
-          className="profilemodal--box aic"
-          style={{
-            gap: "8px",
-            margin: "16px 0px",
-            padding: "10px 6px",
-            border: "1px solid #DA4A52",
-          }}
-        >
-          <Icon
-            imgsrc={warningIcon}
-            classnamestyle="profilemodal--box-warning-icon aic hover-effect"
-          />
-          <div className="aic profilemodal--box-warning">
-            <div className=" profilemodal--box-warning-top">
-              USDC Balance Low.
-            </div>
-            <div className=" profilemodal--box-warning-bottom">
-              You need a minimum of 30 $USDC to purchase pre-sale tokens.
-            </div>
+
+      {isUsdcLow && <div
+        className="profilemodal--box aic"
+        style={{
+          gap: "8px",
+          margin: "16px 0px",
+          padding: "10px 6px",
+          border: "1px solid #DA4A52",
+        }}
+      >
+        <Icon
+          imgsrc={warningIcon}
+          classnamestyle="profilemodal--box-warning-icon aic hover-effect"
+        />
+        <div className="aic profilemodal--box-warning">
+          <div className=" profilemodal--box-warning-top">
+            USDC Balance Low.
+          </div>
+          <div className=" profilemodal--box-warning-bottom">
+            You need a minimum of 30 $USDC to purchase pre-sale tokens.
+
           </div>
         </div>
       )}
