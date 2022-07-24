@@ -17,7 +17,12 @@ const Modal = ({ visible, onClose, children }) => {
     };
   }, [escFunction]);
 
-  if (visible)
+  if (visible) {
+    // console.log("ModlaOpen")
+    // const windowOffset = window.scrollY
+    // document.body.setAttribute('style', `position: fixed !important; top:${windowOffset}px; overflow-y: hidden !important;`)
+    // const style = document.body.getAttribute('style')
+    // console.log("Style: ", style)
     return (
       <>
         <div
@@ -32,6 +37,9 @@ const Modal = ({ visible, onClose, children }) => {
         <div className="modal--container">{children}</div>
       </>
     );
+  } else {
+    // document.body.setAttribute('style', ``)
+  }
 };
 
 export default Modal;

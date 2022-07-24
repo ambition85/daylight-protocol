@@ -4,12 +4,15 @@ import Profile from "./Profile";
 import RecentTransactions from "./RecentTransactions";
 import "./style.css";
 import { WalletWeb3Context } from "../..//context/WalletWeb3Context";
+import useActiveWeb3React from "../../hooks/useActiveWeb3React";
+import useAuth from "../../hooks/useAuth";
 
 const WalletMenu = ({ isWalletOptionsOpen, setisWalletOptionsOpen }) => {
   //state for openning profile menu
   const [isOpenWallet, setisOpenWallet] = useState(false);
   const [isOpenTransactions, setisOpenTransactions] = useState(false);
-  const { wallet, disconnectWallet } = useContext(WalletWeb3Context);
+  const { account: wallet } = useActiveWeb3React()
+  const { logout: disconnectWallet } = useAuth()
 
   return (
     <>
@@ -64,8 +67,10 @@ const WalletMenu = ({ isWalletOptionsOpen, setisWalletOptionsOpen }) => {
               Recent Transactions
             </div>
             <div className="walletmenu--divider" />
-            <div className="walletmenu--option" onClick={disconnectWallet}>
-              Disconnect
+            <div className="walletmenu--option">
+              <div className="walletmenu--option" onClick={disconnectWallet}>
+                Disconnect
+              </div>
             </div>
           </div>
         </div>

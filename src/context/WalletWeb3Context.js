@@ -103,6 +103,7 @@ export const WalletWeb3Provider = ({ children }) => {
           : process.env.REACT_APP_TESTNET_CHAINID;
       if (network.chainId !== parseInt(currentNetwork)) {
         setisWrongNetwork(true);
+        await updateNetworkWallet()
       }
       let walletAddress;
       if (accountsWeb3) {

@@ -1,0 +1,301 @@
+.connnectemodal-container {
+  position: relative;
+  box-sizing: border-box;
+  background: rgba(0, 0, 0, 0.9);
+  border: 2px solid #000000;
+  box-shadow: 0px 4px 24px rgba(0, 0, 0, 0.25);
+  border-radius: 29px;
+  padding: 32px 20px;
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-start;
+  flex-direction: column;
+  font-family: "Space Grotesk";
+  font-style: normal;
+  font-weight: 700;
+  font-size: 24px;
+  line-height: 31px;
+  /* identical to box height */
+
+  color: #ffffff;
+
+  width: 380px;
+}
+
+.connnectemodal--header {
+  transform: translateX(-20px);
+  margin-bottom: 15px;
+  margin-left: 15px;
+}
+
+.connnectemodal--header-back {
+  width: 44px;
+  height: 44px;
+}
+
+.connnectemodal--box {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+
+  width: 100%;
+  background: rgba(245, 255, 252, 0.1);
+  border-radius: 10px;
+}
+
+.connect-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  padding: 20px;
+  cursor: pointer;
+  font-size: 20px;
+  border: 1px solid rgba(195, 195, 195, 0.14)
+}
+
+.connect-item:hover {
+  background: rgba(245, 255, 252, 0.15);
+  transition: 600ms cubic-bezier(0.54, 0.21, 0.18, 1.35);
+}
+
+.item-desc {
+  font-size: 12px;
+
+}
+
+.item-img {
+  width: 45px;
+  height: 45px;
+}
+
+.connnectemodal--box-button {
+  padding: 10px;
+  gap: 5px;
+  width: 150px;
+  height: 42px;
+  background: linear-gradient(90deg, #da4a52 0%, #df775a 100%);
+  border: 1px solid #ffffff;
+  border-radius: 10px;
+  font-weight: 400;
+  font-size: 17px;
+  line-height: 22px;
+  color: #ffffff;
+  transition: 400ms cubic-bezier(0.54, 0.21, 0.18, 1.35);
+}
+
+.connnectemodal--box-button:hover {
+  background: linear-gradient(90deg,
+      rgb(218, 74, 82, 0.6) 0%,
+      rgb(223, 119, 90, 0.6) 100%);
+  border: 1px solid rgb(255, 255, 255, 0.6);
+}
+
+.connnectemodal--box-button-fake {
+  padding: 10px;
+  gap: 5px;
+  width: 150px;
+  height: 42px;
+  opacity: 0.5;
+  border: 1px solid #ffffff;
+  border-radius: 10px;
+  font-weight: 400;
+  font-size: 17px;
+  line-height: 22px;
+  color: #ffffff;
+  transition: 400ms cubic-bezier(0.54, 0.21, 0.18, 1.35);
+}
+
+.connnectemodal--box-button-fake:hover {
+  opacity: 1;
+  border: 1px solid #ffffff;
+  color: #ffffff;
+  cursor: pointer;
+}
+
+.connnectemodal--button {
+  margin-top: 32px;
+  height: 54px;
+  background: linear-gradient(90deg, #da4a52 0%, #df775a 100%);
+  border-radius: 10px;
+  width: 100%;
+  font-family: "Space Grotesk";
+  font-style: normal;
+  font-weight: 700;
+  font-size: 18px;
+  line-height: 23px;
+  color: #ffffff;
+  transition: 400ms cubic-bezier(0.54, 0.21, 0.18, 1.35);
+}
+
+.connnectemodal--button:hover {
+  background: linear-gradient(90deg,
+      rgb(218, 74, 82, 0.6) 0%,
+      rgb(223, 119, 90, 0.6) 100%);
+}
+
+.connnectemodal--wallet-info {
+  margin-top: 6px;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 8px;
+  width: 100%;
+}
+
+.connnectemodal--wallet-info-title {
+  font-family: "Play";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 21px;
+  /* identical to box height */
+
+  display: flex;
+  align-items: center;
+
+  color: #ffffff;
+}
+
+.connnectemodal--box-address {
+  font-family: "Dongle";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 27px;
+  line-height: 39px;
+}
+
+.connnectemodal--box-copy {}
+
+.connnectemodal--box-copy-icon {
+  width: 24px;
+  height: 24px;
+}
+
+.connnectemodal--box-warning {
+  flex-direction: column;
+  align-items: flex-start;
+  width: 100%;
+}
+
+.connnectemodal--box-warning-top {
+  font-family: "Play";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 17px;
+  line-height: 20px;
+  /* identical to box height */
+
+  display: flex;
+  align-items: center;
+
+  /* White */
+
+  color: #ffffff;
+}
+
+.connnectemodal--box-warning-bottom {
+  font-family: "Space Grotesk";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 15px;
+  line-height: 19px;
+
+  /* White */
+
+  color: #ffffff;
+  width: 100%;
+}
+
+.connnectemodal--balance {
+  font-family: "Dongle";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 27px;
+  line-height: 39px;
+  /* identical to box height */
+
+  display: flex;
+  align-items: center;
+  text-align: right;
+
+  color: #ffffff;
+  gap: 4px;
+}
+
+.connnectemodal--balance-amount {
+  font-family: "Dongle";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 27px;
+  line-height: 39px;
+  text-align: right;
+  color: #ffffff;
+  width: 50%;
+}
+
+.connnectemodal--scan {
+  margin-top: 16px;
+  width: 100%;
+  justify-content: flex-end;
+  font-family: "Dongle";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 27px;
+  line-height: 27px;
+
+  background: linear-gradient(90deg, #da4a52 0%, #df775a 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  text-fill-color: transparent;
+  transition: 400ms cubic-bezier(0.54, 0.21, 0.18, 1.35);
+}
+
+.connnectemodal--scan:hover {
+  opacity: 0.5;
+  cursor: pointer;
+}
+
+.message-copy {
+  font-family: "Dongle";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 27px;
+  line-height: 39px;
+  text-align: center;
+  color: #ffffff;
+  position: absolute;
+  padding: 5px;
+  border-radius: 10px;
+  background: rgba(245, 255, 252, 0.1);
+  transform: translateY(-65px);
+  border: 1px solid #da4a52;
+  visibility: hidden;
+  opacity: 0;
+  transition: 400ms cubic-bezier(0.54, 0.21, 0.18, 1.35);
+}
+
+.message-copy-active {
+  font-family: "Dongle";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 27px;
+  line-height: 39px;
+  text-align: center;
+  color: #ffffff;
+  position: absolute;
+  padding: 5px;
+  border-radius: 10px;
+  background: rgba(245, 255, 252, 0.1);
+  transform: translateY(-65px);
+  border: 1px solid #da4a52;
+  visibility: visible;
+  opacity: 1;
+  transition: 400ms cubic-bezier(0.54, 0.21, 0.18, 1.35);
+  cursor: copy;
+}
+
+.connnectemodal--box-warning-icon {
+  height: 24px;
+  width: 24px;
+}

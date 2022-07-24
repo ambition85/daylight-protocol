@@ -27,6 +27,9 @@ import WalletMenu from "../../components/Wallet";
 import BlockText from "../../Blocks/BlockText";
 import { saveTxHistory } from "../../utils/utils"
 import { mainnetNetwork as chainConfig } from "../../utils/constants"
+import useActiveWeb3React from "../../hooks/useActiveWeb3React";
+import useAuth from "../../hooks/useAuth";
+
 // import { testnetNetwork as chainConfig } from "../../utils/constants"
 // export const chainConfig = {
 //   chainId: "0xA869",
@@ -50,7 +53,7 @@ let provider,
 
 const Home = () => {
   const [isWalletOptionsOpen, setisWalletOptionsOpen] = useState(false);
-  const [rate, setRate] = useState("1000000000000");
+  const [rate, setRate] = useState("40000000000000");
   const [startTime, setStartTime] = useState(0);
   const [endTime, setEndTime] = useState(0);
   const [claimTime, setClaimTime] = useState(0);
@@ -69,7 +72,11 @@ const Home = () => {
   const [depositAmount, setDepositAmount] = useState("0");
   const [withdrawable, setWithdrawable] = useState("0");
   const [presaleState, setPresaleState] = useState(0);
-  const { wallet, signer, library, isWrongNetwork, updateNetworkWallet } = useContext(WalletWeb3Context);
+  const { library, chainId, account: wallet, ...web3React } = useActiveWeb3React()
+  const { login } = useAuth()
+
+  console.log("Cahin id: ", chainId)
+
   const [offsetY, setoffsetY] = useState(0);
 
   const handlescroll = () => {
@@ -83,22 +90,9 @@ const Home = () => {
   }, []);
   useEffect(() => {
     (async () => {
-      try {
-        await library.provider.request({
-          method: "wallet_switchEthereumChain",
-          params: [{ chainId: chainConfig.chainId }],
-        });
-      } catch (switchError) {
-        if (switchError.code === 4902) {
-          try {
-            await library.provider.request({
-              method: "wallet_addEthereumChain",
-              params: [chainConfig],
-            });
-          } catch (err) {
-            console.log("error adding chain:", err);
-          }
-        }
+      if (!wallet) {
+        if (window.ethereum)
+          await login('injected')
       }
       provider = new providers.JsonRpcProvider(chainConfig.rpcUrls[0])
       presaleReadContract = new Contract(
@@ -112,7 +106,8 @@ const Home = () => {
         new providers.JsonRpcProvider(chainConfig.rpcUrls[0])
       );
 
-      if (!!provider) {
+      const signer = library && library.getSigner();
+      if (!!signer) {
         presaleContract = new Contract(PresaleAddress, PresaleABI, signer);
         usdcContract = new Contract(USDCAddress, ERC20ABI, signer);
       }
@@ -185,8 +180,11 @@ const Home = () => {
   }, []);
   useEffect(() => {
     (async () => {
-      if (!!provider) {
+      const signer = library && library.getSigner();
+      console.log("Signer", signer)
+      if (!!signer) {
         presaleContract = new Contract(PresaleAddress, PresaleABI, signer);
+        console.log("presaleContract", presaleContract)
         usdcContract = new Contract(USDCAddress, ERC20ABI, signer);
       }
       if (!wallet) {
@@ -267,6 +265,8 @@ const Home = () => {
     setUsdcAllowance(allowance);
   };
   const buyDayl = async (val) => {
+    const signer = library.getSigner();
+    presaleContract = new Contract(PresaleAddress, PresaleABI, signer);
     console.log("Val:", val)
     if (!usdcContract || !presaleContract || !presaleReadContract) {
       return;
@@ -326,6 +326,8 @@ const Home = () => {
     }
   };
   const withdraw = async () => {
+    const signer = library.getSigner();
+    presaleContract = new Contract(PresaleAddress, PresaleABI, signer);
     if (Date.now() / 1000 < claimTime) {
       return toast.error("Not claim time");
     }
@@ -357,6 +359,8 @@ const Home = () => {
     toast.success("Withdraw Success");
   };
   const claim = async () => {
+    const signer = library.getSigner();
+    presaleContract = new Contract(PresaleAddress, PresaleABI, signer);
     if (Date.now() / 1000 < claimTime) {
       return toast.error("Not claim time");
     }

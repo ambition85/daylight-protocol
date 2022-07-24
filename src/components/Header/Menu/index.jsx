@@ -96,14 +96,15 @@ const Menu = ({ isOpen, close, buttonweb3 }) => {
             </LightTooltip>
           </div>
         </ClickAwayListener>
-        <HashLink
-          onClick={() => close()}
+        <a
+          href="https://daylight-protocol.gitbook.io/litepaper/"
+          target="_blank"
           smooth={true}
           to="#blog"
           className="hover-effect menu--links-link"
         >
           Litepaper
-        </HashLink>
+        </a>
 
         {buttonweb3}
       </div>
