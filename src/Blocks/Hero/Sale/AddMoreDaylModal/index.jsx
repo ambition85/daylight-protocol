@@ -147,28 +147,7 @@ const AddMoreDaylModal = ({
         >
           MIN
         </button>
-        <button
-          className="adddaylmodal--buttons-button aic"
-          type="button"
-          onClick={() => setisRange(() => 50)}
-          data-aos="fade-down"
-          data-aos-delay="300"
-          data-aos-offset="-100"
-          data-aos-easing="ease-in-out"
-        >
-          50%
-        </button>
-        <button
-          className="adddaylmodal--buttons-button aic"
-          type="button"
-          onClick={() => setisRange(() => 75)}
-          data-aos="fade-down"
-          data-aos-delay="400"
-          data-aos-offset="-100"
-          data-aos-easing="ease-in-out"
-        >
-          75%
-        </button>
+
         <button
           className="adddaylmodal--buttons-button aic"
           type="button"

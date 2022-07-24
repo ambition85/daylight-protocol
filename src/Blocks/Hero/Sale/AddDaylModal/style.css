@@ -306,3 +306,21 @@ input[type="range"].adddaylmodal--range:focus::-ms-fill-upper {
     rgb(223, 119, 90, 0.6) 100%
   );
 }
+@media screen and (max-width: 435px) {
+  .adddaylmodal-container {
+    width: calc(100vw - 40px);
+  }
+  .adddaylmodal--infostack-a {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .adddaylmodal--infostack-a-info {
+    font-size: 22px !important;
+    line-height: 29px !important;
+  }
+  .adddaylmodal--tokens-token-amount {
+    font-size: 27px;
+    line-height: 39px;
+    width: 100px;
+  }
+}

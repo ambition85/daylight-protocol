@@ -19,8 +19,8 @@ import {
 import ERC20ABI from "../../../constants/abis/ERC20.json";
 import PresaleABI from "../../../constants/abis/Presale.json";
 import PresaleTokenABI from "../../../constants/abis/PresaleToken.json";
-import { usdcDecimals } from "../../../Pages/Home/index"
-import { mainnetNetwork as chainConfig } from "../../../utils/constants"
+import { usdcDecimals } from "../../../Pages/Home/index";
+import { mainnetNetwork as chainConfig } from "../../../utils/constants";
 
 let provider,
   presaleReadContract,
@@ -30,15 +30,15 @@ let provider,
 
 const Profile = ({ wallet, onClose, disconnectWallet }) => {
   const [iscopyactive, setiscopyactive] = useState(false);
-  const [isUsdcLow, setISUSDCLow] = useState(false)
-  const [usdcBal, setUSDCBal] = useState(0)
-  const [daylBal, setDAYLBal] = useState(0)
-  const [avaxBal, setAVXBal] = useState(0)
-  const [minPer, setMinPer] = useState(0)
+  const [isUsdcLow, setISUSDCLow] = useState(false);
+  const [usdcBal, setUSDCBal] = useState(0);
+  const [daylBal, setDAYLBal] = useState(0);
+  const [avaxBal, setAVXBal] = useState(0);
+  const [minPer, setMinPer] = useState(0);
 
   useEffect(() => {
-    fetchBalance()
-  }, [])
+    fetchBalance();
+  }, []);
 
   const fetchBalance = async () => {
     provider = new providers.Web3Provider(window.ethereum);
@@ -58,21 +58,20 @@ const Profile = ({ wallet, onClose, disconnectWallet }) => {
       new providers.JsonRpcProvider(chainConfig.rpcUrls[0])
     );
 
-    const [daylBal, usdcBal, avaxBal, minPer] =
-      await Promise.all([
-        presaleTokenContract.balanceOf(wallet),
-        usdcReadContract.balanceOf(wallet),
-        provider.getBalance(wallet),
-        presaleReadContract.minPerWallet(),
-      ]);
-    console.log("Balance: ", daylBal, usdcBal, avaxBal)
-    setAVXBal(utils.formatEther(avaxBal))
-    setDAYLBal(utils.formatEther(daylBal))
-    setUSDCBal(utils.formatUnits(usdcBal, usdcDecimals))
+    const [daylBal, usdcBal, avaxBal, minPer] = await Promise.all([
+      presaleTokenContract.balanceOf(wallet),
+      usdcReadContract.balanceOf(wallet),
+      provider.getBalance(wallet),
+      presaleReadContract.minPerWallet(),
+    ]);
+    console.log("Balance: ", daylBal, usdcBal, avaxBal);
+    setAVXBal(utils.formatEther(avaxBal));
+    setDAYLBal(utils.formatEther(daylBal));
+    setUSDCBal(utils.formatUnits(usdcBal, usdcDecimals));
     setMinPer(minPer.toString());
 
-    if (minPer.gt(usdcBal)) setISUSDCLow(true)
-  }
+    if (minPer.gt(usdcBal)) setISUSDCLow(true);
+  };
 
   useEffect(() => {
     if (iscopyactive) {
@@ -135,33 +134,39 @@ const Profile = ({ wallet, onClose, disconnectWallet }) => {
         </div>
       </div>
       {/* /////////// */}
-      {isUsdcLow && <div
-        className="profilemodal--box aic"
-        style={{
-          gap: "8px",
-          margin: "16px 0px",
-          padding: "10px 6px",
-          border: "1px solid #DA4A52",
-        }}
-      >
-        <Icon
-          imgsrc={warningIcon}
-          classnamestyle="profilemodal--box-warning-icon aic hover-effect"
-        />
-        <div className="aic profilemodal--box-warning">
-          <div className=" profilemodal--box-warning-top">
-            USDC Balance Low.
-          </div>
-          <div className=" profilemodal--box-warning-bottom">
-            You need USDC for Transactions fees.
+      {isUsdcLow && (
+        <div
+          className="profilemodal--box aic"
+          style={{
+            gap: "8px",
+            margin: "16px 0px",
+            padding: "10px 6px",
+            border: "1px solid #DA4A52",
+          }}
+        >
+          <Icon
+            imgsrc={warningIcon}
+            classnamestyle="profilemodal--box-warning-icon aic hover-effect"
+          />
+          <div className="aic profilemodal--box-warning">
+            <div className=" profilemodal--box-warning-top">
+              USDC Balance Low.
+            </div>
+            <div className=" profilemodal--box-warning-bottom">
+              You need a minimum of 30 $USDC to purchase pre-sale tokens.
+            </div>
           </div>
         </div>
-      </div>}
+      )}
 
       {/* /////////// */}
       <div
         className="profilemodal--box aic"
-        style={{ marginTop: "10px", padding: "0px 16px", justifyContent: "space-between" }}
+        style={{
+          marginTop: "10px",
+          padding: "0px 16px",
+          justifyContent: "space-between",
+        }}
         data-aos="fade-down"
         data-aos-delay="200"
         data-aos-offset="-100"
