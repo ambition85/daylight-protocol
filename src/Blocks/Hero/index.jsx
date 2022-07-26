@@ -8,7 +8,8 @@ import Lottie from "lottie-react";
 import FenixFlying from "../../assets/animations/Fenix-Flying.json";
 // import LogoMascot from "../../assets/img/brand/logoMascot.gif";
 import FlamesLayer from "../../components/FlamesLayer";
-
+import { createPopup } from "@typeform/embed";
+import "@typeform/embed/build/css/popup.css";
 const HeroSection = ({
   offsetY,
   setisWalletOptionsOpen,
@@ -35,6 +36,7 @@ const HeroSection = ({
   minPerWallet,
   maxPerWallet,
 }) => {
+  const { toggle } = createPopup("ZweqBEDd");
   return (
     <div className="hero-container-header" id="presale">
       <Header
@@ -71,15 +73,10 @@ const HeroSection = ({
         <div classnamestyle="hero--mascot aic ">
           <Lottie animationData={FenixFlying} loop={true} />
         </div>
-        {/* <Icon imgsrc={LogoMascot} classnamestyle="hero--mascot aic " /> */}
-        <div
-          className="hero--button-presale aic"
-          onClick={() => {
-            window.open("https://ugensgmyg93.typeform.com/to/ZweqBEDd");
-          }}
-        >
+        <div className="hero--button-presale aic" onClick={() => toggle()}>
           Apply Now
         </div>
+
         <div className="hero--banner aic">
           Receive an EXCLUSIVE Whitelist for the Daylight Protocol Pre-Sale
         </div>

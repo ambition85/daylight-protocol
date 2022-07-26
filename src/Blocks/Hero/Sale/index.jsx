@@ -47,14 +47,14 @@ const Sale = ({
   const [isModalMoreDaylOpen, setisModalMoreDaylOpen] = useState(false);
   const [progressPercent, setProgressPercent] = useState("30px");
   const [progressPercentSoftCap, setProgressPercentSoftCap] = useState("30px");
-  const { account: wallet } = useActiveWeb3React()
-  const { login } = useAuth()
+  const { account: wallet } = useActiveWeb3React();
+  const { login } = useAuth();
   const [isOpenWallet, setisOpenWallet] = useState(false);
 
   React.useEffect(() => {
     let newValue = (totalUsdc / hardCap) * 1e6 * 100;
     let newValue2 =
-      (((softCap / hardCap) * 100) / 100) * progressBarRef.current.clientWidth;
+      (((600000 / 6000000) * 100) / 100) * progressBarRef.current.clientWidth;
     setProgressPercentSoftCap(newValue2 + "px");
     if (newValue < 5) {
       newValue = "30px";
@@ -66,16 +66,16 @@ const Sale = ({
   }, [totalUsdc, progressBarRef.current]);
   const curTime = Math.floor(Date.now() / 1000);
 
-  const isMobile = window.innerWidth <= 768
+  const isMobile = window.innerWidth <= 768;
 
   const handlePurchase = () => {
-    console.log("Wallet: ".isMobile, window.innerWidth)
-    if (isMobile) login("walletconnect")
+    console.log("Wallet: ".isMobile, window.innerWidth);
+    if (isMobile) login("walletconnect");
     else {
-      if (window.ethereum) login("injected")
-      else setisOpenWallet(true)
+      if (window.ethereum) login("injected");
+      else setisOpenWallet(true);
     }
-  }
+  };
 
   return (
     <div className="hero-sale-container-outer">
@@ -168,8 +168,8 @@ const Sale = ({
               {curTime < startTime
                 ? "PRE-SALE NOT STARTED"
                 : curTime < endTime
-                  ? "PRE-SALE"
-                  : "PRE-SALE ENDED"}
+                ? "PRE-SALE"
+                : "PRE-SALE ENDED"}
             </div>
           </div>
           <div className="hero-sale-section-price">
@@ -217,7 +217,7 @@ const Sale = ({
               className="hero-sale-bar-circle-indicator"
               style={{ left: progressPercentSoftCap }}
             >
-              Soft Cap [$2.5M]
+              Soft Cap [$600K]
             </div>
             <div
               className="hero-sale-bar-circle-divider"
@@ -407,10 +407,10 @@ const Sale = ({
                         hours >= 24
                           ? `${hours / 24} days`
                           : hours > 0
-                            ? `${hours} hours`
-                            : minutes > 0
-                              ? `${minutes} minutes`
-                              : `${seconds} seconds`
+                          ? `${hours} hours`
+                          : minutes > 0
+                          ? `${minutes} minutes`
+                          : `${seconds} seconds`
                       }
                     />
                   ) : (
@@ -466,10 +466,10 @@ const Sale = ({
                         hours >= 24
                           ? `${hours / 24} days`
                           : hours > 0
-                            ? `${hours} hours`
-                            : minutes > 0
-                              ? `${minutes} minutes`
-                              : `${seconds} seconds`
+                          ? `${hours} hours`
+                          : minutes > 0
+                          ? `${minutes} minutes`
+                          : `${seconds} seconds`
                       }
                     />
                   ) : (
@@ -504,10 +504,11 @@ const Sale = ({
               >
                 <div className="hero-sale-section-connected-b">Pre-Sale</div>
                 <div
-                  className={`hero-sale-section-connected-a ${Big(totalUsdc).gte(Big(softCap).div(Big(10).pow(6)))
-                    ? "connected-success"
-                    : "connected-failed"
-                    }`}
+                  className={`hero-sale-section-connected-a ${
+                    Big(totalUsdc).gte(Big(softCap).div(Big(10).pow(6)))
+                      ? "connected-success"
+                      : "connected-failed"
+                  }`}
                 >
                   {Big(totalUsdc).gte(Big(softCap).div(Big(10).pow(6)))
                     ? "SUCCESS"
