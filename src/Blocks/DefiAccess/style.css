@@ -75,7 +75,7 @@
   width: 506.15px;
   height: 459.28px;
 
-  transform: rotate(55.83deg);
+  /* transform: rotate(55.83deg); */
 }
 .defiaccess-brand-img {
   width: 100%;
@@ -110,6 +110,6 @@
     width: 100%;
     height: 100%;
 
-    transform: rotate(55.83deg);
+    /* transform: rotate(55.83deg); */
   }
 }

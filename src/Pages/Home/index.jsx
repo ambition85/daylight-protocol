@@ -25,8 +25,8 @@ import {
 import PresaleABI from "../../constants/abis/Presale.json";
 import WalletMenu from "../../components/Wallet";
 import BlockText from "../../Blocks/BlockText";
-import { saveTxHistory } from "../../utils/utils"
-import { mainnetNetwork as chainConfig } from "../../utils/constants"
+import { saveTxHistory } from "../../utils/utils";
+import { mainnetNetwork as chainConfig } from "../../utils/constants";
 import useActiveWeb3React from "../../hooks/useActiveWeb3React";
 import useAuth from "../../hooks/useAuth";
 
@@ -72,10 +72,15 @@ const Home = () => {
   const [depositAmount, setDepositAmount] = useState("0");
   const [withdrawable, setWithdrawable] = useState("0");
   const [presaleState, setPresaleState] = useState(0);
-  const { library, chainId, account: wallet, ...web3React } = useActiveWeb3React()
-  const { login } = useAuth()
+  const {
+    library,
+    chainId,
+    account: wallet,
+    ...web3React
+  } = useActiveWeb3React();
+  const { login } = useAuth();
 
-  console.log("Cahin id: ", chainId)
+  console.log("Cahin id: ", chainId);
 
   const [offsetY, setoffsetY] = useState(0);
 
@@ -91,10 +96,9 @@ const Home = () => {
   useEffect(() => {
     (async () => {
       if (!wallet) {
-        if (window.ethereum)
-          await login('injected')
+        if (window.ethereum) await login("injected");
       }
-      provider = new providers.JsonRpcProvider(chainConfig.rpcUrls[0])
+      provider = new providers.JsonRpcProvider(chainConfig.rpcUrls[0]);
       presaleReadContract = new Contract(
         PresaleAddress,
         PresaleABI,
@@ -159,16 +163,22 @@ const Home = () => {
         return;
       }
 
-      const [userInfo, whitelisted, claimable, usdcBalance, usdcAllowance, maxPerWallet] =
-        await Promise.all([
-          presaleReadContract.userInfo(wallet),
-          presaleReadContract.whitelisted(wallet),
-          presaleReadContract.claimableAmount(wallet),
-          usdcReadContract.balanceOf(wallet),
-          usdcReadContract.allowance(wallet, PresaleAddress),
-          presaleReadContract.maxPerWallet(),
-        ]);
-      console.log("USDC allow: ", usdcAllowance)
+      const [
+        userInfo,
+        whitelisted,
+        claimable,
+        usdcBalance,
+        usdcAllowance,
+        maxPerWallet,
+      ] = await Promise.all([
+        presaleReadContract.userInfo(wallet),
+        presaleReadContract.whitelisted(wallet),
+        presaleReadContract.claimableAmount(wallet),
+        usdcReadContract.balanceOf(wallet),
+        usdcReadContract.allowance(wallet, PresaleAddress),
+        presaleReadContract.maxPerWallet(),
+      ]);
+      console.log("USDC allow: ", usdcAllowance);
 
       setTotalDayl(userInfo.totalReward.toString());
       setDepositAmount(userInfo.depositAmount.toString());
@@ -182,10 +192,10 @@ const Home = () => {
   useEffect(() => {
     (async () => {
       const signer = library && library.getSigner();
-      console.log("Signer", signer)
+      console.log("Signer", signer);
       if (!!signer) {
         presaleContract = new Contract(PresaleAddress, PresaleABI, signer);
-        console.log("presaleContract", presaleContract)
+        console.log("presaleContract", presaleContract);
         usdcContract = new Contract(USDCAddress, ERC20ABI, signer);
       }
       if (!wallet) {
@@ -201,7 +211,7 @@ const Home = () => {
             usdcReadContract.allowance(wallet, PresaleAddress),
           ]);
 
-        console.log("USDC allow next: ", usdcBalance, usdcAllowance)
+        console.log("USDC allow next: ", usdcBalance, usdcAllowance);
         setUsdcAllowance(!usdcAllowance.lt(maxPerWallet));
         setTotalDayl(userInfo.totalReward.toString());
         setDepositAmount(userInfo.depositAmount.toString());
@@ -242,7 +252,7 @@ const Home = () => {
       //   },
       // });
 
-      console.log("Event: ", wasAdded)
+      console.log("Event: ", wasAdded);
     } catch (error) {
       console.log(error);
     }
@@ -253,15 +263,15 @@ const Home = () => {
     if (!usdcContract || !presaleContract || !presaleReadContract) {
       return;
     }
-    console.log("Contract: ", usdcContract)
+    console.log("Contract: ", usdcContract);
     let tx = await usdcContract.approve(
       PresaleAddress,
       usdcBalance.mul(BigNumber.from(maxPerWallet)).toString(),
       { from: wallet }
     );
     await tx.wait();
-    saveTxHistory(tx.hash)
-    console.log("Event: ", tx)
+    saveTxHistory(tx.hash);
+    console.log("Event: ", tx);
 
     let allowance = await usdcContract.allowance(wallet, PresaleAddress);
 
@@ -270,13 +280,13 @@ const Home = () => {
   const buyDayl = async (val) => {
     const signer = library.getSigner();
     presaleContract = new Contract(PresaleAddress, PresaleABI, signer);
-    console.log("Val:", val)
+    console.log("Val:", val);
     if (!usdcContract || !presaleContract || !presaleReadContract) {
       return;
     }
 
-    console.log(totalDayl, val)
-    console.log(BigNumber.from(totalDayl), BigNumber.from(val))
+    console.log(totalDayl, val);
+    console.log(BigNumber.from(totalDayl), BigNumber.from(val));
     if (
       totalDayl === "0" &&
       BigNumber.from(totalDayl)
@@ -287,28 +297,22 @@ const Home = () => {
     }
     if (
       BigNumber.from(totalDayl)
-        .add((BigNumber.from(val)).mul(BigNumber.from(rate)))
+        .add(BigNumber.from(val).mul(BigNumber.from(rate)))
         .gt(BigNumber.from(maxPerWallet).mul(BigNumber.from(rate)))
     ) {
       return toast("Exceeds maximum amount");
     }
     let ttlUsdc = await presaleReadContract.totalUSDC();
-    if (
-      ttlUsdc
-        .add((BigNumber.from(val)))
-        .gt(BigNumber.from(hardCap))
-    ) {
+    if (ttlUsdc.add(BigNumber.from(val)).gt(BigNumber.from(hardCap))) {
       return toast("Exceeds Hard Cap");
     }
     try {
       let tx = await presaleContract.deposit(
-        BigNumber.from(val)
-          .mul(BigNumber.from(rate))
-          .toString(),
+        BigNumber.from(val).mul(BigNumber.from(rate)).toString(),
         { from: wallet }
       );
       await tx.wait();
-      saveTxHistory(tx.hash)
+      saveTxHistory(tx.hash);
       toast.success("Depositing Success");
     } catch (err) {
       console.log("error:", err);
@@ -343,7 +347,7 @@ const Home = () => {
     }
     let tx = await presaleContract.withdraw({ from: wallet });
     await tx.wait();
-    saveTxHistory(tx.hash)
+    saveTxHistory(tx.hash);
     const userInfo = await presaleReadContract.userInfo(wallet);
     const mtv = (await presaleReadContract.minToVault()).toNumber();
     setMinToVault(mtv);
@@ -372,7 +376,7 @@ const Home = () => {
     }
     let tx = await presaleContract.claimToken({ from: wallet });
     await tx.wait();
-    saveTxHistory(tx.hash)
+    saveTxHistory(tx.hash);
     setClaimable(await presaleReadContract.claimableAmount(wallet));
     toast.success("Claiming Success");
   };

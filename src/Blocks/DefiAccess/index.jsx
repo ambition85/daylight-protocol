@@ -1,10 +1,12 @@
 import React from "react";
 import "./style.css";
-import Logo from "../../assets/img/brand/logoBig.svg";
+// import Logo from "../../assets/img/brand/logoBig.svg";
 import defiBg from "../../assets/img/brand/defiBg.svg";
 import iconSmall from "../../assets/img/brand/iconSmall.svg";
 import Icon from "../../components/Icon";
 import FlamesLayer from "../../components/FlamesLayer";
+import Lottie from "lottie-react";
+import FenixFlying from "../..//assets/animations/Flying-Fenix.json";
 
 const DefiAccess = ({ offsetY }) => {
   return (
@@ -37,11 +39,7 @@ const DefiAccess = ({ offsetY }) => {
             </div>
           </div>
           <div className="defiaccess-brand">
-            <img
-              src={Logo}
-              alt="daylight brand"
-              className="defiaccess-brand-img"
-            />
+            <Lottie animationData={FenixFlying} loop={true} />
           </div>
         </div>
       </div>
