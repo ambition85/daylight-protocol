@@ -3,6 +3,7 @@
   width: 100vw;
   position: relative;
   z-index: 0;
+  pointer-events: none;
 }
 .flameslayer-container-left,
 .flameslayer-container-right {
