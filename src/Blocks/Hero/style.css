@@ -58,19 +58,20 @@
   font-family: "Play";
   font-style: normal;
   font-weight: 700;
-  font-size: 24px;
-  line-height: 28px;
+  font-size: 20px;
+  line-height: 24px;
   /* identical to box height */
 
   display: flex;
   align-items: center;
   text-align: center;
+  color: white;
 
-  background: linear-gradient(180deg, #f54f00 47.4%, #ffffff 100%);
-  -webkit-background-clip: text;
+  /* background: linear-gradient(180deg, #f54f00 47.4%, #ffffff 100%); */
+  /* -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
-  text-fill-color: transparent;
+  text-fill-color: transparent; */
 
   /* border: 0.5px solid #ff0000; */
   text-shadow: 1px 1px 18px rgba(253, 142, 142, 0.25);
