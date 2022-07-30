@@ -1,7 +1,9 @@
 import React from "react";
 import "./style.css";
-import flamesLeft from "../../assets/img/brand/flamesLeft.png";
-import flamesRight from "../../assets/img/brand/flamesRight.png";
+import Lottie from "lottie-react";
+import flames from "../..//assets/animations/flames.json";
+// import flamesLeft from "../../assets/img/brand/flamesLeft.png";
+// import flamesRight from "../../assets/img/brand/flamesRight.png";
 
 const FlamesLayer = ({ offsetY, noLeft, noRight }) => {
   return (
@@ -14,12 +16,13 @@ const FlamesLayer = ({ offsetY, noLeft, noRight }) => {
             transition: "transform 0.6s cubic-bezier(0, 0, 0, 1) 0s",
           }}
         >
-          <img
+          <Lottie animationData={flames} loop={true} />
+          {/* <img
             className="icon--img"
             src={flamesLeft}
             alt="icon-alt"
             draggable="false"
-          />
+          /> */}
         </div>
       )}
       {!noRight && (
@@ -30,12 +33,13 @@ const FlamesLayer = ({ offsetY, noLeft, noRight }) => {
             transition: "transform 0.6s cubic-bezier(0, 0, 0, 1) 0s",
           }}
         >
-          <img
+          <Lottie animationData={flames} loop={true} />
+          {/* <img
             className="icon--img"
             src={flamesRight}
             alt="icon-alt"
             draggable="false"
-          />
+          /> */}
         </div>
       )}
     </div>

@@ -1,7 +1,7 @@
-import { useEffect, useState, useContext } from "react";
+import { useEffect, useState } from "react";
 import { providers, Contract, BigNumber } from "ethers";
 import { ToastContainer, toast } from "react-toastify";
-import { WalletWeb3Context } from "../../context/WalletWeb3Context";
+// import { WalletWeb3Context } from "../../context/WalletWeb3Context";
 
 import Body from "../../Blocks/Body";
 import Hero from "../../Blocks/Hero";

@@ -1,11 +1,17 @@
 import React from "react";
 import "./style.css";
-import Icon from "../../components/Icon";
-import logoMascot from "../..//assets/img/brand/litepaper.svg";
+import Lottie from "lottie-react";
+import flames from "../..//assets/animations/Flying-Fenix-AVAX.json";
+// import Icon from "../../components/Icon";
+// import logoMascot from "../..//assets/img/brand/litepaper.svg";
 const Litepaper = () => {
   return (
     <div className="aic litepaper-container">
-      <Icon imgsrc={logoMascot} classnamestyle="litepaper-logo" />
+      <div className="litepaper-logo">
+        <Lottie animationData={flames} loop={true} />
+      </div>
+
+      {/* <Icon imgsrc={logoMascot} classnamestyle="litepaper-logo" /> */}
       <div className="aic litepaper--info">
         <div className=" litepaper--info-title">Project Daylight</div>
         <a
@@ -16,7 +22,6 @@ const Litepaper = () => {
         >
           LITEPAPER
         </a>
-
       </div>
     </div>
   );
