@@ -5,13 +5,19 @@ import "./style.css";
 // import Icon from "../../components/Icon";
 // import FlamesLayer from "../../components/FlamesLayer";
 import Lottie from "lottie-react";
-import flames from "../..//assets/animations/Daylight-DEX-Desktop.json";
+import DexImg from "../..//assets/animations/Daylight-DEX-Desktop.json";
+import DexMobile from "../..//assets/animations/Daylight-DEX-Mobile.json";
 
 const DexSection = () => {
   return (
     <>
       <div className="dexsection2-container aic" id="dex">
-        <Lottie animationData={flames} loop={true} />
+        <div className="dexsection2--img">
+          <Lottie animationData={DexImg} loop={true} />
+        </div>
+        <div className="dexsection2--img-mobile">
+          <Lottie animationData={DexMobile} loop={true} />
+        </div>
 
         {/* <Icon imgsrc={DexImg} classnamestyle="dexsection2--img" /> */}
         {/* <Icon imgsrc={dexMobile} classnamestyle="dexsection2--img-mobile" /> */}
