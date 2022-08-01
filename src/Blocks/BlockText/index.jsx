@@ -1,6 +1,6 @@
 import React from "react";
 import "./style.css";
-import FlamesLayer from "../../components/FlamesLayer";
+// import FlamesLayer from "../../components/FlamesLayer";
 
 const BlockText = ({ offsetY }) => {
   return (
@@ -22,9 +22,9 @@ const BlockText = ({ offsetY }) => {
         depreciating value and combat sustainability issues faced by other
         protocols in the space.
       </div>
-      <div style={{ transform: "translateY(400px)" }}>
+      {/* <div style={{ transform: "translateY(400px)" }}>
         <FlamesLayer offsetY={offsetY} noLeft />
-      </div>
+      </div> */}
     </>
   );
 };

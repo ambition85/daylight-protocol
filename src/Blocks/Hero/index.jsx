@@ -70,15 +70,19 @@ const HeroSection = ({
         <Info addDaylToken={addDaylToken} />
       </div>
       <div className="hero--footer aic">
-        <div classnamestyle="hero--mascot aic ">
+        <div classnamestyle="hero--mascot ">
           <Lottie animationData={FenixFlying} loop={true} />
         </div>
-        <div className="hero--button-presale aic" onClick={() => toggle()}>
-          Apply Now
+        <div className="hero--footer-middle aic">
+          <div className="hero--banner aic">
+            Receive an EXCLUSIVE Whitelist for the Daylight Protocol Pre-Sale
+          </div>
+          <div className="hero--button-presale aic" onClick={() => toggle()}>
+            Apply Now
+          </div>
         </div>
-
-        <div className="hero--banner aic">
-          Receive an EXCLUSIVE Whitelist for the Daylight Protocol Pre-Sale
+        <div classnamestyle="hero--mascot  ">
+          <Lottie animationData={FenixFlying} loop={true} />
         </div>
       </div>
       <FlamesLayer offsetY={offsetY} />

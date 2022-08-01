@@ -17,19 +17,20 @@
   padding: 0px 32px;
 }
 .hero--footer {
-  flex-direction: column;
-  justify-content: flex-start;
-  position: relative;
+  /* flex-direction: column; */
+  /* position: relative; */
 }
-.hero--mascot {
-  width: 280px;
-  height: 280px;
-  margin-top: 32px;
+.hero--mascot div svg {
+  width: 200px !important;
+  height: 200px !important;
+}
+.hero--footer-middle {
+  flex-direction: column;
+  gap: 16px;
+
+  max-width: 359.09px;
 }
 .hero--button-presale {
-  position: absolute;
-  top: 200px;
-  /* margin-top: 32px; */
   padding: 16px 32px;
   height: 53px;
   background: linear-gradient(346.4deg, #fbb040 6.59%, #f9ed32 89.94%);
@@ -42,6 +43,7 @@
   line-height: 21px;
   color: #2d2d2d;
   transition: 300ms cubic-bezier(0.54, 0.21, 0.18, 1.35);
+  width: 100%;
 }
 .hero--button-presale:hover {
   background: linear-gradient(
@@ -54,31 +56,21 @@
   cursor: pointer;
 }
 .hero--banner {
-  transform: translateY(-20px);
   font-family: "Play";
   font-style: normal;
-  font-weight: 700;
-  font-size: 20px;
-  line-height: 24px;
-  /* identical to box height */
-
-  display: flex;
-  align-items: center;
+  font-weight: 400;
+  font-size: 24px;
+  line-height: 28px;
   text-align: center;
-  color: white;
-
-  /* background: linear-gradient(180deg, #f54f00 47.4%, #ffffff 100%); */
-  /* -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-  text-fill-color: transparent; */
-
-  /* border: 0.5px solid #ff0000; */
+  color: #ffffff;
   text-shadow: 1px 1px 18px rgba(253, 142, 142, 0.25);
 }
 @media screen and (max-width: 1280px) {
   .hero-container {
     flex-wrap: wrap;
     margin-top: 40px;
+  }
+  .hero--footer {
+    flex-direction: column;
   }
 }
