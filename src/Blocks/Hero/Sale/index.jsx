@@ -54,7 +54,7 @@ const Sale = ({
   React.useEffect(() => {
     let newValue = (totalUsdc / hardCap) * 1e6 * 100;
     let newValue2 =
-      (((600000 / 6000000) * 100) / 100) * progressBarRef.current.clientWidth;
+      (((softCap / hardCap) * 100) / 100) * progressBarRef.current.clientWidth;
     setProgressPercentSoftCap(newValue2 + "px");
     if (newValue < 5) {
       newValue = "30px";
@@ -217,7 +217,7 @@ const Sale = ({
               className="hero-sale-bar-circle-indicator"
               style={{ left: progressPercentSoftCap }}
             >
-              Soft Cap [$600K]
+              Soft Cap [$300K]
             </div>
             <div
               className="hero-sale-bar-circle-divider"
