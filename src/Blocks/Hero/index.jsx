@@ -70,7 +70,7 @@ const HeroSection = ({
         <Info addDaylToken={addDaylToken} />
       </div>
       <div className="hero--footer aic">
-        <div classnamestyle="hero--mascot ">
+        <div className="hero--mascot">
           <Lottie animationData={FenixFlying} loop={true} />
         </div>
         <div className="hero--footer-middle aic">
@@ -81,7 +81,7 @@ const HeroSection = ({
             Apply Now
           </div>
         </div>
-        <div classnamestyle="hero--mascot  ">
+        <div className="hero--mascot  ">
           <Lottie animationData={FenixFlying} loop={true} />
         </div>
       </div>

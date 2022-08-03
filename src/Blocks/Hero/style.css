@@ -17,12 +17,16 @@
   padding: 0px 32px;
 }
 .hero--footer {
+  margin-top: 32px;
   /* flex-direction: column; */
   /* position: relative; */
 }
-.hero--mascot div svg {
-  width: 200px !important;
-  height: 200px !important;
+.hero--mascot {
+  width: 200px;
+  height: 200px;
+}
+.hero--mascot div {
+  width: 100%;
 }
 .hero--footer-middle {
   flex-direction: column;

@@ -23,4 +23,8 @@
     width: 100vw;
     height: 100%;
   }
+  .dexsection2--img-mobile div {
+    width: 100%;
+    height: 100%;
+  }
 }
