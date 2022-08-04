@@ -45,8 +45,8 @@ const Sale = ({
   const progressBarRef = useRef(null);
   const [isModalOpen, setisModalOpen] = useState(false);
   const [isModalMoreDaylOpen, setisModalMoreDaylOpen] = useState(false);
-  const [progressPercent, setProgressPercent] = useState("30px");
-  const [progressPercentSoftCap, setProgressPercentSoftCap] = useState("30px");
+  const [progressPercent, setProgressPercent] = useState("10px");
+  const [progressPercentSoftCap, setProgressPercentSoftCap] = useState("10px");
   const { account: wallet } = useActiveWeb3React();
   const { login } = useAuth();
   const [isOpenWallet, setisOpenWallet] = useState(false);
@@ -57,7 +57,8 @@ const Sale = ({
       (((softCap / hardCap) * 100) / 100) * progressBarRef.current.clientWidth;
     setProgressPercentSoftCap(newValue2 + "px");
     if (newValue < 5) {
-      newValue = "30px";
+      newValue = "10px";
+      // newValue = "1%";
     } else {
       newValue = newValue + "%";
     }
@@ -239,7 +240,7 @@ const Sale = ({
               Token Distribution
             </div>
             <div className="hero-sale-section-price-amount">
-              ${numberWithCommas((hardCap / 1e6) * 40)} $DAYL
+              {numberWithCommas((hardCap / 1e6) * 40)} $DAYL
             </div>
           </div>
           <div className="hero-sale-section-price">

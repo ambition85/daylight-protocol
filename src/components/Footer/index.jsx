@@ -117,8 +117,7 @@ const Footer = () => {
             classnamestyle="footer--bottom-brand aic hover-effect"
           />
           <div className="footer--bottom-text">
-            Daylight Protocol Copyright {new Date().getFullYear()}. All rights
-            reserved.
+            © {new Date().getFullYear()} Daylight Capital, All Rights Reserved.
           </div>
         </div>
       </div>
