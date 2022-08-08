@@ -3,7 +3,7 @@ import React, { useContext, useState, useRef } from "react";
 import Countdown from "react-countdown";
 import Big from "big.js";
 
-import { WalletWeb3Context } from "../../../context/WalletWeb3Context";
+// import { WalletWeb3Context } from "../../../context/WalletWeb3Context";
 import "./style.css";
 import logoToken from "../../../assets/img/coins/dayl.svg";
 import Modal from "../../../components/Modal";
@@ -12,7 +12,7 @@ import AddDaylModal from "./AddDaylModal";
 import AddMoreDaylModal from "./AddMoreDaylModal";
 import {
   numberWithCommas,
-  formatNumbers,
+  formatNumbers2,
   localeString,
 } from "../../../utils/utils";
 import useActiveWeb3React from "../../../hooks/useActiveWeb3React";
@@ -70,7 +70,6 @@ const Sale = ({
   const isMobile = window.innerWidth <= 768;
 
   const handlePurchase = () => {
-    console.log("Wallet: ".isMobile, window.innerWidth);
     if (isMobile) login("walletconnect");
     else {
       if (window.ethereum) login("injected");
@@ -218,7 +217,7 @@ const Sale = ({
               className="hero-sale-bar-circle-indicator"
               style={{ left: progressPercentSoftCap }}
             >
-              Soft Cap [$300K]
+              Soft Cap [${formatNumbers2(softCap / 1e6)}]
             </div>
             <div
               className="hero-sale-bar-circle-divider"

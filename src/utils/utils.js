@@ -35,24 +35,24 @@ export function formatDate(dateString) {
 }
 
 export function saveTxHistory(txHash) {
-  let txs = []
-  const history = localStorage.getItem("txHistory")
-  if (history) txs = JSON.parse(history)
+  let txs = [];
+  const history = localStorage.getItem("txHistory");
+  if (history) txs = JSON.parse(history);
 
   txs.push({
     createAt: Number(new Date()),
-    hash: txHash
-  })
+    hash: txHash,
+  });
 
-  localStorage.setItem("txHistory", JSON.stringify(txs))
+  localStorage.setItem("txHistory", JSON.stringify(txs));
 }
 
 export function getTxHistory() {
-  let txs = []
-  const history = localStorage.getItem("txHistory")
-  if (history) txs = JSON.parse(history)
+  let txs = [];
+  const history = localStorage.getItem("txHistory");
+  if (history) txs = JSON.parse(history);
 
-  return txs
+  return txs;
 }
 export const formatNumbers = (value) => {
   const suffixes = ["", "K", "M", "B", "T", "P", "E"];
@@ -63,7 +63,12 @@ export const formatNumbers = (value) => {
   if (shortValue % 1 != 0) {
     shortValue = shortValue.toFixed(1);
   }
+
   return shortValue + suffixes[suffixNum];
 };
-
-
+export const formatNumbers2 = (value) => {
+  return Intl.NumberFormat("en-US", {
+    notation: "compact",
+    maximumFractionDigits: 1,
+  }).format(value);
+};
