@@ -1,9 +1,9 @@
 import React, { useContext, useState, useEffect } from "react";
 import { WalletWeb3Context } from "../../context/WalletWeb3Context";
 import { HashLink } from "react-router-hash-link";
-import { styled } from '@mui/material/styles';
-import Tooltip, { TooltipProps, tooltipClasses } from '@mui/material/Tooltip';
-import Typography from '@mui/material/Typography';
+import { styled } from "@mui/material/styles";
+import Tooltip, { TooltipProps, tooltipClasses } from "@mui/material/Tooltip";
+import Typography from "@mui/material/Typography";
 //
 import "./style.css";
 //
@@ -23,8 +23,13 @@ import { chainId as mainnetChainId } from "../../utils/web3React";
 import { updateNetwork } from "../../utils/web3React";
 
 const Header = ({ setisWalletOptionsOpen, offsetY }) => {
-  const { library, chainId, account: wallet, ...web3React } = useActiveWeb3React()
-  const isWrongNetwork = chainId != mainnetChainId
+  const {
+    library,
+    chainId,
+    account: wallet,
+    ...web3React
+  } = useActiveWeb3React();
+  const isWrongNetwork = chainId != mainnetChainId;
   const [isOpenWallet, setisOpenWallet] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
   const web3ButtonHandler = () => {
@@ -38,7 +43,7 @@ const Header = ({ setisWalletOptionsOpen, offsetY }) => {
     } else {
       setIsOpen(() => false);
       setisWalletOptionsOpen(false);
-      setisOpenWallet(true)
+      setisOpenWallet(true);
     }
   };
 
@@ -53,11 +58,11 @@ const Header = ({ setisWalletOptionsOpen, offsetY }) => {
     } else {
       setIsOpen(() => false);
       setisWalletOptionsOpen(false);
-      login("walletconnect")
+      login("walletconnect");
     }
   };
 
-  const { login, logout } = useAuth()
+  const { login, logout } = useAuth();
 
   const [scrollValue, setScrollValue] = useState(0);
 
@@ -135,11 +140,22 @@ const Header = ({ setisWalletOptionsOpen, offsetY }) => {
         </div>
         <div className="header--buttons aic">
           <div className="aic">
-
-            <a className="header--litepaper-left aic" style={{ textDecoration: "none" }} href="https://daylight-protocol.gitbook.io/litepaper/" target="_blank">Litepaper</a>
-            <div className="header--litepaper-right aic">Website</div>
-            <div className="header--litepaper-right-tooltip">coming soon</div>
-
+            <a
+              className="header--litepaper-left aic"
+              style={{ textDecoration: "none" }}
+              href="https://daylight-protocol.gitbook.io/litepaper/"
+              target="_blank"
+            >
+              Litepaper
+            </a>
+            <a
+              className="header--litepaper-right aic"
+              style={{ textDecoration: "none" }}
+              href="https://daylightprotocol.com/"
+              target="_blank"
+            >
+              Website
+            </a>
           </div>
           <div
             onClick={() => web3ButtonHandler()}
@@ -218,13 +234,13 @@ const LightTooltip = styled(({ className, ...props }) => (
 ))(({ theme }) => ({
   [`& .${tooltipClasses.tooltip}`]: {
     backgroundColor: theme.palette.common.white,
-    color: 'rgba(0, 0, 0, 0.87)',
+    color: "rgba(0, 0, 0, 0.87)",
     boxShadow: theme.shadows[1],
     fontSize: 18,
     width: 150,
     padding: 13,
     borderRadius: 10,
-    boxShadow: "0px 4px 24px rgb(0 0 0 / 50%)"
+    boxShadow: "0px 4px 24px rgb(0 0 0 / 50%)",
   },
 }));
 

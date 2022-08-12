@@ -8,9 +8,9 @@ import TelegramIcon from "../../../assets/img/icons/telegram.svg";
 import DiscordIcon from "../../../assets/img/icons/discord.svg";
 import TwitterIcon from "../../../assets/img/icons/twitter.svg";
 import { HashLink } from "react-router-hash-link";
-import { styled } from '@mui/material/styles';
-import Tooltip, { TooltipProps, tooltipClasses } from '@mui/material/Tooltip';
-import ClickAwayListener from '@mui/material/ClickAwayListener';
+import { styled } from "@mui/material/styles";
+import Tooltip, { TooltipProps, tooltipClasses } from "@mui/material/Tooltip";
+import ClickAwayListener from "@mui/material/ClickAwayListener";
 
 const Menu = ({ isOpen, close, buttonweb3 }) => {
   const [open, setOpen] = React.useState(false);
@@ -78,12 +78,14 @@ const Menu = ({ isOpen, close, buttonweb3 }) => {
         >
           Litepaper
         </a>
-        <div
+        <a
+          onClick={() => close()}
+          target="_blank"
+          href="https://daylightprotocol.com/"
           className="hover-effect menu--links-link"
-          style={{ opacity: "0.5" }}
         >
-          website | coming soon
-        </div>
+          Website
+        </a>
 
         {buttonweb3}
       </div>
@@ -123,13 +125,13 @@ const LightTooltip = styled(({ className, ...props }) => (
 ))(({ theme }) => ({
   [`& .${tooltipClasses.tooltip}`]: {
     backgroundColor: theme.palette.common.white,
-    color: 'rgba(0, 0, 0, 0.87)',
+    color: "rgba(0, 0, 0, 0.87)",
     boxShadow: theme.shadows[1],
     fontSize: 15,
     width: 130,
     padding: 13,
     borderRadius: 10,
-    boxShadow: "0px 4px 24px rgb(0 0 0 / 50%)"
+    boxShadow: "0px 4px 24px rgb(0 0 0 / 50%)",
   },
 }));
 
