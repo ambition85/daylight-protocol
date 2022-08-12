@@ -58,7 +58,6 @@ const Sale = ({
     setProgressPercentSoftCap(newValue2 + "px");
     if (newValue < 5) {
       newValue = "10px";
-      // newValue = "1%";
     } else {
       newValue = newValue + "%";
     }
@@ -165,18 +164,41 @@ const Sale = ({
           >
             <div className="hero-sale-section-price-title">Round 1</div>
             <div className="hero-sale-section-price-amount">
-              {curTime < startTime
+              {!!startTime && (
+                <Countdown
+                  date={new Date(startTime * 1000)}
+                  renderer={({ days, hours, minutes, seconds }) => (
+                    <>
+                      {days >= 1 ? days + ":" : null}
+                      {hours}:{minutes}:{seconds}
+                    </>
+                  )}
+                />
+              )}
+              {/* {curTime < startTime
                 ? "PRE-SALE NOT STARTED"
                 : curTime < endTime
                 ? "PRE-SALE"
-                : "PRE-SALE ENDED"}
+                : "PRE-SALE ENDED"} */}
             </div>
           </div>
           <div className="hero-sale-section-price">
             <div className="hero-sale-section-price-title">Time left</div>
             <div className="hero-sale-section-price-amount">
+              {!!endTime && (
+                <Countdown
+                  date={new Date(endTime * 1000)}
+                  renderer={({ days, hours, minutes, seconds }) => (
+                    <>
+                      {days >= 1 ? days + ":" : null}
+                      {hours}:{minutes}:{seconds}
+                    </>
+                  )}
+                />
+              )}
+              {/* //OLD CODE */}
               {/* {curTime < startTime ? (
-                "PRE-SALE NOT STARTED"
+                " NOT STARTED"
               ) : curTime < endTime ? (
                 <Countdown
                   date={endTime * 1000}
@@ -187,9 +209,8 @@ const Sale = ({
                   }
                 />
               ) : (
-                "PRE-SALE ENDED"
+                "ENDED"
               )} */}
-              TBD
             </div>
           </div>
         </div>
