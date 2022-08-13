@@ -196,7 +196,10 @@ const Sale = ({
                 />
               )} */}
               {curTime < startTime
-                ? "PRE-SALE COMING SOON"
+                ? <Countdown
+                  date={new Date(startTime * 1000)}
+                  renderer={({ days, hours, minutes, seconds }) => renderTime({ days, hours, minutes, seconds })}
+                />
                 : curTime < endTime
                   ? "PRE-SALE"
                   : "PRE-SALE ENDED"}
@@ -206,10 +209,7 @@ const Sale = ({
             <div className="hero-sale-section-price-title">Time left</div>
             <div className="hero-sale-section-price-amount">
               {curTime < startTime && startTime ?
-                <Countdown
-                  date={new Date(startTime * 1000)}
-                  renderer={({ days, hours, minutes, seconds }) => renderTime({ days, hours, minutes, seconds })}
-                /> : curTime >= startTime && curTime < endTime && endTime && startTime ? <Countdown
+                "Starting Soon" : curTime >= startTime && curTime < endTime && endTime && startTime ? <Countdown
                   date={new Date(endTime * 1000)}
                   renderer={({ days, hours, minutes, seconds }) => renderTime({ days, hours, minutes, seconds })}
                 /> : null
