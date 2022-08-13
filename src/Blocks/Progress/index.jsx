@@ -11,7 +11,7 @@ const ProgressSecction = () => {
       <Option
         check
         title="Presale Conclusion & Token Distribution"
-        date="To Be Announced"
+        date="21st August, 2022"
       />
       <Option check title="Launch & IDO" date="To Be Announced" />
     </div>

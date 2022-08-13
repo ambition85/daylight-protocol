@@ -76,6 +76,26 @@ const Sale = ({
     }
   };
 
+  const renderTime = ({ days, hours, minutes, seconds }) => {
+    const day = `${days}d`
+    const hour = `${hours}h`
+    const min = `${minutes}m`
+    const sec = `${seconds}s`
+    if (days >= 1)
+      return (
+        <>
+          {day}:{hour}:{min}
+        </>
+      )
+    else
+      return (
+        <>
+          {hour}:{min}:{sec}
+        </>
+      )
+
+  }
+
   return (
     <div className="hero-sale-container-outer">
       {/* //MODAL ON FIXED POSITION  */}
@@ -164,7 +184,7 @@ const Sale = ({
           >
             <div className="hero-sale-section-price-title">Round 1</div>
             <div className="hero-sale-section-price-amount">
-              {!!startTime && (
+              {/* {!!startTime && (
                 <Countdown
                   date={new Date(startTime * 1000)}
                   renderer={({ days, hours, minutes, seconds }) => (
@@ -174,28 +194,27 @@ const Sale = ({
                     </>
                   )}
                 />
-              )}
-              {/* {curTime < startTime
-                ? "PRE-SALE NOT STARTED"
+              )} */}
+              {curTime < startTime
+                ? "PRE-SALE COMING SOON"
                 : curTime < endTime
-                ? "PRE-SALE"
-                : "PRE-SALE ENDED"} */}
+                  ? "PRE-SALE"
+                  : "PRE-SALE ENDED"}
             </div>
           </div>
           <div className="hero-sale-section-price">
             <div className="hero-sale-section-price-title">Time left</div>
             <div className="hero-sale-section-price-amount">
-              {!!endTime && (
+              {curTime < startTime && startTime ?
                 <Countdown
+                  date={new Date(startTime * 1000)}
+                  renderer={({ days, hours, minutes, seconds }) => renderTime({ days, hours, minutes, seconds })}
+                /> : curTime >= startTime && curTime < endTime && endTime && startTime ? <Countdown
                   date={new Date(endTime * 1000)}
-                  renderer={({ days, hours, minutes, seconds }) => (
-                    <>
-                      {days >= 1 ? days + ":" : null}
-                      {hours}:{minutes}:{seconds}
-                    </>
-                  )}
-                />
-              )}
+                  renderer={({ days, hours, minutes, seconds }) => renderTime({ days, hours, minutes, seconds })}
+                /> : null
+              }
+
               {/* //OLD CODE */}
               {/* {curTime < startTime ? (
                 " NOT STARTED"
@@ -428,10 +447,10 @@ const Sale = ({
                         hours >= 24
                           ? `${hours / 24} days`
                           : hours > 0
-                          ? `${hours} hours`
-                          : minutes > 0
-                          ? `${minutes} minutes`
-                          : `${seconds} seconds`
+                            ? `${hours} hours`
+                            : minutes > 0
+                              ? `${minutes} minutes`
+                              : `${seconds} seconds`
                       }
                     />
                   ) : (
@@ -487,10 +506,10 @@ const Sale = ({
                         hours >= 24
                           ? `${hours / 24} days`
                           : hours > 0
-                          ? `${hours} hours`
-                          : minutes > 0
-                          ? `${minutes} minutes`
-                          : `${seconds} seconds`
+                            ? `${hours} hours`
+                            : minutes > 0
+                              ? `${minutes} minutes`
+                              : `${seconds} seconds`
                       }
                     />
                   ) : (
@@ -525,11 +544,10 @@ const Sale = ({
               >
                 <div className="hero-sale-section-connected-b">Pre-Sale</div>
                 <div
-                  className={`hero-sale-section-connected-a ${
-                    Big(totalUsdc).gte(Big(softCap).div(Big(10).pow(6)))
-                      ? "connected-success"
-                      : "connected-failed"
-                  }`}
+                  className={`hero-sale-section-connected-a ${Big(totalUsdc).gte(Big(softCap).div(Big(10).pow(6)))
+                    ? "connected-success"
+                    : "connected-failed"
+                    }`}
                 >
                   {Big(totalUsdc).gte(Big(softCap).div(Big(10).pow(6)))
                     ? "SUCCESS"
