@@ -173,6 +173,7 @@ const AddDaylModal = ({
         <div className="adddaylmodal--infostack-a-info aic">
           <>My ${isCurrent === "usdc" ? "USDC" : "DAYL"}</>
           <Icon
+            style={{ width: "25px", height: "25px" }}
             imgsrc={isCurrent === "usdc" ? usdcIcon : daylIcon}
             classnamestyle="hover-effect adddaylmodal--infostack-a-info-token aic"
           />
@@ -337,6 +338,7 @@ const AddDaylModal = ({
           </div> */}
               <div className="adddaylmodal--tokens-token-img aic">
                 <Icon
+                  style={{ width: "25px", height: "25px" }}
                   imgsrc={isCurrent === "usdc" ? usdcIcon : daylIcon}
                   classnamestyle="hover-effect adddaylmodal--tokens-token-img-icon aic"
                 />
@@ -353,6 +355,7 @@ const AddDaylModal = ({
             >
               <Icon
                 imgsrc={switchIcon}
+                style={{ width: "25px", height: "25px" }}
                 classnamestyle="adddaylmodal--tokens-token-switch-icon aic"
               />
             </div>
@@ -397,6 +400,7 @@ const AddDaylModal = ({
           </div> */}
               <div className="adddaylmodal--tokens-token-img aic">
                 <Icon
+                  style={{ width: "25px", height: "25px" }}
                   imgsrc={isCurrent === "usdc" ? daylIcon : usdcIcon}
                   classnamestyle="hover-effect adddaylmodal--tokens-token-img-icon aic"
                 />
