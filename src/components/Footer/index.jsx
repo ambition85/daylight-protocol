@@ -29,7 +29,7 @@ const Footer = () => {
           />
           <Icon
             imgsrc={discordIcon}
-            link="https://discord.com/invite/wSagPDSfh3"
+            link="https://discord.gg/CsRc6AVZbZ"
             classnamestyle="footer--social aic hover-effect"
           />
           <Icon

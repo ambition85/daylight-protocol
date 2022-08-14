@@ -103,7 +103,7 @@ const Menu = ({ isOpen, close, buttonweb3 }) => {
           />
           <Icon
             imgsrc={DiscordIcon}
-            link="https://discord.com/invite/wSagPDSfh3"
+            link="https://discord.gg/CsRc6AVZbZ"
             classnamestyle="menu--socials-social aic hover-effect"
           />
           <Icon
