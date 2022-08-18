@@ -22,9 +22,9 @@ const HeroSection = ({
   startTime,
   endTime,
   claimTime,
-  totalUsdc,
+  totalBusd,
   totalDayl,
-  usdcBalance,
+  busdBalance,
   whitelisted,
   claimable,
   hardCap,
@@ -54,9 +54,9 @@ const HeroSection = ({
           startTime={startTime}
           endTime={endTime}
           claimTime={claimTime}
-          totalUsdc={totalUsdc}
+          totalBusd={totalBusd}
           totalDayl={totalDayl}
-          usdcBalance={usdcBalance}
+          busdBalance={busdBalance}
           claimable={claimable}
           hardCap={hardCap}
           softCap={softCap}

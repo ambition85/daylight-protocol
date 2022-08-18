@@ -5,7 +5,7 @@ import Big from "big.js";
 import "../AddDaylModal/style.css";
 import Icon from "../../../../components/Icon";
 import ArrowLeftIcon from "../../../../assets/img/icons/arrowLeft.svg";
-import usdcIcon from "../../../../assets/img/coins/usdc.svg";
+import busdIcon from "../../../../assets/img/coins/busd.svg";
 import daylIcon from "../../../../assets/img/coins/dayl.svg";
 import switchIcon from "../../../../assets/img/icons/switch.svg";
 import { localeString } from "../../../../utils/utils";
@@ -15,20 +15,20 @@ const AddMoreDaylModal = ({
   endTime,
   totalDayl,
   rate,
-  usdcBalance,
+  busdBalance,
   whitelisted,
   onClose,
   buyDayl,
 }) => {
   const [isRange, setisRange] = useState(15);
   const [isFormData, setisFormData] = useState({
-    usdcValue: "",
+    busdValue: "",
     daylValue: "",
   });
-  const [isCurrent, setisCurrent] = useState("usdc");
+  const [isCurrent, setisCurrent] = useState("busd");
   const switchHandler = () => {
     setisCurrent((prev) => {
-      return prev === "usdc" ? "dayl" : "usdc";
+      return prev === "busd" ? "dayl" : "busd";
     });
   };
   const onChangeHandler = (e) => {
@@ -42,22 +42,22 @@ const AddMoreDaylModal = ({
   };
   const onSubmitHandler = (e) => {
     e.preventDefault();
-    const { usdcValue, daylValue } = isFormData;
-    if (!usdcValue || !daylValue) {
+    const { busdValue, daylValue } = isFormData;
+    if (!busdValue || !daylValue) {
       toast.error("Please fill all fields");
       return;
     }
-    const usdcValueBig = Big(usdcValue);
+    const busdValueBig = Big(busdValue);
     const daylValueBig = Big(daylValue);
-    if (usdcValueBig.gt(usdcBalance)) {
-      toast.error("You don't have enough usdc");
+    if (busdValueBig.gt(busdBalance)) {
+      toast.error("You don't have enough busd");
       return;
     }
     if (daylValueBig.gt(totalDayl)) {
       toast.error("You don't have enough dayl");
       return;
     }
-    // buyDayl(usdcValueBig, daylValueBig);
+    // buyDayl(busdValueBig, daylValueBig);
   };
   const addDayl = async () => {
     if (!whitelisted) {
@@ -67,7 +67,7 @@ const AddMoreDaylModal = ({
     } else if (Date.now() / 1000 > endTime) {
       toast.error("Presale ended");
     } else {
-      if (usdcBalance.toString() === "0" || isRange === "0") {
+      if (busdBalance.toString() === "0" || isRange === "0") {
         toast.error("Buying 0 $DAYL");
       } else {
         await buyDayl(isRange);
@@ -102,19 +102,19 @@ const AddMoreDaylModal = ({
       {/* /////////// */}
       <div className="adddaylmodal--infostack-a">
         <div className="adddaylmodal--infostack-a-info aic">
-          <>My ${isCurrent === "usdc" ? "USDC" : "DAYL"}</>
+          <>My ${isCurrent === "busd" ? "BUSD" : "DAYL"}</>
           <Icon
-            imgsrc={isCurrent === "usdc" ? usdcIcon : daylIcon}
+            imgsrc={isCurrent === "busd" ? busdIcon : daylIcon}
             classnamestyle="hover-effect adddaylmodal--infostack-a-info-token aic"
           />
           <b>
-            {isCurrent === "usdc"
-              ? localeString(new Big(usdcBalance).div(new Big(10).pow(6)))
+            {isCurrent === "busd"
+              ? localeString(new Big(busdBalance).div(new Big(10).pow(18)))
               : localeString(
-                  new Big(usdcBalance)
-                    .mul(new Big(rate))
-                    .div(new Big(10).pow(18))
-                )}
+                new Big(busdBalance)
+                  .mul(new Big(rate))
+                  .div(new Big(10).pow(18))
+              )}
           </b>
         </div>
         <div className="adddaylmodal--infostack-a-amount">
@@ -172,14 +172,14 @@ const AddMoreDaylModal = ({
           <input
             className="adddaylmodal--tokens-token-amount"
             type="number"
-            name={isCurrent === "usdc" ? "usdcValue" : "daylValue"}
+            name={isCurrent === "busd" ? "busdValue" : "daylValue"}
             value={
-              isCurrent === "usdc" ? isFormData.usdcValue : isFormData.daylValue
+              isCurrent === "busd" ? isFormData.busdValue : isFormData.daylValue
             }
             onChange={(e) => onChangeHandler(e)}
             aria-disabled={false}
             placeholder={
-              isCurrent === "usdc" ? "Add USDC Tokens" : "Add DAYL Tokens"
+              isCurrent === "busd" ? "Add BUSD Tokens" : "Add DAYL Tokens"
             }
             step={0.001}
             required
@@ -187,15 +187,15 @@ const AddMoreDaylModal = ({
             pattern="\d*"
           />{" "}
           {/* <div className="adddaylmodal--tokens-token-amount">
-            {isCurrent === "usdc"
+            {isCurrent === "busd"
               ? localeString(
-                new Big(usdcBalance)
+                new Big(busdBalance)
                   .mul(isRange)
                   .div(100)
-                  .div(new Big(10).pow(6))
+                  .div(new Big(10).pow(18))
               )
               : localeString(
-                new Big(usdcBalance)
+                new Big(busdBalance)
                   .mul(new Big(rate))
                   .mul(isRange)
                   .div(100)
@@ -204,15 +204,15 @@ const AddMoreDaylModal = ({
           </div> */}
           <div className="adddaylmodal--tokens-token-img aic">
             <Icon
-              imgsrc={isCurrent === "usdc" ? usdcIcon : daylIcon}
+              imgsrc={isCurrent === "busd" ? busdIcon : daylIcon}
               classnamestyle="hover-effect adddaylmodal--tokens-token-img-icon aic"
             />
-            {isCurrent === "usdc" ? "USDC" : "DAYL"}
+            {isCurrent === "busd" ? "BUSD" : "DAYL"}
           </div>
         </div>
         <div
           className="adddaylmodal--tokens-token-switch"
-          onClick={() => switchHandler()}
+          // onClick={() => switchHandler()}
           data-aos="fade-down"
           data-aos-delay="400"
           data-aos-offset="-200"
@@ -233,12 +233,12 @@ const AddMoreDaylModal = ({
           <input
             className="adddaylmodal--tokens-token-amount"
             type="number"
-            name={isCurrent !== "usdc" ? "usdcValue" : "daylValue"}
+            name={isCurrent !== "busd" ? "busdValue" : "daylValue"}
             value={
-              isCurrent !== "usdc" ? isFormData.usdcValue : isFormData.daylValue
+              isCurrent !== "busd" ? isFormData.busdValue : isFormData.daylValue
             }
             placeholder={
-              isCurrent === "usdc" ? "Add USDC Tokens" : "Add DAYL Tokens"
+              isCurrent === "busd" ? "Add BUSD Tokens" : "Add DAYL Tokens"
             }
             onChange={(e) => onChangeHandler(e)}
             aria-disabled={false}
@@ -248,27 +248,27 @@ const AddMoreDaylModal = ({
             pattern="\d*"
           />
           {/* <div className="adddaylmodal--tokens-token-amount">
-            {isCurrent === "usdc"
+            {isCurrent === "busd"
               ? localeString(
-                new Big(usdcBalance)
+                new Big(busdBalance)
                   .mul(new Big(rate))
                   .mul(isRange)
                   .div(100)
                   .div(new Big(10).pow(18))
               ).toString()
               : localeString(
-                new Big(usdcBalance)
+                new Big(busdBalance)
                   .mul(isRange)
                   .div(100)
-                  .div(new Big(10).pow(6))
+                  .div(new Big(10).pow(18))
               )}
           </div> */}
           <div className="adddaylmodal--tokens-token-img aic">
             <Icon
-              imgsrc={isCurrent === "usdc" ? daylIcon : usdcIcon}
+              imgsrc={isCurrent === "busd" ? daylIcon : busdIcon}
               classnamestyle="hover-effect adddaylmodal--tokens-token-img-icon aic"
             />
-            {isCurrent === "usdc" ? "DAYL" : "USDC"}
+            {isCurrent === "busd" ? "DAYL" : "BUSD"}
           </div>
         </div>
       </div>

@@ -7,36 +7,36 @@ import frameIcon from "../../../assets/img/icons/frame.svg";
 import warningIcon from "../../../assets/img/icons/warning.svg";
 import copyIcon from "../../../assets/img/icons/copy.svg";
 import daylIcon from "../../../assets/img/coins/dayl.svg";
-import usdcIcon from "../../../assets/img/coins/usdc.svg";
-import avaxIcon from "../../../assets/img/coins/avax.svg";
+import busdIcon from "../../../assets/img/coins/busd.svg";
+import bnbIcon from "../../../assets/img/coins/bnb.svg";
 import { shortenAddressLong } from "../../../utils/utils";
 
 import {
   PresaleAddress,
   PresaleTokenAddress,
-  USDCAddress,
+  BUSDAddress,
 } from "../../../constants";
 import ERC20ABI from "../../../constants/abis/ERC20.json";
 import PresaleABI from "../../../constants/abis/Presale.json";
 import PresaleTokenABI from "../../../constants/abis/PresaleToken.json";
 
-import { usdcDecimals } from "../../../Pages/Home/index"
+import { busdDecimals } from "../../../Pages/Home/index"
 // import { testnetNetwork as chainConfig } from "../../../utils/constants"
 import { mainnetNetwork as chainConfig } from "../../../utils/constants"
 
 
 let provider,
   presaleReadContract,
-  usdcReadContract,
+  busdReadContract,
   presaleTokenContract,
-  usdcContract;
+  busdContract;
 
 const Profile = ({ wallet, onClose, disconnectWallet }) => {
   const [iscopyactive, setiscopyactive] = useState(false);
-  const [isUsdcLow, setISUSDCLow] = useState(false);
-  const [usdcBal, setUSDCBal] = useState(0);
+  const [isBusdLow, setISBUSDLow] = useState(false);
+  const [busdBal, setBUSDBal] = useState(0);
   const [daylBal, setDAYLBal] = useState(0);
-  const [avaxBal, setAVXBal] = useState(0);
+  const [bnbBal, setBNBBal] = useState(0);
   const [minPer, setMinPer] = useState(0);
   console.log("Wallet: ", wallet)
   useEffect(() => {
@@ -55,25 +55,25 @@ const Profile = ({ wallet, onClose, disconnectWallet }) => {
       PresaleTokenABI,
       new providers.JsonRpcProvider(chainConfig.rpcUrls[0])
     );
-    usdcReadContract = new Contract(
-      USDCAddress,
+    busdReadContract = new Contract(
+      BUSDAddress,
       ERC20ABI,
       new providers.JsonRpcProvider(chainConfig.rpcUrls[0])
     );
 
-    const [daylBal, usdcBal, avaxBal, minPer] = await Promise.all([
+    const [daylBal, busdBal, bnbBal, minPer] = await Promise.all([
       presaleTokenContract.balanceOf(wallet),
-      usdcReadContract.balanceOf(wallet),
+      busdReadContract.balanceOf(wallet),
       provider.getBalance(wallet),
       presaleReadContract.minPerWallet(),
     ]);
-    console.log("Balance: ", daylBal, usdcBal, avaxBal);
-    setAVXBal(utils.formatEther(avaxBal));
+    console.log("Balance: ", daylBal, busdBal, bnbBal);
+    setBNBBal(utils.formatEther(bnbBal));
     setDAYLBal(utils.formatEther(daylBal));
-    setUSDCBal(utils.formatUnits(usdcBal, usdcDecimals));
+    setBUSDBal(utils.formatUnits(busdBal, busdDecimals));
     setMinPer(minPer.toString());
 
-    if (minPer.gt(usdcBal)) setISUSDCLow(true);
+    if (minPer.gt(busdBal)) setISBUSDLow(true);
   };
 
   useEffect(() => {
@@ -138,7 +138,7 @@ const Profile = ({ wallet, onClose, disconnectWallet }) => {
       </div>
       {/* /////////// */}
 
-      {isUsdcLow && <div
+      {isBusdLow && <div
         className="profilemodal--box aic"
         style={{
           gap: "8px",
@@ -153,10 +153,10 @@ const Profile = ({ wallet, onClose, disconnectWallet }) => {
         />
         <div className="aic profilemodal--box-warning">
           <div className=" profilemodal--box-warning-top">
-            USDC Balance Low.
+            BUSD Balance Low.
           </div>
           <div className=" profilemodal--box-warning-bottom">
-            You need a minimum of 30 $USDC to purchase pre-sale tokens.
+            You need a minimum of 100 $BUSD to purchase pre-sale tokens.
 
           </div>
         </div>
@@ -199,12 +199,12 @@ const Profile = ({ wallet, onClose, disconnectWallet }) => {
       >
         <div className="profilemodal--balance aic">
           <Icon
-            imgsrc={usdcIcon}
+            imgsrc={busdIcon}
             classnamestyle="profilemodal--box-warning-icon aic hover-effect"
           />
-          USDC Balance
+          BUSD Balance
         </div>
-        <div className="profilemodal--balance-amount">{usdcBal}</div>
+        <div className="profilemodal--balance-amount">{busdBal}</div>
       </div>
       <div
         className="profilemodal--box aic"
@@ -220,21 +220,21 @@ const Profile = ({ wallet, onClose, disconnectWallet }) => {
       >
         <div className="profilemodal--balance aic">
           <Icon
-            imgsrc={avaxIcon}
+            imgsrc={bnbIcon}
             classnamestyle="profilemodal--box-warning-icon aic hover-effect"
           />
-          AVAX Balance
+          BNB Balance
         </div>
-        <div className="profilemodal--balance-amount">{avaxBal}</div>
+        <div className="profilemodal--balance-amount">{bnbBal}</div>
       </div>
       {/* /////////// */}
       <div
         className="profilemodal--scan aic "
         onClick={() => {
-          window.open(`https://avascan.info/blockchain/c/address/${wallet}`);
+          window.open(`https://bscscan.com/address/${wallet}`);
         }}
       >
-        View on AvaScan
+        View on BSCScan
         <Icon
           imgsrc={frameIcon}
           classnamestyle="profilemodal--box-warning-icon aic"

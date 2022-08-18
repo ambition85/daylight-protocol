@@ -29,9 +29,9 @@ const Sale = ({
   startTime,
   endTime,
   claimTime,
-  totalUsdc,
+  totalBusd,
   totalDayl,
-  usdcBalance,
+  busdBalance,
   whitelisted,
   claimable,
   hardCap,
@@ -52,7 +52,7 @@ const Sale = ({
   const [isOpenWallet, setisOpenWallet] = useState(false);
 
   React.useEffect(() => {
-    let newValue = (totalUsdc / hardCap) * 1e6 * 100;
+    let newValue = (totalBusd / hardCap) * 100;
     let newValue2 =
       (((softCap / hardCap) * 100) / 100) * progressBarRef.current.clientWidth;
     setProgressPercentSoftCap(newValue2 + "px");
@@ -63,7 +63,7 @@ const Sale = ({
     }
 
     setProgressPercent(() => newValue);
-  }, [totalUsdc, progressBarRef.current]);
+  }, [totalBusd, progressBarRef.current]);
   const curTime = Math.floor(Date.now() / 1000);
 
   const isMobile = window.innerWidth <= 768;
@@ -108,8 +108,8 @@ const Sale = ({
           startTime={startTime}
           endTime={endTime}
           totalDayl={totalDayl}
-          totalUsdc={totalUsdc}
-          usdcBalance={usdcBalance}
+          totalBusd={totalBusd}
+          busdBalance={busdBalance}
           minPerWallet={minPerWallet}
           maxPerWallet={maxPerWallet}
           rate={rate}
@@ -127,8 +127,8 @@ const Sale = ({
           startTime={startTime}
           endTime={endTime}
           totalDayl={totalDayl}
-          totalUsdc={totalUsdc}
-          usdcBalance={usdcBalance}
+          totalBusd={totalBusd}
+          busdBalance={busdBalance}
           rate={rate}
           whitelisted={whitelisted}
           buyDayl={buyDayl}
@@ -163,16 +163,16 @@ const Sale = ({
             <div className="hero-sale-section-price-amount">
               $
               {new Big(1)
-                .mul(new Big(10).pow(12))
+                // .mul(new Big(10).pow(12))
                 .div(new Big(rate))
                 .toString()}
             </div>
             <div className="hero-sale-section-price-estimated">
               {new Big(1)
-                .mul(new Big(10).pow(12))
+                // .mul(new Big(10).pow(12))
                 .div(new Big(rate))
                 .toString()}{" "}
-              $USDC
+              $BUSD
             </div>
           </div>
         </div>
@@ -257,7 +257,7 @@ const Sale = ({
               className="hero-sale-bar-circle-indicator"
               style={{ left: progressPercentSoftCap }}
             >
-              Soft Cap [${formatNumbers2(softCap / 1e6)}]
+              Soft Cap [${formatNumbers2(softCap / 1e18)}]
             </div>
             <div
               className="hero-sale-bar-circle-divider"
@@ -266,8 +266,8 @@ const Sale = ({
           </div>
         </div>
         <div className="hero-sale-bar-value aic">
-          <div className="hover-effect">{localeString(totalUsdc)}</div>/
-          <div className="hover-effect">{localeString(hardCap / 1e6)}</div>
+          <div className="hover-effect">{localeString(totalBusd)}</div>/
+          <div className="hover-effect">{localeString(hardCap / 1e18)}</div>
         </div>
         {/* //////////////// 4 */}
         <div className="hero-sale-section" style={{ marginTop: "27.32px" }}>
@@ -279,7 +279,7 @@ const Sale = ({
               Token Distribution
             </div>
             <div className="hero-sale-section-price-amount">
-              {numberWithCommas((hardCap / 1e6) * 40)} $DAYL
+              {numberWithCommas((hardCap / 1e18) * 40)} $DAYL
             </div>
           </div>
           <div className="hero-sale-section-price">
@@ -287,8 +287,8 @@ const Sale = ({
               Total Raised (Hard Cap)
             </div>
             <div className="hero-sale-section-price-amount">
-              ${numberWithCommas(totalUsdc)} / $
-              {numberWithCommas(hardCap / 1e6)}
+              ${numberWithCommas(totalBusd)} / $
+              {numberWithCommas(hardCap / 1e18)}
             </div>
           </div>
         </div>
@@ -310,7 +310,7 @@ const Sale = ({
                 }}
               >
                 <div className="hero-sale-section-connected-b">
-                  My USDC deposit
+                  My BUSD deposit
                 </div>
                 <div className="hero-sale-section-connected-a">
                   $
@@ -386,7 +386,7 @@ const Sale = ({
               className="hero-sale-section-button"
               onClick={() => approve()}
             >
-              Approve USDC
+              Approve BUSD
             </button>
           </div>
         )}
@@ -544,12 +544,12 @@ const Sale = ({
               >
                 <div className="hero-sale-section-connected-b">Pre-Sale</div>
                 <div
-                  className={`hero-sale-section-connected-a ${Big(totalUsdc).gte(Big(softCap).div(Big(10).pow(6)))
+                  className={`hero-sale-section-connected-a ${Big(totalBusd).gte(Big(softCap).div(Big(10).pow(6)))
                     ? "connected-success"
                     : "connected-failed"
                     }`}
                 >
-                  {Big(totalUsdc).gte(Big(softCap).div(Big(10).pow(6)))
+                  {Big(totalBusd).gte(Big(softCap).div(Big(10).pow(6)))
                     ? "SUCCESS"
                     : "FAILED"}
                 </div>
@@ -562,7 +562,7 @@ const Sale = ({
                   Withdrawable
                 </div>
                 <div className="hero-sale-section-connected-a">
-                  ${Big(withdrawable).div(Big(10).pow(6)).toFixed(1)} USDC
+                  ${Big(withdrawable).div(Big(10).pow(6)).toFixed(1)} BUSD
                 </div>
               </div>
             </div>

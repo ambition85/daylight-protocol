@@ -4,10 +4,10 @@ import { ethers } from 'ethers'
 import { mainnetNetwork as chainConfig } from './constants'
 
 const POLLING_INTERVAL = 12000
-export const rpcUrl = "https://api.avax.network/ext/bc/C/rpc"
-// export const rpcUrl = "https://data-seed-prebsc-1-s1.binance.org:8545/";
+// export const rpcUrl = "https://api.avax.network/ext/bc/C/rpc"
+export const rpcUrl = "https://data-seed-prebsc-1-s1.binance.org:8545/";
 // const chainId = parseInt(process.env.REACT_APP_CHAIN_ID, 10)
-export const chainId = 43114
+export const chainId = 56
 const injected = new InjectedConnector({ supportedChainIds: [chainId] })
 
 const walletconnect = new WalletConnectConnector({
@@ -84,7 +84,7 @@ export const setupNetwork = async () => {
         params: [
           {
             chainId: `0x${chainId.toString(16)}`,
-            chainName: 'Avalanche',
+            chainName: 'Binance Smart Chain',
             nativeCurrency: {
               name: 'AVAX',
               symbol: 'avax',
@@ -100,7 +100,7 @@ export const setupNetwork = async () => {
       return false
     }
   } else {
-    console.error("Can't setup the Avalanche network on metamask because window.ethereum is undefined")
+    console.error("Can't setup the Binance Smart Chain network on metamask because window.ethereum is undefined")
     return false
   }
 }

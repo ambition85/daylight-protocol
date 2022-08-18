@@ -2,31 +2,28 @@ export const tokenddress =
   process.env.REACT_APP_NETWORK_ENV === "mainnet" ? "" : "";
 /////////////////////////////////////////////////////////////////////////////////////// //////////
 export const mainnetNetwork = {
-  chainId: `0x${Number(43114).toString(16)}`,
-  chainName: "Avalanche C-chain",
+  chainId: `0x${Number(56).toString(16)}`,
+  chainName: "Binance Smart Chain Mainnet",
   nativeCurrency: {
-    name: "Avalanche C-chain",
-    symbol: "AVAX",
+    name: "BNB",
+    symbol: "BNB",
     decimals: 18,
   },
   rpcUrls: [
-    "https://api.avax.network/ext/bc/C/rpc",
-    "https://ava-mainnet.public.blastapi.io/ext/bc/C/rpc",
-    "https://rpc.ankr.com/avalanche",
+    "https://bsc-dataseed.binance.org",
   ],
-  blockExplorerUrls: ["https://snowtrace.io"],
+  blockExplorerUrls: ["https://bscscan.com"],
 };
 export const testnetNetwork = {
-  chainId: `0x${Number(43113).toString(16)}`,
-  chainName: "Avalanche Fuji Testnet",
+  chainId: `0x${Number(97).toString(16)}`,
+  chainName: "Binance Smart Chain Testnet",
   nativeCurrency: {
-    name: "Avalanche Fuji Testnet",
-    symbol: "tAVAX",
+    name: "Binance Smart Chain Testnet",
+    symbol: "tBNB",
     decimals: 18,
   },
   rpcUrls: [
-    "https://api.avax-test.network/ext/bc/C/rpc",
-    "https://rpc.ankr.com/avalanche_fuji",
+    "https://data-seed-prebsc-2-s3.binance.org:8545/",
   ],
-  blockExplorerUrls: ["https://testnet.snowtrace.io"],
+  blockExplorerUrls: ["https://testnet.bscscan.com"],
 };

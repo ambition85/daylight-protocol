@@ -67,11 +67,11 @@ const RecentTransactions = ({ wallet, onClose, disconnectWallet }) => {
                       className="recenttransaction--scan aic "
                       onClick={() => {
                         window.open(
-                          `https://snowtrace.io/tx/${item.hash}`
+                          `https://bscscan.com/tx/${item.hash}`
                         );
                       }}
                     >
-                      View on Snowtrace
+                      View on BSCScan
                       <Icon
                         imgsrc={frameIcon}
                         classnamestyle="recenttransaction--box-warning-icon aic"

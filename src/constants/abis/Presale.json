@@ -98,7 +98,7 @@
 					},
 					{
 						"internalType": "address",
-						"name": "_usdc",
+						"name": "_busd",
 						"type": "address"
 					},
 					{
@@ -186,7 +186,7 @@
 			{
 				"indexed": false,
 				"internalType": "uint256",
-				"name": "depositUSDC",
+				"name": "depositBUSD",
 				"type": "uint256"
 			},
 			{
@@ -263,7 +263,7 @@
 			{
 				"indexed": false,
 				"internalType": "uint256",
-				"name": "withdrawUSDC",
+				"name": "withdrawBUSD",
 				"type": "uint256"
 			}
 		],
@@ -447,7 +447,7 @@
 	},
 	{
 		"inputs": [],
-		"name": "totalUSDC",
+		"name": "totalBUSD",
 		"outputs": [
 			{
 				"internalType": "uint256",
@@ -486,7 +486,7 @@
 	},
 	{
 		"inputs": [],
-		"name": "usdc",
+		"name": "busd",
 		"outputs": [
 			{
 				"internalType": "contract IERC20",

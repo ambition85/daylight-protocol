@@ -29,7 +29,7 @@ const useAuth = () => {
             if (hasSetup) {
               activate(connector)
             } else
-              toast('Please switch network to Avalanche C-Chain mainnet')
+              toast('Please switch network to Binance Smart Chain mainnet')
 
           } else {
             console.log("Else Error")
