@@ -195,14 +195,15 @@ const Sale = ({
                   )}
                 />
               )} */}
-              {curTime < startTime
+              {/* {curTime < startTime
                 ? <Countdown
                   date={new Date(startTime * 1000)}
                   renderer={({ days, hours, minutes, seconds }) => renderTime({ days, hours, minutes, seconds })}
                 />
                 : curTime < endTime
                   ? "PRE-SALE"
-                  : "PRE-SALE ENDED"}
+                  : "PRE-SALE ENDED"} */}
+              "PRE-SALE RESCHEDULED"
             </div>
           </div>
           <div className="hero-sale-section-price">
@@ -502,14 +503,8 @@ const Sale = ({
                   {curTime < claimTime ? (
                     <Countdown
                       date={claimTime * 1000}
-                      renderer={({ hours, minutes, seconds, completed }) =>
-                        hours >= 24
-                          ? `${hours / 24} days`
-                          : hours > 0
-                            ? `${hours} hours`
-                            : minutes > 0
-                              ? `${minutes} minutes`
-                              : `${seconds} seconds`
+                      renderer={({ days, hours, minutes, seconds, completed }) =>
+                        renderTime({ days, hours, minutes, seconds })
                       }
                     />
                   ) : (
