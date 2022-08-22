@@ -1,9 +1,9 @@
 import React from "react";
 import "./style.css";
 import Lottie from "lottie-react";
-import flames from "../..//assets/animations/Flying-Fenix-AVAX.json";
-// import Icon from "../../components/Icon";
-// import logoMascot from "../..//assets/img/brand/litepaper.svg";
+import flames from "../..//assets/animations/Fenix-BNB-Litepaper.json";
+import Icon from "../../components/Icon";
+import logoMascot from "../..//assets/img/brand/litepaper.svg";
 const Litepaper = () => {
   return (
     <div className="aic litepaper-container">

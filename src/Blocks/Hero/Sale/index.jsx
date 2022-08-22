@@ -315,7 +315,7 @@ const Sale = ({
                 <div className="hero-sale-section-connected-a">
                   $
                   {localeString(
-                    Big(totalDayl).div(Big(rate)).div(Big(10).pow(6)).toString()
+                    Big(totalDayl).div(Big(rate)).div(Big(10).pow(18)).toString()
                   )}
                 </div>
               </div>
@@ -432,7 +432,7 @@ const Sale = ({
                   $DAYL
                 </div>
               </div>
-              <div
+              {/* <div
                 className="hero-sale-section-price"
                 style={{ alignItems: "flex-start", gap: "16px" }}
               >
@@ -457,7 +457,7 @@ const Sale = ({
                     ""
                   )}
                 </div>
-              </div>
+              </div> */}
             </div>
             {/* //HERO BUTTON FOR CLAIM  */}
             <button

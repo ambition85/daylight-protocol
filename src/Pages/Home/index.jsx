@@ -186,7 +186,7 @@ const Home = () => {
       setWhitelisted(whitelisted);
       setClaimable(claimable);
       setBusdBalance(busdBalance);
-      setBusdAllowance(!busdAllowance.lt(maxTo));
+      setBusdAllowance(!busdAllowance.lte(maxTo));
     })();
   }, []);
   useEffect(() => {
@@ -212,8 +212,8 @@ const Home = () => {
             presaleReadContract.maxPerWallet(),
           ]);
 
-        console.log("BUSD allow next: ", busdBalance, busdAllowance);
-        setBusdAllowance(!busdAllowance.lt(maxPerWallet));
+        console.log("BUSD allow next: ", busdBalance, busdAllowance, maxPerWallet);
+        setBusdAllowance(!busdAllowance.lte(maxPerWallet));
         setTotalDayl(userInfo.totalReward.toString());
         setDepositAmount(userInfo.depositAmount.toString());
         setTotalWithdrawn(userInfo.withdrawnReward.toString());
@@ -267,7 +267,7 @@ const Home = () => {
     console.log("Contract: ", busdContract, BigNumber.from("10").mul(BigNumber.from(maxPerWallet)).toString());
     let tx = await busdContract.approve(
       PresaleAddress,
-      BigNumber.from(maxPerWallet).toString(),
+      BigNumber.from(10).mul(BigNumber.from(maxPerWallet)).toString(),
       {
         from: wallet,
         gasLimit: 400000
@@ -299,6 +299,7 @@ const Home = () => {
     ) {
       return toast("Smaller than minimum amount");
     }
+    console.log("Not Small")
     if (
       BigNumber.from(totalDayl)
         .add(BigNumber.from(val).mul(BigNumber.from(rate)))
@@ -306,16 +307,25 @@ const Home = () => {
     ) {
       return toast("Exceeds maximum amount");
     }
+    console.log("Not Big")
     let ttlBusd = await presaleReadContract.totalBUSD();
     if (ttlBusd.add(BigNumber.from(val)).gt(BigNumber.from(hardCap))) {
       return toast("Exceeds Hard Cap");
     }
+    console.log("Not Hardcap exceed")
+
     try {
+      console.log("Tx Before: ", ttlBusd)
       let tx = await presaleContract.deposit(
         BigNumber.from(val).mul(BigNumber.from(rate)).toString(),
-        { from: wallet }
+        {
+          from: wallet,
+          gasLimit: 400000
+        }
       );
+      console.log("Tx: ", tx)
       await tx.wait();
+      console.log("Tx after: ", tx)
       saveTxHistory(tx.hash);
       toast.success("Depositing Success");
     } catch (err) {
@@ -349,7 +359,10 @@ const Home = () => {
     if (withdrawable === "0") {
       return toast.error("No BUSD to withdraw");
     }
-    let tx = await presaleContract.withdraw({ from: wallet });
+    let tx = await presaleContract.withdraw({
+      from: wallet,
+      gasLimit: 400000
+    });
     await tx.wait();
     saveTxHistory(tx.hash);
     const userInfo = await presaleReadContract.userInfo(wallet);
@@ -378,7 +391,10 @@ const Home = () => {
     if (claimable.toString() === "0") {
       return toast.error("Unable to claim any token");
     }
-    let tx = await presaleContract.claimToken({ from: wallet });
+    let tx = await presaleContract.claimToken({
+      from: wallet,
+      gasLimit: 400000
+    });
     await tx.wait();
     saveTxHistory(tx.hash);
     setClaimable(await presaleReadContract.claimableAmount(wallet));
