@@ -77,24 +77,23 @@ const Sale = ({
   };
 
   const renderTime = ({ days, hours, minutes, seconds }) => {
-    const day = `${days}d`
-    const hour = `${hours}h`
-    const min = `${minutes}m`
-    const sec = `${seconds}s`
+    const day = `${days}d`;
+    const hour = `${hours}h`;
+    const min = `${minutes}m`;
+    const sec = `${seconds}s`;
     if (days >= 1)
       return (
         <>
           {day}:{hour}:{min}
         </>
-      )
+      );
     else
       return (
         <>
           {hour}:{min}:{sec}
         </>
-      )
-
-  }
+      );
+  };
 
   return (
     <div className="hero-sale-container-outer">
@@ -209,12 +208,19 @@ const Sale = ({
           <div className="hero-sale-section-price">
             <div className="hero-sale-section-price-title">Time left</div>
             <div className="hero-sale-section-price-amount">
-              {curTime < startTime && startTime ?
-                "Starting Soon" : curTime >= startTime && curTime < endTime && endTime && startTime ? <Countdown
+              {curTime < startTime && startTime ? (
+                "Starting Soon"
+              ) : curTime >= startTime &&
+                curTime < endTime &&
+                endTime &&
+                startTime ? (
+                <Countdown
                   date={new Date(endTime * 1000)}
-                  renderer={({ days, hours, minutes, seconds }) => renderTime({ days, hours, minutes, seconds })}
-                /> : null
-              }
+                  renderer={({ days, hours, minutes, seconds }) =>
+                    renderTime({ days, hours, minutes, seconds })
+                  }
+                />
+              ) : null}
 
               {/* //OLD CODE */}
               {/* {curTime < startTime ? (
@@ -267,8 +273,8 @@ const Sale = ({
           </div>
         </div>
         <div className="hero-sale-bar-value aic">
-          <div className="hover-effect">{localeString(totalBusd)}</div>/
-          <div className="hover-effect">{localeString(hardCap / 1e18)}</div>
+          <div className="hover-effect">${localeString(totalBusd)}</div>/
+          <div className="hover-effect">${localeString(hardCap / 1e18)}</div>
         </div>
         {/* //////////////// 4 */}
         <div className="hero-sale-section" style={{ marginTop: "27.32px" }}>
@@ -316,7 +322,10 @@ const Sale = ({
                 <div className="hero-sale-section-connected-a">
                   $
                   {localeString(
-                    Big(totalDayl).div(Big(rate)).div(Big(10).pow(18)).toString()
+                    Big(totalDayl)
+                      .div(Big(rate))
+                      .div(Big(10).pow(18))
+                      .toString()
                   )}
                 </div>
               </div>
@@ -503,9 +512,13 @@ const Sale = ({
                   {curTime < claimTime ? (
                     <Countdown
                       date={claimTime * 1000}
-                      renderer={({ days, hours, minutes, seconds, completed }) =>
-                        renderTime({ days, hours, minutes, seconds })
-                      }
+                      renderer={({
+                        days,
+                        hours,
+                        minutes,
+                        seconds,
+                        completed,
+                      }) => renderTime({ days, hours, minutes, seconds })}
                     />
                   ) : (
                     ""
@@ -539,10 +552,11 @@ const Sale = ({
               >
                 <div className="hero-sale-section-connected-b">Pre-Sale</div>
                 <div
-                  className={`hero-sale-section-connected-a ${Big(totalBusd).gte(Big(softCap).div(Big(10).pow(6)))
-                    ? "connected-success"
-                    : "connected-failed"
-                    }`}
+                  className={`hero-sale-section-connected-a ${
+                    Big(totalBusd).gte(Big(softCap).div(Big(10).pow(6)))
+                      ? "connected-success"
+                      : "connected-failed"
+                  }`}
                 >
                   {Big(totalBusd).gte(Big(softCap).div(Big(10).pow(6)))
                     ? "SUCCESS"

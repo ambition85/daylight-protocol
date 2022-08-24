@@ -6,7 +6,7 @@ const BlockText = ({ offsetY }) => {
   return (
     <>
       <div className="blocktext-container aic">
-        $DAYL token is a deflationary BEP20 token with an elastic supply that
+        $DAYL token is a deflationary BEP-20 token with an elastic supply that
         rewards holders with a positive rebase reward over time for just
         holding. $DAYL also has unique utilities that will be introduced in our
         ecosystem extensions, starting with Casa Daylight, a rewarding and
