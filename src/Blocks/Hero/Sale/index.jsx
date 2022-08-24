@@ -288,8 +288,8 @@ const Sale = ({
               Total Raised (Hard Cap)
             </div>
             <div className="hero-sale-section-price-amount">
-              ${numberWithCommas(totalBusd)} / $
-              {numberWithCommas(hardCap / 1e18)}
+              {numberWithCommas(totalBusd)} /
+              {numberWithCommas(hardCap / 1e18)} $BUSD
             </div>
           </div>
         </div>
