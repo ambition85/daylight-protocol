@@ -273,8 +273,8 @@ const Sale = ({
           </div>
         </div>
         <div className="hero-sale-bar-value aic">
-          <div className="hover-effect">${localeString(totalBusd)}</div>/
-          <div className="hover-effect">${localeString(hardCap / 1e18)}</div>
+          <div className="hover-effect">{localeString(totalBusd)}</div>/
+          <div className="hover-effect">{localeString(hardCap / 1e18)} $BUSD</div>
         </div>
         {/* //////////////// 4 */}
         <div className="hero-sale-section" style={{ marginTop: "27.32px" }}>
@@ -552,11 +552,10 @@ const Sale = ({
               >
                 <div className="hero-sale-section-connected-b">Pre-Sale</div>
                 <div
-                  className={`hero-sale-section-connected-a ${
-                    Big(totalBusd).gte(Big(softCap).div(Big(10).pow(6)))
-                      ? "connected-success"
-                      : "connected-failed"
-                  }`}
+                  className={`hero-sale-section-connected-a ${Big(totalBusd).gte(Big(softCap).div(Big(10).pow(6)))
+                    ? "connected-success"
+                    : "connected-failed"
+                    }`}
                 >
                   {Big(totalBusd).gte(Big(softCap).div(Big(10).pow(6)))
                     ? "SUCCESS"
