@@ -4,12 +4,12 @@ import Sale from "./Sale";
 import Info from "./Info";
 import "./style.css";
 // import Icon from "../../components/Icon";
-import Lottie from "lottie-react";
-import FenixFlying from "../../assets/animations/Fenix-Flying.json";
+// import Lottie from "lottie-react";
+// import FenixFlying from "../../assets/animations/Fenix-Flying.json";
 // import LogoMascot from "../../assets/img/brand/logoMascot.gif";
 import FlamesLayer from "../../components/FlamesLayer";
-import { createPopup } from "@typeform/embed";
-import "@typeform/embed/build/css/popup.css";
+// import { createPopup } from "@typeform/embed";
+// import "@typeform/embed/build/css/popup.css";
 const HeroSection = ({
   offsetY,
   setisWalletOptionsOpen,
@@ -36,7 +36,7 @@ const HeroSection = ({
   minPerWallet,
   maxPerWallet,
 }) => {
-  const { toggle } = createPopup("ZweqBEDd");
+  // const { toggle } = createPopup("ZweqBEDd");
   return (
     <div className="hero-container-header" id="presale">
       <Header
@@ -69,7 +69,7 @@ const HeroSection = ({
         />
         <Info addDaylToken={addDaylToken} />
       </div>
-      <div className="hero--footer aic">
+      {/* <div className="hero--footer aic">
         <div className="hero--mascot">
           <Lottie animationData={FenixFlying} loop={true} />
         </div>
@@ -84,7 +84,7 @@ const HeroSection = ({
         <div className="hero--mascot  ">
           <Lottie animationData={FenixFlying} loop={true} />
         </div>
-      </div>
+      </div> */}
       <FlamesLayer offsetY={offsetY} />
     </div>
   );
