@@ -95,9 +95,9 @@ const Home = () => {
   }, []);
   useEffect(() => {
     (async () => {
-      if (!wallet) {
-        if (window.ethereum) await login("injected");
-      }
+      // if (!wallet) {
+      //   if (window.ethereum) await login("injected");
+      // }
       provider = new providers.JsonRpcProvider(chainConfig.rpcUrls[0]);
       presaleReadContract = new Contract(
         PresaleAddress,

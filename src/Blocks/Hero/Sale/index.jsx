@@ -51,19 +51,19 @@ const Sale = ({
   const { login } = useAuth();
   const [isOpenWallet, setisOpenWallet] = useState(false);
 
-  React.useEffect(() => {
-    let newValue = (totalBusd / hardCap) * 100;
-    let newValue2 =
-      (((softCap / hardCap) * 100) / 100) * progressBarRef.current.clientWidth;
-    setProgressPercentSoftCap(newValue2 + "px");
-    if (newValue < 5) {
-      newValue = "10px";
-    } else {
-      newValue = newValue + "%";
-    }
+  // React.useEffect(() => {
+  //   let newValue = (totalBusd / hardCap) * 100;
+  //   let newValue2 =
+  //     (((softCap / hardCap) * 100) / 100) * progressBarRef.current.clientWidth;
+  //   setProgressPercentSoftCap(newValue2 + "px");
+  //   if (newValue < 5) {
+  //     newValue = "10px";
+  //   } else {
+  //     newValue = newValue + "%";
+  //   }
 
-    setProgressPercent(() => newValue);
-  }, [totalBusd, progressBarRef.current]);
+  //   setProgressPercent(() => newValue);
+  // }, [totalBusd, progressBarRef.current]);
   const curTime = Math.floor(Date.now() / 1000);
 
   const isMobile = window.innerWidth <= 768;
@@ -241,13 +241,13 @@ const Sale = ({
           </div>
         </div>
         {/* //////////////// 3 */}
-        <div className="hero-sale-section-b" style={{ marginTop: "8px" }}>
+        {/* <div className="hero-sale-section-b" style={{ marginTop: "8px" }}>
           <div className="hero-sale-section-nametags">Sale</div>
-        </div>
+        </div> */}
 
         {/* //////////////// 3 */}
 
-        <div
+        {/* <div
           className="hero-sale-bar "
           ref={progressBarRef}
           style={{ marginTop: "16px" }}
@@ -275,9 +275,9 @@ const Sale = ({
         <div className="hero-sale-bar-value aic">
           <div className="hover-effect">{localeString(totalBusd)}</div>/
           <div className="hover-effect">{localeString(hardCap / 1e18)} $BUSD</div>
-        </div>
+        </div> */}
         {/* //////////////// 4 */}
-        <div className="hero-sale-section" style={{ marginTop: "27.32px" }}>
+        {/* <div className="hero-sale-section" style={{ marginTop: "27.32px" }}>
           <div
             className="hero-sale-section-price"
             style={{ alignItems: "flex-start" }}
@@ -298,7 +298,7 @@ const Sale = ({
               {numberWithCommas(hardCap / 1e18)} $BUSD
             </div>
           </div>
-        </div>
+        </div> */}
         {/* //////////////// connected */}
         {!!wallet ? (
           <>
@@ -363,9 +363,10 @@ const Sale = ({
         ) : (
           <button
             className="hero-sale-section-purchase"
-            onClick={handlePurchase}
+          // onClick={handlePurchase}
           >
-            Purchase Daylight Tokens
+            Coming Soon
+            {/* Purchase Daylight Tokens */}
           </button>
         )}
         {/*

@@ -157,7 +157,7 @@ const Header = ({ setisWalletOptionsOpen, offsetY }) => {
               Website
             </a>
           </div>
-          <div
+          {/* <div
             onClick={() => web3ButtonHandler()}
             className="header--button aic"
           >
@@ -182,7 +182,7 @@ const Header = ({ setisWalletOptionsOpen, offsetY }) => {
             ) : (
               "Connect Wallet"
             )}
-          </div>
+          </div> */}
         </div>
         <div className="header--menu">
           <button type="button" onClick={() => setIsOpen(() => true)}>
@@ -194,34 +194,34 @@ const Header = ({ setisWalletOptionsOpen, offsetY }) => {
           <Menu
             isOpen={isOpen}
             close={() => setIsOpen(() => false)}
-            buttonweb3={
-              <div
-                onClick={() => web3MobileButtonHandler()}
-                className="header--button aic"
-              >
-                {!!wallet ? (
-                  <>
-                    {isWrongNetwork ? (
-                      "Wrong Network"
-                    ) : (
-                      <div className="walletmenu-container aic">
-                        <Icon
-                          imgsrc={walletIcon}
-                          classnamestyle="walletmenu--icon-wallet aic "
-                        />
-                        {shortenAddress(wallet)}
-                        <Icon
-                          imgsrc={downTabIcon}
-                          classnamestyle="walletmenu--icon-tab aic "
-                        />
-                      </div>
-                    )}
-                  </>
-                ) : (
-                  "Connect Wallet"
-                )}
-              </div>
-            }
+          // buttonweb3={
+          //   <div
+          //     onClick={() => web3MobileButtonHandler()}
+          //     className="header--button aic"
+          //   >
+          //     {!!wallet ? (
+          //       <>
+          //         {isWrongNetwork ? (
+          //           "Wrong Network"
+          //         ) : (
+          //           <div className="walletmenu-container aic">
+          //             <Icon
+          //               imgsrc={walletIcon}
+          //               classnamestyle="walletmenu--icon-wallet aic "
+          //             />
+          //             {shortenAddress(wallet)}
+          //             <Icon
+          //               imgsrc={downTabIcon}
+          //               classnamestyle="walletmenu--icon-tab aic "
+          //             />
+          //           </div>
+          //         )}
+          //       </>
+          //     ) : (
+          //       "Connect Wallet"
+          //     )}
+          //   </div>
+          // }
           />
         </div>
       </nav>
