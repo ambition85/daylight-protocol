@@ -50,7 +50,7 @@ const Footer = () => {
               to="#presale"
               className="hover-effect footer--bottom-link"
             >
-              Pre-Sale
+              PreSale
             </HashLink>
             <div className="footer--bottom-div" />
             <HashLink
@@ -85,7 +85,7 @@ const Footer = () => {
               to="#presale"
               className="hover-effect footer--bottom-link"
             >
-              Pre-Sale
+              PreSale
             </HashLink>
             <div className="footer--bottom-div" />
             <HashLink

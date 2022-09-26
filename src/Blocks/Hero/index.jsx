@@ -75,7 +75,7 @@ const HeroSection = ({
         </div>
         <div className="hero--footer-middle aic">
           <div className="hero--banner aic">
-            Receive an EXCLUSIVE Whitelist for the Daylight Protocol Pre-Sale
+            Receive an EXCLUSIVE Whitelist for the Daylight Protocol PreSale
           </div>
           <div className="hero--button-presale aic" onClick={() => toggle()}>
             Apply Now

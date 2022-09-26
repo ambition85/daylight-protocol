@@ -44,7 +44,7 @@ const Menu = ({ isOpen, close, buttonweb3 }) => {
           to="#presale"
           className="hover-effect menu--links-link"
         >
-          Pre-Sale
+          PreSale
         </HashLink>
         <HashLink
           onClick={() => close()}

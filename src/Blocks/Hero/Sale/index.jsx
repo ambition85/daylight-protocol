@@ -200,9 +200,9 @@ const Sale = ({
                   renderer={({ days, hours, minutes, seconds }) => renderTime({ days, hours, minutes, seconds })}
                 />
                 : curTime < endTime
-                  ? "PRE-SALE"
-                  : "PRE-SALE ENDED"} */}
-              "PRE-SALE RESCHEDULED"
+                  ? "PreSale"
+                  : "PreSale ENDED"} */}
+              "PreSale RESCHEDULED"
             </div>
           </div>
           <div className="hero-sale-section-price">
@@ -363,7 +363,7 @@ const Sale = ({
         ) : (
           <button
             className="hero-sale-section-purchase"
-          // onClick={handlePurchase}
+            // onClick={handlePurchase}
           >
             Coming Soon
             {/* Purchase Daylight Tokens */}
@@ -551,12 +551,13 @@ const Sale = ({
                 className="hero-sale-section-price"
                 style={{ alignItems: "flex-start", gap: "16px" }}
               >
-                <div className="hero-sale-section-connected-b">Pre-Sale</div>
+                <div className="hero-sale-section-connected-b">PreSale</div>
                 <div
-                  className={`hero-sale-section-connected-a ${Big(totalBusd).gte(Big(softCap).div(Big(10).pow(6)))
-                    ? "connected-success"
-                    : "connected-failed"
-                    }`}
+                  className={`hero-sale-section-connected-a ${
+                    Big(totalBusd).gte(Big(softCap).div(Big(10).pow(6)))
+                      ? "connected-success"
+                      : "connected-failed"
+                  }`}
                 >
                   {Big(totalBusd).gte(Big(softCap).div(Big(10).pow(6)))
                     ? "SUCCESS"

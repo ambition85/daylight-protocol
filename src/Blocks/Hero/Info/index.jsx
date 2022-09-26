@@ -39,7 +39,7 @@ const Info = ({ addDaylToken }) => {
         data-aos-easing="ease-in"
         onClick={() => addDaylToken()}
       >
-        Add Pre-Sale Token to Wallet
+        Add PreSale Token to Wallet
       </Button>
       <div className="hero-info--socials">
         <Icon
@@ -55,7 +55,6 @@ const Info = ({ addDaylToken }) => {
         <Icon
           imgsrc={DiscordIcon}
           link="https://discord.gg/CsRc6AVZbZ"
-
           classnamestyle="hero-info--socials-icon aic hover-effect"
         />
         <Icon

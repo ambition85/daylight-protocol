@@ -25,14 +25,14 @@ const AddDaylModal = ({
   maxPerWallet,
 }) => {
   const [isRange, setisRange] = useState(100);
-  const [isBusdLow, setISBUSDLow] = useState(false)
-  const [isMaxReached, setIsMaxReached] = useState(false)
+  const [isBusdLow, setISBUSDLow] = useState(false);
+  const [isMaxReached, setIsMaxReached] = useState(false);
 
-  const [busdDepositNum, setBUSDDepositNum] = useState(0)
-  const [minNum, setMinNum] = useState(0)
-  const [maxNum, setMaxNum] = useState(0)
-  const [currentBUSDNum, setCurrentBUSDNum] = useState(0)
-  const [maxInput, setMaxInput] = useState(0)
+  const [busdDepositNum, setBUSDDepositNum] = useState(0);
+  const [minNum, setMinNum] = useState(0);
+  const [maxNum, setMaxNum] = useState(0);
+  const [currentBUSDNum, setCurrentBUSDNum] = useState(0);
+  const [maxInput, setMaxInput] = useState(0);
 
   const [isFormData, setisFormData] = useState({
     busdValue: "",
@@ -40,27 +40,31 @@ const AddDaylModal = ({
   });
 
   useEffect(() => {
-    const currentBUSDDeposit = Big(totalDayl).div(Big(rate)).div(Big(10).pow(18)).toNumber()
-    const minNum = Big(minPerWallet).div(Big(10).pow(18)).toNumber()
-    const maxNum = Big(maxPerWallet).div(Big(10).pow(18)).toNumber()
-    const currentBUSDNum = Big(busdBalance).div(Big(10).pow(18)).toNumber()
-    setBUSDDepositNum(currentBUSDDeposit)
-    setMinNum(minNum)
-    setMaxNum(maxNum)
-    setCurrentBUSDNum(currentBUSDNum)
+    const currentBUSDDeposit = Big(totalDayl)
+      .div(Big(rate))
+      .div(Big(10).pow(18))
+      .toNumber();
+    const minNum = Big(minPerWallet).div(Big(10).pow(18)).toNumber();
+    const maxNum = Big(maxPerWallet).div(Big(10).pow(18)).toNumber();
+    const currentBUSDNum = Big(busdBalance).div(Big(10).pow(18)).toNumber();
+    setBUSDDepositNum(currentBUSDDeposit);
+    setMinNum(minNum);
+    setMaxNum(maxNum);
+    setCurrentBUSDNum(currentBUSDNum);
 
-    const max = Math.min(currentBUSDNum, maxNum - currentBUSDDeposit)
-    setMaxInput(max)
-    setisRange((max * 100 / currentBUSDNum).toFixed(2))
+    const max = Math.min(currentBUSDNum, maxNum - currentBUSDDeposit);
+    setMaxInput(max);
+    setisRange(((max * 100) / currentBUSDNum).toFixed(2));
     setisFormData({
       busdValue: max,
-      daylValue: max * Big(rate)
+      daylValue: max * Big(rate),
       // daylValue: max * Big(rate).div(Big(10).pow(12))
-    })
+    });
 
-    if (currentBUSDNum === 0 || currentBUSDNum + currentBUSDDeposit < minNum) setISBUSDLow(true)
-    if (currentBUSDDeposit >= maxNum) setIsMaxReached(true)
-  }, [])
+    if (currentBUSDNum === 0 || currentBUSDNum + currentBUSDDeposit < minNum)
+      setISBUSDLow(true);
+    if (currentBUSDDeposit >= maxNum) setIsMaxReached(true);
+  }, []);
 
   const [isCurrent, setisCurrent] = useState("busd");
   const switchHandler = () => {
@@ -70,19 +74,18 @@ const AddDaylModal = ({
   };
 
   const onChangeRange = (val) => {
-    const maxRange = maxInput * 100 / currentBUSDNum
-    if (maxRange < val) val = maxRange
+    const maxRange = (maxInput * 100) / currentBUSDNum;
+    if (maxRange < val) val = maxRange;
 
-    const minRange =
-
-      setisRange(Number(val).toFixed(2))
-    const busdValue = (val * currentBUSDNum / 100).toFixed(2)
-    const daylValue = busdValue * Big(rate)
+    const minRange = setisRange(Number(val).toFixed(2));
+    const busdValue = ((val * currentBUSDNum) / 100).toFixed(2);
+    const daylValue = busdValue * Big(rate);
     // const daylValue = busdValue * Big(rate).div(Big(10).pow(12))
     setisFormData({
-      busdValue, daylValue
-    })
-  }
+      busdValue,
+      daylValue,
+    });
+  };
 
   const onChangeHandler = (e) => {
     let { name, value } = e.target;
@@ -90,28 +93,26 @@ const AddDaylModal = ({
     if (value == 0) {
       setisFormData({
         busdValue: "",
-        daylValue: ""
-      })
-      setisRange(0)
-    }
-    else if (name == "busdValue") {
-      if (value > maxInput) value = maxInput
-      setisRange((value / currentBUSDNum * 100).toFixed(2))
+        daylValue: "",
+      });
+      setisRange(0);
+    } else if (name == "busdValue") {
+      if (value > maxInput) value = maxInput;
+      setisRange(((value / currentBUSDNum) * 100).toFixed(2));
       setisFormData({
         busdValue: value,
-        daylValue: value * Big(rate)
+        daylValue: value * Big(rate),
         // daylValue: value * Big(rate).div(Big(10).pow(12))
-      })
-    }
-    else {
+      });
+    } else {
       // const busdValue = Big(value).mul(Big(10).pow(12)).div(Big(rate)).toNumber()
-      const busdValue = Big(value).div(Big(rate)).toNumber()
-      if (busdValue > maxInput) value = maxInput
-      setisRange((busdValue / currentBUSDNum * 100).toFixed(2))
+      const busdValue = Big(value).div(Big(rate)).toNumber();
+      if (busdValue > maxInput) value = maxInput;
+      setisRange(((busdValue / currentBUSDNum) * 100).toFixed(2));
       setisFormData({
         busdValue,
-        daylValue: value
-      })
+        daylValue: value,
+      });
     }
   };
   const onSubmitHandler = (e) => {
@@ -145,7 +146,9 @@ const AddDaylModal = ({
       if (busdBalance.toString() === "0" || isRange === "0") {
         toast.error("Buying 0 $DAYL");
       } else {
-        await buyDayl((isFormData.busdValue * Math.pow(10, busdDecimals)).toString());
+        await buyDayl(
+          (isFormData.busdValue * Math.pow(10, busdDecimals)).toString()
+        );
       }
     }
     onClose();
@@ -187,58 +190,62 @@ const AddDaylModal = ({
             {isCurrent === "busd"
               ? localeString(new Big(busdBalance).div(new Big(10).pow(18)))
               : localeString(
-                new Big(busdBalance)
-                  .mul(new Big(rate))
-                  .div(new Big(10).pow(18))
-              )}
+                  new Big(busdBalance)
+                    .mul(new Big(rate))
+                    .div(new Big(10).pow(18))
+                )}
           </b>
         </div>
         <div className="adddaylmodal--infostack-a-amount">
           Amount {isRange}%
         </div>
       </div>
-      {isBusdLow && <div
-        className="profilemodal--box aic"
-        style={{
-          gap: "8px",
-          margin: "16px 0px",
-          padding: "10px 6px",
-          border: "1px solid #DA4A52",
-        }}
-      >
-        <Icon
-          imgsrc={warningIcon}
-          classnamestyle="profilemodal--box-warning-icon aic hover-effect"
-        />
-        <div className="aic profilemodal--box-warning">
-          <div className=" profilemodal--box-warning-top">
-            BUSD Balance Low.
-          </div>
-          <div className=" profilemodal--box-warning-bottom">
-            You need a minimum of 100 $BUSD to purchase pre-sale tokens.
-          </div>
-        </div>
-      </div>}
-      {isMaxReached && <div
-        className="profilemodal--box aic"
-        style={{
-          gap: "8px",
-          margin: "16px 0px",
-          padding: "10px 6px",
-          border: "1px solid #DA4A52",
-        }}
-      >
-        <Icon
-          imgsrc={warningIcon}
-          classnamestyle="profilemodal--box-warning-icon aic hover-effect"
-        />
-        <div className="aic profilemodal--box-warning">
-          <div className=" profilemodal--box-warning-bottom">
-            You have deposited max amount.
+      {isBusdLow && (
+        <div
+          className="profilemodal--box aic"
+          style={{
+            gap: "8px",
+            margin: "16px 0px",
+            padding: "10px 6px",
+            border: "1px solid #DA4A52",
+          }}
+        >
+          <Icon
+            imgsrc={warningIcon}
+            classnamestyle="profilemodal--box-warning-icon aic hover-effect"
+          />
+          <div className="aic profilemodal--box-warning">
+            <div className=" profilemodal--box-warning-top">
+              BUSD Balance Low.
+            </div>
+            <div className=" profilemodal--box-warning-bottom">
+              You need a minimum of 100 $BUSD to purchase PreSale tokens.
+            </div>
           </div>
         </div>
-      </div>}
-      {!isMaxReached && !isBusdLow &&
+      )}
+      {isMaxReached && (
+        <div
+          className="profilemodal--box aic"
+          style={{
+            gap: "8px",
+            margin: "16px 0px",
+            padding: "10px 6px",
+            border: "1px solid #DA4A52",
+          }}
+        >
+          <Icon
+            imgsrc={warningIcon}
+            classnamestyle="profilemodal--box-warning-icon aic hover-effect"
+          />
+          <div className="aic profilemodal--box-warning">
+            <div className=" profilemodal--box-warning-bottom">
+              You have deposited max amount.
+            </div>
+          </div>
+        </div>
+      )}
+      {!isMaxReached && !isBusdLow && (
         <div>
           <input
             style={{
@@ -258,7 +265,7 @@ const AddDaylModal = ({
             <button
               className="adddaylmodal--buttons-button aic"
               type="button"
-              onClick={() => onChangeRange((minNum * 100 / currentBUSDNum))}
+              onClick={() => onChangeRange((minNum * 100) / currentBUSDNum)}
               data-aos="fade-down"
               data-aos-delay="200"
               data-aos-offset="-100"
@@ -291,7 +298,7 @@ const AddDaylModal = ({
             <button
               className="adddaylmodal--buttons-button aic"
               type="button"
-              onClick={() => onChangeRange((maxInput * 100 / currentBUSDNum))}
+              onClick={() => onChangeRange((maxInput * 100) / currentBUSDNum)}
               data-aos="fade-down"
               data-aos-delay="500"
               data-aos-offset="-100"
@@ -314,7 +321,9 @@ const AddDaylModal = ({
                 type="number"
                 name={isCurrent === "busd" ? "busdValue" : "daylValue"}
                 value={
-                  isCurrent === "busd" ? isFormData.busdValue : isFormData.daylValue
+                  isCurrent === "busd"
+                    ? isFormData.busdValue
+                    : isFormData.daylValue
                 }
                 onChange={(e) => onChangeHandler(e)}
                 aria-disabled={false}
@@ -377,7 +386,9 @@ const AddDaylModal = ({
                 type="number"
                 name={isCurrent !== "busd" ? "busdValue" : "daylValue"}
                 value={
-                  isCurrent !== "busd" ? isFormData.busdValue : isFormData.daylValue
+                  isCurrent !== "busd"
+                    ? isFormData.busdValue
+                    : isFormData.daylValue
                 }
                 placeholder={
                   isCurrent === "busd" ? "Add BUSD Tokens" : "Add DAYL Tokens"
@@ -422,8 +433,7 @@ const AddDaylModal = ({
             Purchase $DAYL
           </button>
         </div>
-      }
-
+      )}
     </div>
   );
 };

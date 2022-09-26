@@ -20,10 +20,9 @@ import ERC20ABI from "../../../constants/abis/ERC20.json";
 import PresaleABI from "../../../constants/abis/Presale.json";
 import PresaleTokenABI from "../../../constants/abis/PresaleToken.json";
 
-import { busdDecimals } from "../../../Pages/Home/index"
+import { busdDecimals } from "../../../Pages/Home/index";
 // import { testnetNetwork as chainConfig } from "../../../utils/constants"
-import { mainnetNetwork as chainConfig } from "../../../utils/constants"
-
+import { mainnetNetwork as chainConfig } from "../../../utils/constants";
 
 let provider,
   presaleReadContract,
@@ -38,13 +37,13 @@ const Profile = ({ wallet, onClose, disconnectWallet }) => {
   const [daylBal, setDAYLBal] = useState(0);
   const [bnbBal, setBNBBal] = useState(0);
   const [minPer, setMinPer] = useState(0);
-  console.log("Wallet: ", wallet)
+  console.log("Wallet: ", wallet);
   useEffect(() => {
     fetchBalance();
   }, []);
 
   const fetchBalance = async () => {
-    provider = new providers.JsonRpcProvider(chainConfig.rpcUrls[0])
+    provider = new providers.JsonRpcProvider(chainConfig.rpcUrls[0]);
     presaleReadContract = new Contract(
       PresaleAddress,
       PresaleABI,
@@ -138,30 +137,30 @@ const Profile = ({ wallet, onClose, disconnectWallet }) => {
       </div>
       {/* /////////// */}
 
-      {isBusdLow && <div
-        className="profilemodal--box aic"
-        style={{
-          gap: "8px",
-          margin: "16px 0px",
-          padding: "10px 6px",
-          border: "1px solid #DA4A52",
-        }}
-      >
-        <Icon
-          imgsrc={warningIcon}
-          classnamestyle="profilemodal--box-warning-icon aic hover-effect"
-        />
-        <div className="aic profilemodal--box-warning">
-          <div className=" profilemodal--box-warning-top">
-            BUSD Balance Low.
-          </div>
-          <div className=" profilemodal--box-warning-bottom">
-            You need a minimum of 100 $BUSD to purchase pre-sale tokens.
-
+      {isBusdLow && (
+        <div
+          className="profilemodal--box aic"
+          style={{
+            gap: "8px",
+            margin: "16px 0px",
+            padding: "10px 6px",
+            border: "1px solid #DA4A52",
+          }}
+        >
+          <Icon
+            imgsrc={warningIcon}
+            classnamestyle="profilemodal--box-warning-icon aic hover-effect"
+          />
+          <div className="aic profilemodal--box-warning">
+            <div className=" profilemodal--box-warning-top">
+              BUSD Balance Low.
+            </div>
+            <div className=" profilemodal--box-warning-bottom">
+              You need a minimum of 100 $BUSD to purchase PreSale tokens.
+            </div>
           </div>
         </div>
-      </div>
-      }
+      )}
 
       {/* /////////// */}
       <div
@@ -251,6 +250,6 @@ const Profile = ({ wallet, onClose, disconnectWallet }) => {
       </button>
     </div>
   );
-}
+};
 
 export default Profile;
