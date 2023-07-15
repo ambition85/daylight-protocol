@@ -157,7 +157,7 @@ const Header = ({ setisWalletOptionsOpen, offsetY }) => {
               Website
             </a>
           </div>
-          {/* <div
+          <div
             onClick={() => web3ButtonHandler()}
             className="header--button aic"
           >
@@ -182,7 +182,7 @@ const Header = ({ setisWalletOptionsOpen, offsetY }) => {
             ) : (
               "Connect Wallet"
             )}
-          </div> */}
+          </div>
         </div>
         <div className="header--menu">
           <button type="button" onClick={() => setIsOpen(() => true)}>
